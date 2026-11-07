@@ -1,5 +1,5 @@
-/* 小九足球 service worker —— 构建于 202611071901（内容一变浏览器就自动换版） */
-var CACHE = "xj9-202611071901";
+/* 小九足球 service worker —— 构建于 202611072001（内容一变浏览器就自动换版） */
+var CACHE = "xj9-202611072001";
 var PRE = ["/", "/manifest.webmanifest", "/icon-192.png", "/icon-512.png", "/favicon.ico"];
 self.addEventListener("install", function (e) {
   e.waitUntil(caches.open(CACHE).then(function (c) { return c.addAll(PRE); })

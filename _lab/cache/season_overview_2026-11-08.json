@@ -1,0 +1,2532 @@
+{
+ "generated_at": "2026-11-08T20:59:27",
+ "hist": {
+  "8": {
+   "zh": "英超",
+   "seasons": [
+    {
+     "season": "2026/2027",
+     "sid": 28083,
+     "overview": {
+      "matches": 95,
+      "total_goals": 255,
+      "avg_goals": 2.68,
+      "home_win_pct": 42.1,
+      "draw_pct": 27.4,
+      "away_win_pct": 30.5,
+      "home_goals": 144,
+      "away_goals": 111,
+      "avg_home_goals": 1.52,
+      "avg_away_goals": 1.17
+     }
+    },
+    {
+     "season": "2025/2026",
+     "sid": 25583,
+     "overview": {
+      "matches": 380,
+      "total_goals": 1045,
+      "avg_goals": 2.75,
+      "home_win_pct": 42.6,
+      "draw_pct": 27.4,
+      "away_win_pct": 30.0,
+      "home_goals": 580,
+      "away_goals": 465,
+      "avg_home_goals": 1.53,
+      "avg_away_goals": 1.22
+     }
+    },
+    {
+     "season": "2024/2025",
+     "sid": 23614,
+     "overview": {
+      "matches": 380,
+      "total_goals": 1115,
+      "avg_goals": 2.93,
+      "home_win_pct": 40.8,
+      "draw_pct": 24.5,
+      "away_win_pct": 34.7,
+      "home_goals": 575,
+      "away_goals": 540,
+      "avg_home_goals": 1.51,
+      "avg_away_goals": 1.42
+     }
+    },
+    {
+     "season": "2023/2024",
+     "sid": 21646,
+     "overview": {
+      "matches": 380,
+      "total_goals": 1246,
+      "avg_goals": 3.28,
+      "home_win_pct": 46.1,
+      "draw_pct": 21.6,
+      "away_win_pct": 32.4,
+      "home_goals": 684,
+      "away_goals": 562,
+      "avg_home_goals": 1.8,
+      "avg_away_goals": 1.48
+     }
+    }
+   ]
+  },
+  "564": {
+   "zh": "西甲",
+   "seasons": [
+    {
+     "season": "2026/2027",
+     "sid": 27965,
+     "overview": {
+      "matches": 114,
+      "total_goals": 336,
+      "avg_goals": 2.95,
+      "home_win_pct": 43.9,
+      "draw_pct": 26.3,
+      "away_win_pct": 29.8,
+      "home_goals": 188,
+      "away_goals": 148,
+      "avg_home_goals": 1.65,
+      "avg_away_goals": 1.3
+     }
+    },
+    {
+     "season": "2025/2026",
+     "sid": 25659,
+     "overview": {
+      "matches": 380,
+      "total_goals": 1024,
+      "avg_goals": 2.69,
+      "home_win_pct": 48.9,
+      "draw_pct": 24.5,
+      "away_win_pct": 26.6,
+      "home_goals": 598,
+      "away_goals": 426,
+      "avg_home_goals": 1.57,
+      "avg_away_goals": 1.12
+     }
+    },
+    {
+     "season": "2024/2025",
+     "sid": 23621,
+     "overview": {
+      "matches": 380,
+      "total_goals": 995,
+      "avg_goals": 2.62,
+      "home_win_pct": 44.5,
+      "draw_pct": 25.5,
+      "away_win_pct": 30.0,
+      "home_goals": 552,
+      "away_goals": 443,
+      "avg_home_goals": 1.45,
+      "avg_away_goals": 1.17
+     }
+    },
+    {
+     "season": "2023/2024",
+     "sid": 21694,
+     "overview": {
+      "matches": 380,
+      "total_goals": 1005,
+      "avg_goals": 2.64,
+      "home_win_pct": 43.9,
+      "draw_pct": 28.2,
+      "away_win_pct": 27.9,
+      "home_goals": 564,
+      "away_goals": 441,
+      "avg_home_goals": 1.48,
+      "avg_away_goals": 1.16
+     }
+    }
+   ]
+  },
+  "82": {
+   "zh": "德甲",
+   "seasons": [
+    {
+     "season": "2026/2027",
+     "sid": 28321,
+     "overview": {
+      "matches": 78,
+      "total_goals": 274,
+      "avg_goals": 3.51,
+      "home_win_pct": 50.0,
+      "draw_pct": 21.8,
+      "away_win_pct": 28.2,
+      "home_goals": 167,
+      "away_goals": 107,
+      "avg_home_goals": 2.14,
+      "avg_away_goals": 1.37
+     }
+    },
+    {
+     "season": "2025/2026",
+     "sid": 25646,
+     "overview": {
+      "matches": 306,
+      "total_goals": 990,
+      "avg_goals": 3.24,
+      "home_win_pct": 43.8,
+      "draw_pct": 24.5,
+      "away_win_pct": 31.7,
+      "home_goals": 544,
+      "away_goals": 446,
+      "avg_home_goals": 1.78,
+      "avg_away_goals": 1.46
+     }
+    },
+    {
+     "season": "2024/2025",
+     "sid": 23744,
+     "overview": {
+      "matches": 306,
+      "total_goals": 959,
+      "avg_goals": 3.13,
+      "home_win_pct": 38.6,
+      "draw_pct": 25.2,
+      "away_win_pct": 36.3,
+      "home_goals": 499,
+      "away_goals": 460,
+      "avg_home_goals": 1.63,
+      "avg_away_goals": 1.5
+     }
+    },
+    {
+     "season": "2023/2024",
+     "sid": 21795,
+     "overview": {
+      "matches": 306,
+      "total_goals": 985,
+      "avg_goals": 3.22,
+      "home_win_pct": 43.8,
+      "draw_pct": 26.5,
+      "away_win_pct": 29.7,
+      "home_goals": 553,
+      "away_goals": 432,
+      "avg_home_goals": 1.81,
+      "avg_away_goals": 1.41
+     }
+    }
+   ]
+  },
+  "384": {
+   "zh": "意甲",
+   "seasons": [
+    {
+     "season": "2026/2027",
+     "sid": 27895,
+     "overview": {
+      "matches": 105,
+      "total_goals": 330,
+      "avg_goals": 3.14,
+      "home_win_pct": 47.6,
+      "draw_pct": 16.2,
+      "away_win_pct": 36.2,
+      "home_goals": 170,
+      "away_goals": 160,
+      "avg_home_goals": 1.62,
+      "avg_away_goals": 1.52
+     }
+    },
+    {
+     "season": "2025/2026",
+     "sid": 25533,
+     "overview": {
+      "matches": 380,
+      "total_goals": 922,
+      "avg_goals": 2.43,
+      "home_win_pct": 38.9,
+      "draw_pct": 26.1,
+      "away_win_pct": 35.0,
+      "home_goals": 485,
+      "away_goals": 437,
+      "avg_home_goals": 1.28,
+      "avg_away_goals": 1.15
+     }
+    },
+    {
+     "season": "2024/2025",
+     "sid": 23746,
+     "overview": {
+      "matches": 380,
+      "total_goals": 973,
+      "avg_goals": 2.56,
+      "home_win_pct": 39.7,
+      "draw_pct": 28.4,
+      "away_win_pct": 31.8,
+      "home_goals": 509,
+      "away_goals": 464,
+      "avg_home_goals": 1.34,
+      "avg_away_goals": 1.22
+     }
+    },
+    {
+     "season": "2023/2024",
+     "sid": 21818,
+     "overview": {
+      "matches": 380,
+      "total_goals": 992,
+      "avg_goals": 2.61,
+      "home_win_pct": 41.8,
+      "draw_pct": 29.5,
+      "away_win_pct": 28.7,
+      "home_goals": 545,
+      "away_goals": 447,
+      "avg_home_goals": 1.43,
+      "avg_away_goals": 1.18
+     }
+    }
+   ]
+  },
+  "301": {
+   "zh": "法甲",
+   "seasons": [
+    {
+     "season": "2026/2027",
+     "sid": 28082,
+     "overview": {
+      "matches": 84,
+      "total_goals": 252,
+      "avg_goals": 3.0,
+      "home_win_pct": 48.8,
+      "draw_pct": 22.6,
+      "away_win_pct": 28.6,
+      "home_goals": 142,
+      "away_goals": 110,
+      "avg_home_goals": 1.69,
+      "avg_away_goals": 1.31
+     }
+    },
+    {
+     "season": "2025/2026",
+     "sid": 25651,
+     "overview": {
+      "matches": 306,
+      "total_goals": 863,
+      "avg_goals": 2.82,
+      "home_win_pct": 46.1,
+      "draw_pct": 24.5,
+      "away_win_pct": 29.4,
+      "home_goals": 484,
+      "away_goals": 379,
+      "avg_home_goals": 1.58,
+      "avg_away_goals": 1.24
+     }
+    },
+    {
+     "season": "2024/2025",
+     "sid": 23643,
+     "overview": {
+      "matches": 306,
+      "total_goals": 911,
+      "avg_goals": 2.98,
+      "home_win_pct": 46.7,
+      "draw_pct": 20.3,
+      "away_win_pct": 33.0,
+      "home_goals": 492,
+      "away_goals": 419,
+      "avg_home_goals": 1.61,
+      "avg_away_goals": 1.37
+     }
+    },
+    {
+     "season": "2023/2024",
+     "sid": 21779,
+     "overview": {
+      "matches": 306,
+      "total_goals": 826,
+      "avg_goals": 2.7,
+      "home_win_pct": 39.2,
+      "draw_pct": 26.5,
+      "away_win_pct": 34.3,
+      "home_goals": 443,
+      "away_goals": 383,
+      "avg_home_goals": 1.45,
+      "avg_away_goals": 1.25
+     }
+    }
+   ]
+  },
+  "2": {
+   "zh": "欧冠",
+   "seasons": [
+    {
+     "season": "2026/2027",
+     "sid": 28155,
+     "overview": {
+      "matches": 72,
+      "total_goals": 291,
+      "avg_goals": 4.04,
+      "home_win_pct": 55.6,
+      "draw_pct": 9.7,
+      "away_win_pct": 34.7,
+      "home_goals": 167,
+      "away_goals": 124,
+      "avg_home_goals": 2.32,
+      "avg_away_goals": 1.72
+     }
+    },
+    {
+     "season": "2025/2026",
+     "sid": 25580,
+     "overview": {
+      "matches": 144,
+      "total_goals": 487,
+      "avg_goals": 3.38,
+      "home_win_pct": 49.3,
+      "draw_pct": 17.4,
+      "away_win_pct": 33.3,
+      "home_goals": 278,
+      "away_goals": 209,
+      "avg_home_goals": 1.93,
+      "avg_away_goals": 1.45
+     }
+    },
+    {
+     "season": "2024/2025",
+     "sid": 23619,
+     "overview": {
+      "matches": 144,
+      "total_goals": 470,
+      "avg_goals": 3.26,
+      "home_win_pct": 53.5,
+      "draw_pct": 12.5,
+      "away_win_pct": 34.0,
+      "home_goals": 270,
+      "away_goals": 200,
+      "avg_home_goals": 1.88,
+      "avg_away_goals": 1.39
+     }
+    },
+    {
+     "season": "2023/2024",
+     "sid": 21638,
+     "overview": {
+      "matches": 96,
+      "total_goals": 296,
+      "avg_goals": 3.08,
+      "home_win_pct": 46.9,
+      "draw_pct": 20.8,
+      "away_win_pct": 32.3,
+      "home_goals": 169,
+      "away_goals": 127,
+      "avg_home_goals": 1.76,
+      "avg_away_goals": 1.32
+     }
+    }
+   ]
+  },
+  "5": {
+   "zh": "欧联",
+   "seasons": [
+    {
+     "season": "2026/2027",
+     "sid": 27913,
+     "overview": {
+      "matches": 72,
+      "total_goals": 214,
+      "avg_goals": 2.97,
+      "home_win_pct": 38.9,
+      "draw_pct": 16.7,
+      "away_win_pct": 44.4,
+      "home_goals": 103,
+      "away_goals": 111,
+      "avg_home_goals": 1.43,
+      "avg_away_goals": 1.54
+     }
+    },
+    {
+     "season": "2025/2026",
+     "sid": 25582,
+     "overview": {
+      "matches": 144,
+      "total_goals": 386,
+      "avg_goals": 2.68,
+      "home_win_pct": 52.8,
+      "draw_pct": 17.4,
+      "away_win_pct": 29.9,
+      "home_goals": 219,
+      "away_goals": 167,
+      "avg_home_goals": 1.52,
+      "avg_away_goals": 1.16
+     }
+    },
+    {
+     "season": "2024/2025",
+     "sid": 23620,
+     "overview": {
+      "matches": 144,
+      "total_goals": 408,
+      "avg_goals": 2.83,
+      "home_win_pct": 48.6,
+      "draw_pct": 24.3,
+      "away_win_pct": 27.1,
+      "home_goals": 236,
+      "away_goals": 172,
+      "avg_home_goals": 1.64,
+      "avg_away_goals": 1.19
+     }
+    },
+    {
+     "season": "2023/2024",
+     "sid": 22130,
+     "overview": {
+      "matches": 96,
+      "total_goals": 293,
+      "avg_goals": 3.05,
+      "home_win_pct": 51.0,
+      "draw_pct": 16.7,
+      "away_win_pct": 32.3,
+      "home_goals": 179,
+      "away_goals": 114,
+      "avg_home_goals": 1.86,
+      "avg_away_goals": 1.19
+     }
+    }
+   ]
+  },
+  "2286": {
+   "zh": "欧协联",
+   "seasons": [
+    {
+     "season": "2026/2027",
+     "sid": 27911,
+     "overview": {
+      "matches": 54,
+      "total_goals": 149,
+      "avg_goals": 2.76,
+      "home_win_pct": 50.0,
+      "draw_pct": 27.8,
+      "away_win_pct": 22.2,
+      "home_goals": 85,
+      "away_goals": 64,
+      "avg_home_goals": 1.57,
+      "avg_away_goals": 1.19
+     }
+    },
+    {
+     "season": "2025/2026",
+     "sid": 25581,
+     "overview": {
+      "matches": 108,
+      "total_goals": 256,
+      "avg_goals": 2.37,
+      "home_win_pct": 51.9,
+      "draw_pct": 23.1,
+      "away_win_pct": 25.0,
+      "home_goals": 165,
+      "away_goals": 91,
+      "avg_home_goals": 1.53,
+      "avg_away_goals": 0.84
+     }
+    },
+    {
+     "season": "2024/2025",
+     "sid": 23616,
+     "overview": {
+      "matches": 108,
+      "total_goals": 320,
+      "avg_goals": 2.96,
+      "home_win_pct": 52.8,
+      "draw_pct": 20.4,
+      "away_win_pct": 26.9,
+      "home_goals": 194,
+      "away_goals": 126,
+      "avg_home_goals": 1.8,
+      "avg_away_goals": 1.17
+     }
+    },
+    {
+     "season": "2023/2024",
+     "sid": 21669,
+     "overview": {
+      "matches": 96,
+      "total_goals": 293,
+      "avg_goals": 3.05,
+      "home_win_pct": 51.0,
+      "draw_pct": 16.7,
+      "away_win_pct": 32.3,
+      "home_goals": 181,
+      "away_goals": 112,
+      "avg_home_goals": 1.89,
+      "avg_away_goals": 1.17
+     }
+    }
+   ]
+  },
+  "1328": {
+   "zh": "欧超杯",
+   "seasons": [
+    {
+     "season": "2027/2028",
+     "sid": 29184,
+     "overview": {}
+    },
+    {
+     "season": "2026/2027",
+     "sid": 27306,
+     "overview": {}
+    },
+    {
+     "season": "2025/2026",
+     "sid": 25488,
+     "overview": {}
+    },
+    {
+     "season": "2024/2025",
+     "sid": 23534,
+     "overview": {}
+    }
+   ]
+  },
+  "9": {
+   "zh": "英冠",
+   "seasons": [
+    {
+     "season": "2026/2027",
+     "sid": 27903,
+     "overview": {
+      "matches": 180,
+      "total_goals": 532,
+      "avg_goals": 2.96,
+      "home_win_pct": 43.3,
+      "draw_pct": 25.6,
+      "away_win_pct": 31.1,
+      "home_goals": 298,
+      "away_goals": 234,
+      "avg_home_goals": 1.66,
+      "avg_away_goals": 1.3
+     }
+    },
+    {
+     "season": "2025/2026",
+     "sid": 25648,
+     "overview": {
+      "matches": 552,
+      "total_goals": 1438,
+      "avg_goals": 2.61,
+      "home_win_pct": 41.7,
+      "draw_pct": 26.4,
+      "away_win_pct": 31.9,
+      "home_goals": 773,
+      "away_goals": 665,
+      "avg_home_goals": 1.4,
+      "avg_away_goals": 1.2
+     }
+    },
+    {
+     "season": "2024/2025",
+     "sid": 23672,
+     "overview": {
+      "matches": 552,
+      "total_goals": 1353,
+      "avg_goals": 2.45,
+      "home_win_pct": 45.8,
+      "draw_pct": 28.3,
+      "away_win_pct": 25.9,
+      "home_goals": 792,
+      "away_goals": 561,
+      "avg_home_goals": 1.43,
+      "avg_away_goals": 1.02
+     }
+    },
+    {
+     "season": "2023/2024",
+     "sid": 21689,
+     "overview": {
+      "matches": 552,
+      "total_goals": 1480,
+      "avg_goals": 2.68,
+      "home_win_pct": 44.6,
+      "draw_pct": 23.4,
+      "away_win_pct": 32.1,
+      "home_goals": 818,
+      "away_goals": 662,
+      "avg_home_goals": 1.48,
+      "avg_away_goals": 1.2
+     }
+    }
+   ]
+  },
+  "12": {
+   "zh": "英甲",
+   "seasons": [
+    {
+     "season": "2026/2027",
+     "sid": 28349,
+     "overview": {
+      "matches": 158,
+      "total_goals": 441,
+      "avg_goals": 2.79,
+      "home_win_pct": 41.8,
+      "draw_pct": 29.7,
+      "away_win_pct": 28.5,
+      "home_goals": 241,
+      "away_goals": 200,
+      "avg_home_goals": 1.53,
+      "avg_away_goals": 1.27
+     }
+    },
+    {
+     "season": "2025/2026",
+     "sid": 25649,
+     "overview": {
+      "matches": 552,
+      "total_goals": 1452,
+      "avg_goals": 2.63,
+      "home_win_pct": 46.0,
+      "draw_pct": 25.2,
+      "away_win_pct": 28.8,
+      "home_goals": 816,
+      "away_goals": 636,
+      "avg_home_goals": 1.48,
+      "avg_away_goals": 1.15
+     }
+    },
+    {
+     "season": "2024/2025",
+     "sid": 23671,
+     "overview": {
+      "matches": 552,
+      "total_goals": 1427,
+      "avg_goals": 2.59,
+      "home_win_pct": 43.1,
+      "draw_pct": 23.9,
+      "away_win_pct": 33.0,
+      "home_goals": 775,
+      "away_goals": 652,
+      "avg_home_goals": 1.4,
+      "avg_away_goals": 1.18
+     }
+    },
+    {
+     "season": "2023/2024",
+     "sid": 21690,
+     "overview": {
+      "matches": 552,
+      "total_goals": 1427,
+      "avg_goals": 2.59,
+      "home_win_pct": 42.4,
+      "draw_pct": 24.5,
+      "away_win_pct": 33.2,
+      "home_goals": 778,
+      "away_goals": 649,
+      "avg_home_goals": 1.41,
+      "avg_away_goals": 1.18
+     }
+    }
+   ]
+  },
+  "304": {
+   "zh": "法乙",
+   "seasons": [
+    {
+     "season": "2026/2027",
+     "sid": 28105,
+     "overview": {
+      "matches": 108,
+      "total_goals": 289,
+      "avg_goals": 2.68,
+      "home_win_pct": 39.8,
+      "draw_pct": 26.9,
+      "away_win_pct": 33.3,
+      "home_goals": 150,
+      "away_goals": 139,
+      "avg_home_goals": 1.39,
+      "avg_away_goals": 1.29
+     }
+    },
+    {
+     "season": "2025/2026",
+     "sid": 25658,
+     "overview": {
+      "matches": 306,
+      "total_goals": 778,
+      "avg_goals": 2.54,
+      "home_win_pct": 37.6,
+      "draw_pct": 30.4,
+      "away_win_pct": 32.0,
+      "home_goals": 402,
+      "away_goals": 376,
+      "avg_home_goals": 1.31,
+      "avg_away_goals": 1.23
+     }
+    },
+    {
+     "season": "2024/2025",
+     "sid": 23651,
+     "overview": {
+      "matches": 306,
+      "total_goals": 789,
+      "avg_goals": 2.58,
+      "home_win_pct": 48.7,
+      "draw_pct": 23.5,
+      "away_win_pct": 27.8,
+      "home_goals": 461,
+      "away_goals": 328,
+      "avg_home_goals": 1.51,
+      "avg_away_goals": 1.07
+     }
+    },
+    {
+     "season": "2023/2024",
+     "sid": 21780,
+     "overview": {
+      "matches": 380,
+      "total_goals": 933,
+      "avg_goals": 2.46,
+      "home_win_pct": 40.3,
+      "draw_pct": 28.7,
+      "away_win_pct": 31.1,
+      "home_goals": 504,
+      "away_goals": 429,
+      "avg_home_goals": 1.33,
+      "avg_away_goals": 1.13
+     }
+    }
+   ]
+  },
+  "85": {
+   "zh": "德乙",
+   "seasons": [
+    {
+     "season": "2026/2027",
+     "sid": 27923,
+     "overview": {
+      "matches": 96,
+      "total_goals": 282,
+      "avg_goals": 2.94,
+      "home_win_pct": 46.9,
+      "draw_pct": 27.1,
+      "away_win_pct": 26.0,
+      "home_goals": 165,
+      "away_goals": 117,
+      "avg_home_goals": 1.72,
+      "avg_away_goals": 1.22
+     }
+    },
+    {
+     "season": "2025/2026",
+     "sid": 25652,
+     "overview": {
+      "matches": 306,
+      "total_goals": 897,
+      "avg_goals": 2.93,
+      "home_win_pct": 46.1,
+      "draw_pct": 24.2,
+      "away_win_pct": 29.7,
+      "home_goals": 499,
+      "away_goals": 398,
+      "avg_home_goals": 1.63,
+      "avg_away_goals": 1.3
+     }
+    },
+    {
+     "season": "2024/2025",
+     "sid": 23745,
+     "overview": {
+      "matches": 306,
+      "total_goals": 925,
+      "avg_goals": 3.02,
+      "home_win_pct": 40.5,
+      "draw_pct": 28.1,
+      "away_win_pct": 31.4,
+      "home_goals": 501,
+      "away_goals": 424,
+      "avg_home_goals": 1.64,
+      "avg_away_goals": 1.39
+     }
+    },
+    {
+     "season": "2023/2024",
+     "sid": 21796,
+     "overview": {
+      "matches": 306,
+      "total_goals": 947,
+      "avg_goals": 3.09,
+      "home_win_pct": 45.8,
+      "draw_pct": 23.2,
+      "away_win_pct": 31.0,
+      "home_goals": 525,
+      "away_goals": 422,
+      "avg_home_goals": 1.72,
+      "avg_away_goals": 1.38
+     }
+    }
+   ]
+  },
+  "387": {
+   "zh": "意乙",
+   "seasons": [
+    {
+     "season": "2026/2027",
+     "sid": 28379,
+     "overview": {
+      "matches": 107,
+      "total_goals": 279,
+      "avg_goals": 2.61,
+      "home_win_pct": 37.4,
+      "draw_pct": 32.7,
+      "away_win_pct": 29.9,
+      "home_goals": 147,
+      "away_goals": 132,
+      "avg_home_goals": 1.37,
+      "avg_away_goals": 1.23
+     }
+    },
+    {
+     "season": "2025/2026",
+     "sid": 26164,
+     "overview": {
+      "matches": 380,
+      "total_goals": 973,
+      "avg_goals": 2.56,
+      "home_win_pct": 45.0,
+      "draw_pct": 31.1,
+      "away_win_pct": 23.9,
+      "home_goals": 565,
+      "away_goals": 408,
+      "avg_home_goals": 1.49,
+      "avg_away_goals": 1.07
+     }
+    },
+    {
+     "season": "2024/2025",
+     "sid": 23839,
+     "overview": {
+      "matches": 380,
+      "total_goals": 937,
+      "avg_goals": 2.47,
+      "home_win_pct": 40.3,
+      "draw_pct": 33.7,
+      "away_win_pct": 26.1,
+      "home_goals": 514,
+      "away_goals": 423,
+      "avg_home_goals": 1.35,
+      "avg_away_goals": 1.11
+     }
+    },
+    {
+     "season": "2023/2024",
+     "sid": 21943,
+     "overview": {
+      "matches": 380,
+      "total_goals": 958,
+      "avg_goals": 2.52,
+      "home_win_pct": 36.6,
+      "draw_pct": 32.1,
+      "away_win_pct": 31.3,
+      "home_goals": 509,
+      "away_goals": 449,
+      "avg_home_goals": 1.34,
+      "avg_away_goals": 1.18
+     }
+    }
+   ]
+  },
+  "567": {
+   "zh": "西乙",
+   "seasons": [
+    {
+     "season": "2026/2027",
+     "sid": 28479,
+     "overview": {
+      "matches": 136,
+      "total_goals": 375,
+      "avg_goals": 2.76,
+      "home_win_pct": 45.6,
+      "draw_pct": 22.1,
+      "away_win_pct": 32.4,
+      "home_goals": 214,
+      "away_goals": 161,
+      "avg_home_goals": 1.57,
+      "avg_away_goals": 1.18
+     }
+    },
+    {
+     "season": "2025/2026",
+     "sid": 25673,
+     "overview": {
+      "matches": 462,
+      "total_goals": 1216,
+      "avg_goals": 2.63,
+      "home_win_pct": 44.8,
+      "draw_pct": 24.9,
+      "away_win_pct": 30.3,
+      "home_goals": 671,
+      "away_goals": 545,
+      "avg_home_goals": 1.45,
+      "avg_away_goals": 1.18
+     }
+    },
+    {
+     "season": "2024/2025",
+     "sid": 23676,
+     "overview": {
+      "matches": 462,
+      "total_goals": 1169,
+      "avg_goals": 2.53,
+      "home_win_pct": 46.3,
+      "draw_pct": 28.1,
+      "away_win_pct": 25.5,
+      "home_goals": 670,
+      "away_goals": 499,
+      "avg_home_goals": 1.45,
+      "avg_away_goals": 1.08
+     }
+    },
+    {
+     "season": "2023/2024",
+     "sid": 21739,
+     "overview": {
+      "matches": 462,
+      "total_goals": 1039,
+      "avg_goals": 2.25,
+      "home_win_pct": 46.5,
+      "draw_pct": 30.1,
+      "away_win_pct": 23.4,
+      "home_goals": 615,
+      "away_goals": 424,
+      "avg_home_goals": 1.33,
+      "avg_away_goals": 0.92
+     }
+    }
+   ]
+  },
+  "72": {
+   "zh": "荷甲",
+   "seasons": [
+    {
+     "season": "2026/2027",
+     "sid": 27958,
+     "overview": {
+      "matches": 103,
+      "total_goals": 389,
+      "avg_goals": 3.78,
+      "home_win_pct": 34.0,
+      "draw_pct": 28.2,
+      "away_win_pct": 37.9,
+      "home_goals": 185,
+      "away_goals": 204,
+      "avg_home_goals": 1.8,
+      "avg_away_goals": 1.98
+     }
+    },
+    {
+     "season": "2025/2026",
+     "sid": 25597,
+     "overview": {
+      "matches": 306,
+      "total_goals": 972,
+      "avg_goals": 3.18,
+      "home_win_pct": 44.4,
+      "draw_pct": 26.1,
+      "away_win_pct": 29.4,
+      "home_goals": 551,
+      "away_goals": 421,
+      "avg_home_goals": 1.8,
+      "avg_away_goals": 1.38
+     }
+    },
+    {
+     "season": "2024/2025",
+     "sid": 23628,
+     "overview": {
+      "matches": 306,
+      "total_goals": 914,
+      "avg_goals": 2.99,
+      "home_win_pct": 45.4,
+      "draw_pct": 25.2,
+      "away_win_pct": 29.4,
+      "home_goals": 519,
+      "away_goals": 395,
+      "avg_home_goals": 1.7,
+      "avg_away_goals": 1.29
+     }
+    },
+    {
+     "season": "2023/2024",
+     "sid": 21730,
+     "overview": {
+      "matches": 306,
+      "total_goals": 992,
+      "avg_goals": 3.24,
+      "home_win_pct": 43.1,
+      "draw_pct": 24.8,
+      "away_win_pct": 32.0,
+      "home_goals": 541,
+      "away_goals": 451,
+      "avg_home_goals": 1.77,
+      "avg_away_goals": 1.47
+     }
+    }
+   ]
+  },
+  "462": {
+   "zh": "葡超",
+   "seasons": [
+    {
+     "season": "2026/2027",
+     "sid": 27947,
+     "overview": {
+      "matches": 93,
+      "total_goals": 245,
+      "avg_goals": 2.63,
+      "home_win_pct": 40.9,
+      "draw_pct": 21.5,
+      "away_win_pct": 37.6,
+      "home_goals": 119,
+      "away_goals": 126,
+      "avg_home_goals": 1.28,
+      "avg_away_goals": 1.35
+     }
+    },
+    {
+     "season": "2025/2026",
+     "sid": 25745,
+     "overview": {
+      "matches": 306,
+      "total_goals": 821,
+      "avg_goals": 2.68,
+      "home_win_pct": 41.2,
+      "draw_pct": 27.1,
+      "away_win_pct": 31.7,
+      "home_goals": 458,
+      "away_goals": 363,
+      "avg_home_goals": 1.5,
+      "avg_away_goals": 1.19
+     }
+    },
+    {
+     "season": "2024/2025",
+     "sid": 23793,
+     "overview": {
+      "matches": 306,
+      "total_goals": 786,
+      "avg_goals": 2.57,
+      "home_win_pct": 43.1,
+      "draw_pct": 25.8,
+      "away_win_pct": 31.0,
+      "home_goals": 429,
+      "away_goals": 357,
+      "avg_home_goals": 1.4,
+      "avg_away_goals": 1.17
+     }
+    },
+    {
+     "season": "2023/2024",
+     "sid": 21825,
+     "overview": {
+      "matches": 306,
+      "total_goals": 877,
+      "avg_goals": 2.87,
+      "home_win_pct": 43.5,
+      "draw_pct": 24.5,
+      "away_win_pct": 32.0,
+      "home_goals": 485,
+      "away_goals": 392,
+      "avg_home_goals": 1.58,
+      "avg_away_goals": 1.28
+     }
+    }
+   ]
+  },
+  "501": {
+   "zh": "苏超",
+   "seasons": [
+    {
+     "season": "2026/2027",
+     "sid": 28275,
+     "overview": {
+      "matches": 73,
+      "total_goals": 206,
+      "avg_goals": 2.82,
+      "home_win_pct": 41.1,
+      "draw_pct": 23.3,
+      "away_win_pct": 35.6,
+      "home_goals": 108,
+      "away_goals": 98,
+      "avg_home_goals": 1.48,
+      "avg_away_goals": 1.34
+     }
+    },
+    {
+     "season": "2025/2026",
+     "sid": 25598,
+     "overview": {}
+    },
+    {
+     "season": "2024/2025",
+     "sid": 23690,
+     "overview": {}
+    },
+    {
+     "season": "2023/2024",
+     "sid": 21787,
+     "overview": {}
+    }
+   ]
+  },
+  "208": {
+   "zh": "比甲",
+   "seasons": [
+    {
+     "season": "2026/2027",
+     "sid": 28440,
+     "overview": {
+      "matches": 95,
+      "total_goals": 307,
+      "avg_goals": 3.23,
+      "home_win_pct": 50.5,
+      "draw_pct": 17.9,
+      "away_win_pct": 31.6,
+      "home_goals": 177,
+      "away_goals": 130,
+      "avg_home_goals": 1.86,
+      "avg_away_goals": 1.37
+     }
+    },
+    {
+     "season": "2025/2026",
+     "sid": 25600,
+     "overview": {}
+    },
+    {
+     "season": "2024/2025",
+     "sid": 23589,
+     "overview": {}
+    },
+    {
+     "season": "2023/2024",
+     "sid": 21693,
+     "overview": {}
+    }
+   ]
+  },
+  "591": {
+   "zh": "瑞超",
+   "seasons": [
+    {
+     "season": "2026/2027",
+     "sid": 28121,
+     "overview": {
+      "matches": 75,
+      "total_goals": 282,
+      "avg_goals": 3.76,
+      "home_win_pct": 42.7,
+      "draw_pct": 18.7,
+      "away_win_pct": 38.7,
+      "home_goals": 143,
+      "away_goals": 139,
+      "avg_home_goals": 1.91,
+      "avg_away_goals": 1.85
+     }
+    },
+    {
+     "season": "2025/2026",
+     "sid": 25607,
+     "overview": {}
+    },
+    {
+     "season": "2024/2025",
+     "sid": 23617,
+     "overview": {}
+    },
+    {
+     "season": "2023/2024",
+     "sid": 21677,
+     "overview": {}
+    }
+   ]
+  },
+  "600": {
+   "zh": "土超",
+   "seasons": [
+    {
+     "season": "2026/2027",
+     "sid": 28203,
+     "overview": {
+      "matches": 96,
+      "total_goals": 288,
+      "avg_goals": 3.0,
+      "home_win_pct": 47.9,
+      "draw_pct": 16.7,
+      "away_win_pct": 35.4,
+      "home_goals": 164,
+      "away_goals": 124,
+      "avg_home_goals": 1.71,
+      "avg_away_goals": 1.29
+     }
+    },
+    {
+     "season": "2025/2026",
+     "sid": 25682,
+     "overview": {
+      "matches": 306,
+      "total_goals": 812,
+      "avg_goals": 2.65,
+      "home_win_pct": 42.2,
+      "draw_pct": 29.1,
+      "away_win_pct": 28.8,
+      "home_goals": 442,
+      "away_goals": 370,
+      "avg_home_goals": 1.44,
+      "avg_away_goals": 1.21
+     }
+    },
+    {
+     "season": "2024/2025",
+     "sid": 23851,
+     "overview": {
+      "matches": 342,
+      "total_goals": 1004,
+      "avg_goals": 2.94,
+      "home_win_pct": 48.5,
+      "draw_pct": 23.4,
+      "away_win_pct": 28.1,
+      "home_goals": 570,
+      "away_goals": 434,
+      "avg_home_goals": 1.67,
+      "avg_away_goals": 1.27
+     }
+    },
+    {
+     "season": "2023/2024",
+     "sid": 22057,
+     "overview": {
+      "matches": 380,
+      "total_goals": 1062,
+      "avg_goals": 2.79,
+      "home_win_pct": 45.5,
+      "draw_pct": 26.3,
+      "away_win_pct": 28.2,
+      "home_goals": 599,
+      "away_goals": 463,
+      "avg_home_goals": 1.58,
+      "avg_away_goals": 1.22
+     }
+    }
+   ]
+  },
+  "444": {
+   "zh": "挪超",
+   "seasons": [
+    {
+     "season": "2026",
+     "sid": 26781,
+     "overview": {
+      "matches": 201,
+      "total_goals": 657,
+      "avg_goals": 3.27,
+      "home_win_pct": 49.8,
+      "draw_pct": 19.4,
+      "away_win_pct": 30.8,
+      "home_goals": 374,
+      "away_goals": 283,
+      "avg_home_goals": 1.86,
+      "avg_away_goals": 1.41
+     }
+    },
+    {
+     "season": "2025",
+     "sid": 24971,
+     "overview": {
+      "matches": 240,
+      "total_goals": 765,
+      "avg_goals": 3.19,
+      "home_win_pct": 48.8,
+      "draw_pct": 19.2,
+      "away_win_pct": 32.1,
+      "home_goals": 434,
+      "away_goals": 331,
+      "avg_home_goals": 1.81,
+      "avg_away_goals": 1.38
+     }
+    },
+    {
+     "season": "2024",
+     "sid": 22975,
+     "overview": {
+      "matches": 240,
+      "total_goals": 681,
+      "avg_goals": 2.84,
+      "home_win_pct": 41.7,
+      "draw_pct": 25.0,
+      "away_win_pct": 33.3,
+      "home_goals": 363,
+      "away_goals": 318,
+      "avg_home_goals": 1.51,
+      "avg_away_goals": 1.32
+     }
+    },
+    {
+     "season": "2023",
+     "sid": 20977,
+     "overview": {
+      "matches": 240,
+      "total_goals": 748,
+      "avg_goals": 3.12,
+      "home_win_pct": 50.8,
+      "draw_pct": 17.5,
+      "away_win_pct": 31.7,
+      "home_goals": 430,
+      "away_goals": 318,
+      "avg_home_goals": 1.79,
+      "avg_away_goals": 1.32
+     }
+    }
+   ]
+  },
+  "573": {
+   "zh": "瑞典超",
+   "seasons": [
+    {
+     "season": "2026",
+     "sid": 26806,
+     "overview": {
+      "matches": 219,
+      "total_goals": 626,
+      "avg_goals": 2.86,
+      "home_win_pct": 40.2,
+      "draw_pct": 23.7,
+      "away_win_pct": 36.1,
+      "home_goals": 341,
+      "away_goals": 285,
+      "avg_home_goals": 1.56,
+      "avg_away_goals": 1.3
+     }
+    },
+    {
+     "season": "2025",
+     "sid": 24943,
+     "overview": {
+      "matches": 240,
+      "total_goals": 683,
+      "avg_goals": 2.85,
+      "home_win_pct": 40.0,
+      "draw_pct": 22.1,
+      "away_win_pct": 37.9,
+      "home_goals": 354,
+      "away_goals": 329,
+      "avg_home_goals": 1.48,
+      "avg_away_goals": 1.37
+     }
+    },
+    {
+     "season": "2024",
+     "sid": 22960,
+     "overview": {
+      "matches": 240,
+      "total_goals": 680,
+      "avg_goals": 2.83,
+      "home_win_pct": 45.4,
+      "draw_pct": 21.7,
+      "away_win_pct": 32.9,
+      "home_goals": 376,
+      "away_goals": 304,
+      "avg_home_goals": 1.57,
+      "avg_away_goals": 1.27
+     }
+    },
+    {
+     "season": "2023",
+     "sid": 20960,
+     "overview": {
+      "matches": 240,
+      "total_goals": 665,
+      "avg_goals": 2.77,
+      "home_win_pct": 46.7,
+      "draw_pct": 19.6,
+      "away_win_pct": 33.8,
+      "home_goals": 373,
+      "away_goals": 292,
+      "avg_home_goals": 1.55,
+      "avg_away_goals": 1.22
+     }
+    }
+   ]
+  },
+  "271": {
+   "zh": "丹超",
+   "seasons": [
+    {
+     "season": "2026/2027",
+     "sid": 27897,
+     "overview": {
+      "matches": 80,
+      "total_goals": 243,
+      "avg_goals": 3.04,
+      "home_win_pct": 46.2,
+      "draw_pct": 27.5,
+      "away_win_pct": 26.2,
+      "home_goals": 132,
+      "away_goals": 111,
+      "avg_home_goals": 1.65,
+      "avg_away_goals": 1.39
+     }
+    },
+    {
+     "season": "2025/2026",
+     "sid": 25536,
+     "overview": {}
+    },
+    {
+     "season": "2024/2025",
+     "sid": 23584,
+     "overview": {}
+    },
+    {
+     "season": "2023/2024",
+     "sid": 21644,
+     "overview": {}
+    }
+   ]
+  },
+  "453": {
+   "zh": "波超",
+   "seasons": [
+    {
+     "season": "2026/2027",
+     "sid": 27919,
+     "overview": {
+      "matches": 121,
+      "total_goals": 359,
+      "avg_goals": 2.97,
+      "home_win_pct": 49.6,
+      "draw_pct": 22.3,
+      "away_win_pct": 28.1,
+      "home_goals": 203,
+      "away_goals": 156,
+      "avg_home_goals": 1.68,
+      "avg_away_goals": 1.29
+     }
+    },
+    {
+     "season": "2025/2026",
+     "sid": 25535,
+     "overview": {
+      "matches": 306,
+      "total_goals": 837,
+      "avg_goals": 2.74,
+      "home_win_pct": 45.1,
+      "draw_pct": 27.8,
+      "away_win_pct": 27.1,
+      "home_goals": 482,
+      "away_goals": 355,
+      "avg_home_goals": 1.58,
+      "avg_away_goals": 1.16
+     }
+    },
+    {
+     "season": "2024/2025",
+     "sid": 23578,
+     "overview": {
+      "matches": 306,
+      "total_goals": 843,
+      "avg_goals": 2.75,
+      "home_win_pct": 44.8,
+      "draw_pct": 25.2,
+      "away_win_pct": 30.1,
+      "home_goals": 472,
+      "away_goals": 371,
+      "avg_home_goals": 1.54,
+      "avg_away_goals": 1.21
+     }
+    },
+    {
+     "season": "2023/2024",
+     "sid": 21650,
+     "overview": {
+      "matches": 306,
+      "total_goals": 823,
+      "avg_goals": 2.69,
+      "home_win_pct": 43.5,
+      "draw_pct": 30.4,
+      "away_win_pct": 26.1,
+      "home_goals": 473,
+      "away_goals": 350,
+      "avg_home_goals": 1.55,
+      "avg_away_goals": 1.14
+     }
+    }
+   ]
+  },
+  "181": {
+   "zh": "奥甲",
+   "seasons": [
+    {
+     "season": "2026/2027",
+     "sid": 28003,
+     "overview": {
+      "matches": 69,
+      "total_goals": 225,
+      "avg_goals": 3.26,
+      "home_win_pct": 50.7,
+      "draw_pct": 20.3,
+      "away_win_pct": 29.0,
+      "home_goals": 133,
+      "away_goals": 92,
+      "avg_home_goals": 1.93,
+      "avg_away_goals": 1.33
+     }
+    },
+    {
+     "season": "2025/2026",
+     "sid": 25653,
+     "overview": {}
+    },
+    {
+     "season": "2024/2025",
+     "sid": 23700,
+     "overview": {}
+    },
+    {
+     "season": "2023/2024",
+     "sid": 21726,
+     "overview": {}
+    }
+   ]
+  },
+  "244": {
+   "zh": "克甲",
+   "seasons": [
+    {
+     "season": "2026/2027",
+     "sid": 27896,
+     "overview": {
+      "matches": 62,
+      "total_goals": 191,
+      "avg_goals": 3.08,
+      "home_win_pct": 51.6,
+      "draw_pct": 19.4,
+      "away_win_pct": 29.0,
+      "home_goals": 110,
+      "away_goals": 81,
+      "avg_home_goals": 1.77,
+      "avg_away_goals": 1.31
+     }
+    },
+    {
+     "season": "2025/2026",
+     "sid": 25584,
+     "overview": {
+      "matches": 180,
+      "total_goals": 479,
+      "avg_goals": 2.66,
+      "home_win_pct": 45.6,
+      "draw_pct": 26.1,
+      "away_win_pct": 28.3,
+      "home_goals": 263,
+      "away_goals": 216,
+      "avg_home_goals": 1.46,
+      "avg_away_goals": 1.2
+     }
+    },
+    {
+     "season": "2024/2025",
+     "sid": 23579,
+     "overview": {
+      "matches": 180,
+      "total_goals": 424,
+      "avg_goals": 2.36,
+      "home_win_pct": 45.0,
+      "draw_pct": 30.0,
+      "away_win_pct": 25.0,
+      "home_goals": 251,
+      "away_goals": 173,
+      "avg_home_goals": 1.39,
+      "avg_away_goals": 0.96
+     }
+    },
+    {
+     "season": "2023/2024",
+     "sid": 21635,
+     "overview": {
+      "matches": 180,
+      "total_goals": 479,
+      "avg_goals": 2.66,
+      "home_win_pct": 42.8,
+      "draw_pct": 23.3,
+      "away_win_pct": 33.9,
+      "home_goals": 266,
+      "away_goals": 213,
+      "avg_home_goals": 1.48,
+      "avg_away_goals": 1.18
+     }
+    }
+   ]
+  },
+  "609": {
+   "zh": "乌超",
+   "seasons": [
+    {
+     "season": "2026/2027",
+     "sid": 28274,
+     "overview": {
+      "matches": 85,
+      "total_goals": 203,
+      "avg_goals": 2.39,
+      "home_win_pct": 43.5,
+      "draw_pct": 28.2,
+      "away_win_pct": 28.2,
+      "home_goals": 119,
+      "away_goals": 84,
+      "avg_home_goals": 1.4,
+      "avg_away_goals": 0.99
+     }
+    },
+    {
+     "season": "2025/2026",
+     "sid": 25675,
+     "overview": {
+      "matches": 240,
+      "total_goals": 617,
+      "avg_goals": 2.57,
+      "home_win_pct": 37.5,
+      "draw_pct": 26.7,
+      "away_win_pct": 35.8,
+      "home_goals": 309,
+      "away_goals": 308,
+      "avg_home_goals": 1.29,
+      "avg_away_goals": 1.28
+     }
+    },
+    {
+     "season": "2024/2025",
+     "sid": 23703,
+     "overview": {
+      "matches": 240,
+      "total_goals": 541,
+      "avg_goals": 2.25,
+      "home_win_pct": 40.0,
+      "draw_pct": 27.9,
+      "away_win_pct": 32.1,
+      "home_goals": 297,
+      "away_goals": 244,
+      "avg_home_goals": 1.24,
+      "avg_away_goals": 1.02
+     }
+    },
+    {
+     "season": "2023/2024",
+     "sid": 21827,
+     "overview": {
+      "matches": 240,
+      "total_goals": 597,
+      "avg_goals": 2.49,
+      "home_win_pct": 38.8,
+      "draw_pct": 27.5,
+      "away_win_pct": 33.8,
+      "home_goals": 304,
+      "away_goals": 293,
+      "avg_home_goals": 1.27,
+      "avg_away_goals": 1.22
+     }
+    }
+   ]
+  },
+  "325": {
+   "zh": "希腊超",
+   "seasons": [
+    {
+     "season": "2026/2027",
+     "sid": 28001,
+     "overview": {
+      "matches": 64,
+      "total_goals": 178,
+      "avg_goals": 2.78,
+      "home_win_pct": 50.0,
+      "draw_pct": 18.8,
+      "away_win_pct": 31.2,
+      "home_goals": 113,
+      "away_goals": 65,
+      "avg_home_goals": 1.77,
+      "avg_away_goals": 1.02
+     }
+    },
+    {
+     "season": "2025/2026",
+     "sid": 25759,
+     "overview": {}
+    },
+    {
+     "season": "2024/2025",
+     "sid": 23923,
+     "overview": {}
+    },
+    {
+     "season": "2023/2024",
+     "sid": 22043,
+     "overview": {}
+    }
+   ]
+  },
+  "262": {
+   "zh": "捷克甲",
+   "seasons": [
+    {
+     "season": "2026/2027",
+     "sid": 27984,
+     "overview": {
+      "matches": 107,
+      "total_goals": 294,
+      "avg_goals": 2.75,
+      "home_win_pct": 41.1,
+      "draw_pct": 22.4,
+      "away_win_pct": 36.4,
+      "home_goals": 155,
+      "away_goals": 139,
+      "avg_home_goals": 1.45,
+      "avg_away_goals": 1.3
+     }
+    },
+    {
+     "season": "2025/2026",
+     "sid": 25591,
+     "overview": {}
+    },
+    {
+     "season": "2024/2025",
+     "sid": 23641,
+     "overview": {}
+    },
+    {
+     "season": "2023/2024",
+     "sid": 21682,
+     "overview": {}
+    }
+   ]
+  },
+  "292": {
+   "zh": "芬兰超",
+   "seasons": [
+    {
+     "season": "2026",
+     "sid": 26805,
+     "overview": {}
+    },
+    {
+     "season": "2025",
+     "sid": 25069,
+     "overview": {}
+    },
+    {
+     "season": "2024",
+     "sid": 23107,
+     "overview": {}
+    },
+    {
+     "season": "2023",
+     "sid": 21136,
+     "overview": {}
+    }
+   ]
+  },
+  "944": {
+   "zh": "沙特联",
+   "seasons": [
+    {
+     "season": "2026/2027",
+     "sid": 27951,
+     "overview": {
+      "matches": 104,
+      "total_goals": 315,
+      "avg_goals": 3.03,
+      "home_win_pct": 40.4,
+      "draw_pct": 26.0,
+      "away_win_pct": 33.7,
+      "home_goals": 160,
+      "away_goals": 155,
+      "avg_home_goals": 1.54,
+      "avg_away_goals": 1.49
+     }
+    },
+    {
+     "season": "2025/2026",
+     "sid": 26276,
+     "overview": {
+      "matches": 306,
+      "total_goals": 921,
+      "avg_goals": 3.01,
+      "home_win_pct": 44.1,
+      "draw_pct": 22.9,
+      "away_win_pct": 33.0,
+      "home_goals": 486,
+      "away_goals": 435,
+      "avg_home_goals": 1.59,
+      "avg_away_goals": 1.42
+     }
+    },
+    {
+     "season": "2024/2025",
+     "sid": 23970,
+     "overview": {
+      "matches": 306,
+      "total_goals": 902,
+      "avg_goals": 2.95,
+      "home_win_pct": 43.8,
+      "draw_pct": 18.6,
+      "away_win_pct": 37.6,
+      "home_goals": 477,
+      "away_goals": 425,
+      "avg_home_goals": 1.56,
+      "avg_away_goals": 1.39
+     }
+    },
+    {
+     "season": "2023/2024",
+     "sid": 22031,
+     "overview": {
+      "matches": 306,
+      "total_goals": 909,
+      "avg_goals": 2.97,
+      "home_win_pct": 42.2,
+      "draw_pct": 24.5,
+      "away_win_pct": 33.3,
+      "home_goals": 482,
+      "away_goals": 427,
+      "avg_home_goals": 1.58,
+      "avg_away_goals": 1.4
+     }
+    }
+   ]
+  },
+  "743": {
+   "zh": "墨西哥联",
+   "seasons": [
+    {
+     "season": "2026/2027",
+     "sid": 28009,
+     "overview": {
+      "matches": 141,
+      "total_goals": 428,
+      "avg_goals": 3.04,
+      "home_win_pct": 37.6,
+      "draw_pct": 26.2,
+      "away_win_pct": 36.2,
+      "home_goals": 224,
+      "away_goals": 204,
+      "avg_home_goals": 1.59,
+      "avg_away_goals": 1.45
+     }
+    },
+    {
+     "season": "2025/2026",
+     "sid": 25539,
+     "overview": {}
+    },
+    {
+     "season": "2024/2025",
+     "sid": 23586,
+     "overview": {}
+    },
+    {
+     "season": "2023/2024",
+     "sid": 21623,
+     "overview": {}
+    }
+   ]
+  },
+  "636": {
+   "zh": "阿根廷联",
+   "seasons": [
+    {
+     "season": "2026",
+     "sid": 26808,
+     "overview": {}
+    },
+    {
+     "season": "2025",
+     "sid": 24969,
+     "overview": {}
+    },
+    {
+     "season": "2024",
+     "sid": 23024,
+     "overview": {
+      "matches": 378,
+      "total_goals": 773,
+      "avg_goals": 2.04,
+      "home_win_pct": 45.0,
+      "draw_pct": 33.6,
+      "away_win_pct": 21.4,
+      "home_goals": 458,
+      "away_goals": 315,
+      "avg_home_goals": 1.21,
+      "avg_away_goals": 0.83
+     }
+    },
+    {
+     "season": "2023",
+     "sid": 20873,
+     "overview": {
+      "matches": 378,
+      "total_goals": 778,
+      "avg_goals": 2.06,
+      "home_win_pct": 44.7,
+      "draw_pct": 32.0,
+      "away_win_pct": 23.3,
+      "home_goals": 455,
+      "away_goals": 323,
+      "avg_home_goals": 1.2,
+      "avg_away_goals": 0.85
+     }
+    }
+   ]
+  },
+  "648": {
+   "zh": "巴西甲",
+   "seasons": [
+    {
+     "season": "2026",
+     "sid": 26763,
+     "overview": {
+      "matches": 339,
+      "total_goals": 906,
+      "avg_goals": 2.67,
+      "home_win_pct": 48.7,
+      "draw_pct": 26.8,
+      "away_win_pct": 24.5,
+      "home_goals": 522,
+      "away_goals": 384,
+      "avg_home_goals": 1.54,
+      "avg_away_goals": 1.13
+     }
+    },
+    {
+     "season": "2025",
+     "sid": 25184,
+     "overview": {
+      "matches": 380,
+      "total_goals": 959,
+      "avg_goals": 2.52,
+      "home_win_pct": 50.3,
+      "draw_pct": 26.1,
+      "away_win_pct": 23.7,
+      "home_goals": 580,
+      "away_goals": 379,
+      "avg_home_goals": 1.53,
+      "avg_away_goals": 1.0
+     }
+    },
+    {
+     "season": "2024",
+     "sid": 23265,
+     "overview": {
+      "matches": 380,
+      "total_goals": 929,
+      "avg_goals": 2.44,
+      "home_win_pct": 47.4,
+      "draw_pct": 26.6,
+      "away_win_pct": 26.1,
+      "home_goals": 536,
+      "away_goals": 393,
+      "avg_home_goals": 1.41,
+      "avg_away_goals": 1.03
+     }
+    },
+    {
+     "season": "2023",
+     "sid": 21207,
+     "overview": {
+      "matches": 380,
+      "total_goals": 946,
+      "avg_goals": 2.49,
+      "home_win_pct": 46.8,
+      "draw_pct": 25.8,
+      "away_win_pct": 27.4,
+      "home_goals": 539,
+      "away_goals": 407,
+      "avg_home_goals": 1.42,
+      "avg_away_goals": 1.07
+     }
+    }
+   ]
+  },
+  "779": {
+   "zh": "美职联",
+   "seasons": [
+    {
+     "season": "2026",
+     "sid": 26720,
+     "overview": {
+      "matches": 510,
+      "total_goals": 1657,
+      "avg_goals": 3.25,
+      "home_win_pct": 45.9,
+      "draw_pct": 25.5,
+      "away_win_pct": 28.6,
+      "home_goals": 940,
+      "away_goals": 717,
+      "avg_home_goals": 1.84,
+      "avg_away_goals": 1.41
+     }
+    },
+    {
+     "season": "2025",
+     "sid": 24962,
+     "overview": {
+      "matches": 510,
+      "total_goals": 1530,
+      "avg_goals": 3.0,
+      "home_win_pct": 43.7,
+      "draw_pct": 25.1,
+      "away_win_pct": 31.2,
+      "home_goals": 836,
+      "away_goals": 694,
+      "avg_home_goals": 1.64,
+      "avg_away_goals": 1.36
+     }
+    },
+    {
+     "season": "2024",
+     "sid": 22974,
+     "overview": {
+      "matches": 493,
+      "total_goals": 1552,
+      "avg_goals": 3.15,
+      "home_win_pct": 44.8,
+      "draw_pct": 24.3,
+      "away_win_pct": 30.8,
+      "home_goals": 856,
+      "away_goals": 696,
+      "avg_home_goals": 1.74,
+      "avg_away_goals": 1.41
+     }
+    },
+    {
+     "season": "2023",
+     "sid": 20901,
+     "overview": {
+      "matches": 493,
+      "total_goals": 1359,
+      "avg_goals": 2.76,
+      "home_win_pct": 47.5,
+      "draw_pct": 29.6,
+      "away_win_pct": 22.9,
+      "home_goals": 832,
+      "away_goals": 527,
+      "avg_home_goals": 1.69,
+      "avg_away_goals": 1.07
+     }
+    }
+   ]
+  },
+  "968": {
+   "zh": "日职联",
+   "seasons": [
+    {
+     "season": "2026/2027",
+     "sid": 26810,
+     "overview": {
+      "matches": 140,
+      "total_goals": 413,
+      "avg_goals": 2.95,
+      "home_win_pct": 44.3,
+      "draw_pct": 24.3,
+      "away_win_pct": 31.4,
+      "home_goals": 226,
+      "away_goals": 187,
+      "avg_home_goals": 1.61,
+      "avg_away_goals": 1.34
+     }
+    },
+    {
+     "season": "2025",
+     "sid": 24946,
+     "overview": {
+      "matches": 380,
+      "total_goals": 911,
+      "avg_goals": 2.4,
+      "home_win_pct": 44.2,
+      "draw_pct": 25.5,
+      "away_win_pct": 30.3,
+      "home_goals": 500,
+      "away_goals": 411,
+      "avg_home_goals": 1.32,
+      "avg_away_goals": 1.08
+     }
+    },
+    {
+     "season": "2024",
+     "sid": 23002,
+     "overview": {
+      "matches": 380,
+      "total_goals": 1013,
+      "avg_goals": 2.67,
+      "home_win_pct": 38.4,
+      "draw_pct": 27.4,
+      "away_win_pct": 34.2,
+      "home_goals": 541,
+      "away_goals": 472,
+      "avg_home_goals": 1.42,
+      "avg_away_goals": 1.24
+     }
+    },
+    {
+     "season": "2023",
+     "sid": 21035,
+     "overview": {
+      "matches": 306,
+      "total_goals": 777,
+      "avg_goals": 2.54,
+      "home_win_pct": 42.2,
+      "draw_pct": 25.5,
+      "away_win_pct": 32.4,
+      "home_goals": 418,
+      "away_goals": 359,
+      "avg_home_goals": 1.37,
+      "avg_away_goals": 1.17
+     }
+    }
+   ]
+  },
+  "1034": {
+   "zh": "韩K联",
+   "seasons": [
+    {
+     "season": "2026",
+     "sid": 26894,
+     "overview": {}
+    },
+    {
+     "season": "2025",
+     "sid": 25044,
+     "overview": {}
+    },
+    {
+     "season": "2024",
+     "sid": 23091,
+     "overview": {}
+    },
+    {
+     "season": "2023",
+     "sid": 21100,
+     "overview": {}
+    }
+   ]
+  },
+  "989": {
+   "zh": "中超",
+   "seasons": [
+    {
+     "season": "2026",
+     "sid": 27223,
+     "overview": {
+      "matches": 240,
+      "total_goals": 762,
+      "avg_goals": 3.17,
+      "home_win_pct": 45.4,
+      "draw_pct": 25.8,
+      "away_win_pct": 28.8,
+      "home_goals": 436,
+      "away_goals": 326,
+      "avg_home_goals": 1.82,
+      "avg_away_goals": 1.36
+     }
+    },
+    {
+     "season": "2025",
+     "sid": 25120,
+     "overview": {
+      "matches": 240,
+      "total_goals": 771,
+      "avg_goals": 3.21,
+      "home_win_pct": 46.7,
+      "draw_pct": 25.8,
+      "away_win_pct": 27.5,
+      "home_goals": 432,
+      "away_goals": 339,
+      "avg_home_goals": 1.8,
+      "avg_away_goals": 1.41
+     }
+    },
+    {
+     "season": "2024",
+     "sid": 22847,
+     "overview": {
+      "matches": 240,
+      "total_goals": 750,
+      "avg_goals": 3.12,
+      "home_win_pct": 46.2,
+      "draw_pct": 22.9,
+      "away_win_pct": 30.8,
+      "home_goals": 431,
+      "away_goals": 319,
+      "avg_home_goals": 1.8,
+      "avg_away_goals": 1.33
+     }
+    },
+    {
+     "season": "2023",
+     "sid": 21345,
+     "overview": {
+      "matches": 240,
+      "total_goals": 666,
+      "avg_goals": 2.77,
+      "home_win_pct": 44.2,
+      "draw_pct": 27.9,
+      "away_win_pct": 27.9,
+      "home_goals": 372,
+      "away_goals": 294,
+      "avg_home_goals": 1.55,
+      "avg_away_goals": 1.23
+     }
+    }
+   ]
+  },
+  "830": {
+   "zh": "埃及超",
+   "seasons": [
+    {
+     "season": "2026/2027",
+     "sid": 28307,
+     "overview": {
+      "matches": 80,
+      "total_goals": 185,
+      "avg_goals": 2.31,
+      "home_win_pct": 37.5,
+      "draw_pct": 25.0,
+      "away_win_pct": 37.5,
+      "home_goals": 89,
+      "away_goals": 96,
+      "avg_home_goals": 1.11,
+      "avg_away_goals": 1.2
+     }
+    },
+    {
+     "season": "2025/2026",
+     "sid": 26148,
+     "overview": {}
+    },
+    {
+     "season": "2024/2025",
+     "sid": 24703,
+     "overview": {
+      "matches": 153,
+      "total_goals": 315,
+      "avg_goals": 2.06,
+      "home_win_pct": 37.3,
+      "draw_pct": 30.7,
+      "away_win_pct": 32.0,
+      "home_goals": 166,
+      "away_goals": 149,
+      "avg_home_goals": 1.08,
+      "avg_away_goals": 0.97
+     }
+    },
+    {
+     "season": "2023/2024",
+     "sid": 22656,
+     "overview": {
+      "matches": 306,
+      "total_goals": 730,
+      "avg_goals": 2.39,
+      "home_win_pct": 37.6,
+      "draw_pct": 30.1,
+      "away_win_pct": 32.4,
+      "home_goals": 389,
+      "away_goals": 341,
+      "avg_home_goals": 1.27,
+      "avg_away_goals": 1.11
+     }
+    }
+   ]
+  },
+  "1356": {
+   "zh": "澳超",
+   "seasons": [
+    {
+     "season": "2026/2027",
+     "sid": 27970,
+     "overview": {
+      "matches": 23,
+      "total_goals": 65,
+      "avg_goals": 2.83,
+      "home_win_pct": 52.2,
+      "draw_pct": 39.1,
+      "away_win_pct": 8.7,
+      "home_goals": 41,
+      "away_goals": 24,
+      "avg_home_goals": 1.78,
+      "avg_away_goals": 1.04
+     }
+    },
+    {
+     "season": "2025/2026",
+     "sid": 26529,
+     "overview": {
+      "matches": 156,
+      "total_goals": 447,
+      "avg_goals": 2.87,
+      "home_win_pct": 38.5,
+      "draw_pct": 26.3,
+      "away_win_pct": 35.3,
+      "home_goals": 238,
+      "away_goals": 209,
+      "avg_home_goals": 1.53,
+      "avg_away_goals": 1.34
+     }
+    },
+    {
+     "season": "2024/2025",
+     "sid": 24199,
+     "overview": {}
+    },
+    {
+     "season": "2023/2024",
+     "sid": 22535,
+     "overview": {
+      "matches": 162,
+      "total_goals": 540,
+      "avg_goals": 3.33,
+      "home_win_pct": 43.2,
+      "draw_pct": 24.7,
+      "away_win_pct": 32.1,
+      "home_goals": 303,
+      "away_goals": 237,
+      "avg_home_goals": 1.87,
+      "avg_away_goals": 1.46
+     }
+    }
+   ]
+  },
+  "1022": {
+   "zh": "日职乙",
+   "seasons": [
+    {
+     "season": "2026/2027",
+     "sid": 26811,
+     "overview": {
+      "matches": 160,
+      "total_goals": 407,
+      "avg_goals": 2.54,
+      "home_win_pct": 44.4,
+      "draw_pct": 23.8,
+      "away_win_pct": 31.9,
+      "home_goals": 225,
+      "away_goals": 182,
+      "avg_home_goals": 1.41,
+      "avg_away_goals": 1.14
+     }
+    },
+    {
+     "season": "2025",
+     "sid": 24940,
+     "overview": {
+      "matches": 380,
+      "total_goals": 934,
+      "avg_goals": 2.46,
+      "home_win_pct": 37.6,
+      "draw_pct": 28.4,
+      "away_win_pct": 33.9,
+      "home_goals": 487,
+      "away_goals": 447,
+      "avg_home_goals": 1.28,
+      "avg_away_goals": 1.18
+     }
+    },
+    {
+     "season": "2024",
+     "sid": 23003,
+     "overview": {
+      "matches": 380,
+      "total_goals": 946,
+      "avg_goals": 2.49,
+      "home_win_pct": 40.8,
+      "draw_pct": 23.4,
+      "away_win_pct": 35.8,
+      "home_goals": 520,
+      "away_goals": 426,
+      "avg_home_goals": 1.37,
+      "avg_away_goals": 1.12
+     }
+    },
+    {
+     "season": "2023",
+     "sid": 21034,
+     "overview": {
+      "matches": 462,
+      "total_goals": 1179,
+      "avg_goals": 2.55,
+      "home_win_pct": 39.2,
+      "draw_pct": 28.1,
+      "away_win_pct": 32.7,
+      "home_goals": 616,
+      "away_goals": 563,
+      "avg_home_goals": 1.33,
+      "avg_away_goals": 1.22
+     }
+    }
+   ]
+  },
+  "651": {
+   "zh": "巴西乙",
+   "seasons": [
+    {
+     "season": "2026",
+     "sid": 27198,
+     "overview": {
+      "matches": 367,
+      "total_goals": 864,
+      "avg_goals": 2.35,
+      "home_win_pct": 45.2,
+      "draw_pct": 26.4,
+      "away_win_pct": 28.3,
+      "home_goals": 492,
+      "away_goals": 372,
+      "avg_home_goals": 1.34,
+      "avg_away_goals": 1.01
+     }
+    },
+    {
+     "season": "2025",
+     "sid": 25185,
+     "overview": {
+      "matches": 380,
+      "total_goals": 843,
+      "avg_goals": 2.22,
+      "home_win_pct": 45.8,
+      "draw_pct": 30.5,
+      "away_win_pct": 23.7,
+      "home_goals": 491,
+      "away_goals": 352,
+      "avg_home_goals": 1.29,
+      "avg_away_goals": 0.93
+     }
+    },
+    {
+     "season": "2024",
+     "sid": 23291,
+     "overview": {
+      "matches": 380,
+      "total_goals": 833,
+      "avg_goals": 2.19,
+      "home_win_pct": 51.8,
+      "draw_pct": 25.8,
+      "away_win_pct": 22.4,
+      "home_goals": 503,
+      "away_goals": 330,
+      "avg_home_goals": 1.32,
+      "avg_away_goals": 0.87
+     }
+    },
+    {
+     "season": "2023",
+     "sid": 21210,
+     "overview": {
+      "matches": 380,
+      "total_goals": 796,
+      "avg_goals": 2.09,
+      "home_win_pct": 46.1,
+      "draw_pct": 29.2,
+      "away_win_pct": 24.7,
+      "home_goals": 477,
+      "away_goals": 319,
+      "avg_home_goals": 1.26,
+      "avg_away_goals": 0.84
+     }
+    }
+   ]
+  }
+ }
+}

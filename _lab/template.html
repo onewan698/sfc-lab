@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>小九足球实验室 · 每日全量足球比赛推荐</title>
+<meta name="description" content="每天 20:40 更新胜负彩任九与任14定稿票面（01–14 顺序、胆/双/弃、注数成本），另附全量比赛的概率、盘口、同赔历史与实票回测；内容与定稿票面都不收费，今后也不收费。">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="小九足球实验室">
+<meta property="og:title" content="小九足球实验室 · 任九 / 任14 定稿票面与全量数据">
+<meta property="og:description" content="每天 20:40 定稿：01–14 顺序票面、弃场清单、胆与双选，附概率、盘口与历史回测；不收钱，今后也不收费。">
+<meta property="og:url" content="https://301392.xyz/">
+<meta property="og:image" content="https://301392.xyz/icon-512.png">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#0f1115">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="小九足球">
+<link rel="icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<style>
+:root{--bg:#0f1115;--card:#171a21;--card2:#1d222b;--tx:#e8eaf0;--mut:#98a1b3;--line:#272d38;
+--up:#3ddc84;--dn:#ff6b6b;--gold:#ffc53d;--blu:#4c9ffe;--vio:#b07cff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
+a{color:var(--blu);text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:16px}
+header{padding:26px 0 10px}
+h1{margin:0 0 6px;font-size:26px;letter-spacing:.5px}
+h1 b{color:var(--gold)}
+.sub{color:var(--mut);font-size:13px}
+/* 数据新旧是用户最关心的事，更新时间不能躲在灰字里 */
+#gen{display:inline-block;margin-top:8px;padding:5px 10px;background:var(--card2);border:1px solid #3a4453;border-radius:8px;color:var(--gold);font-weight:700;font-size:14px}
+.badge{display:inline-block;padding:2px 9px;border-radius:999px;font-size:12px;background:#22301f;color:var(--up);border:1px solid #2f4a2a;margin-left:6px}
+.badge.b0{background:#1b2634;color:var(--blu);border-color:#25405c}
+.badge.b1{background:#33291a;color:var(--gold);border-color:#5a4220}
+nav{display:flex;gap:6px;flex-wrap:wrap;margin:18px 0 14px;position:sticky;top:0;background:var(--bg);padding:8px 0;z-index:5;border-bottom:1px solid var(--line)}
+nav button{background:var(--card);color:var(--mut);border:1px solid var(--line);border-radius:8px;padding:8px 14px;font-size:14px;cursor:pointer}
+nav button.on{color:var(--tx);background:var(--card2);border-color:#3a4453;font-weight:600}
+section{display:none}section.on{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin:0 0 14px}
+.card h2{margin:0 0 4px;font-size:17px}
+.card h3{margin:16px 0 6px;font-size:15px;color:var(--gold)}
+.note{color:var(--mut);font-size:13px}
+.grid{display:grid;gap:12px}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}.g2{grid-template-columns:repeat(2,1fr)}
+@media(max-width:820px){.g3,.g4,.g2{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.g3,.g4,.g2{grid-template-columns:1fr}}
+.kpi{background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.kpi .v{font-size:24px;font-weight:700}
+.kpi .l{color:var(--mut);font-size:12px}
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin:6px 0}
+th,td{padding:7px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{color:var(--mut);font-weight:600;font-size:12.5px;white-space:nowrap}
+td.n{text-align:right;font-variant-numeric:tabular-nums}
+/* 列对齐统一：数值列的表头也必须右对齐，否则「表头在左、数字在右」看着像两列（2026-11-08 用户反馈） */
+th.n{text-align:right}
+td.pick,td.drop,th.pick,th.drop{text-align:center}
+tr:hover td{background:#1b2029}
+.pick{font-weight:700;color:var(--gold)}
+.drop{color:var(--mut)}
+.up{color:var(--up)}.dn{color:var(--dn)}.mut{color:var(--mut)}
+.tag{display:inline-block;padding:1px 7px;border-radius:6px;font-size:11.5px;background:#242b38;color:var(--mut);margin-right:4px}
+.warn{background:#3a2b17;color:var(--gold);border:1px solid #5a4220;border-radius:8px;padding:9px 12px;font-size:13px;margin:8px 0}
+.ok{background:#1e2b20;color:var(--up);border:1px solid #2c4531;border-radius:8px;padding:9px 12px;font-size:13px;margin:8px 0}
+.bar{height:8px;background:#252c39;border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--blu)}
+canvas{width:100%;height:200px}
+code{background:#222835;padding:1px 5px;border-radius:4px;font-size:12.5px}
+ul{margin:6px 0;padding-left:20px}li{margin:3px 0}
+.foot{color:var(--mut);font-size:12px;padding:18px 0 40px;border-top:1px solid var(--line);margin-top:20px}
+.freed{color:var(--up);font-weight:700}
+/* 首页：全部比赛 */
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:0 0 12px;position:sticky;top:44px;z-index:4}
+.filters .grp{display:flex;gap:4px;align-items:center}
+.filters .lb{color:var(--mut);font-size:12px;margin-right:2px}
+.filters button{background:#20263300;border:1px solid var(--line);color:var(--mut);border-radius:7px;padding:5px 10px;font-size:13px;cursor:pointer}
+.filters button.on{background:#24344d;color:#cfe4ff;border-color:#3a556f;font-weight:600}
+.filters select,.filters input{background:#12161d;border:1px solid var(--line);color:var(--tx);border-radius:7px;padding:5px 8px;font-size:13px}
+.day{margin:14px 0 6px;font-size:13px;color:var(--gold);letter-spacing:.5px}
+.mcard{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:0 0 8px}
+.mhd{display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:14px}
+.mhd .tm{color:var(--mut);font-variant-numeric:tabular-nums}
+.mhd img{width:18px;height:18px;border-radius:3px;object-fit:contain;background:#0c0f14}
+.mhd .vs{font-weight:600}
+.mtags{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 2px}
+.mtag{font-size:11.5px;padding:2px 7px;border-radius:6px;background:#1f2532;color:var(--mut)}
+.mtag.b{background:#1b2a3d;color:#8ec5ff}.mtag.g{background:#1e2b20;color:var(--up)}.mtag.r{background:#2f2027;color:#ff9a9a}.mtag.y{background:#33291a;color:var(--gold)}
+.mrow{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:8px}
+@media(max-width:720px){.mrow{grid-template-columns:1fr}}
+.cell{background:#141821;border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:12.5px}
+.cell .t{color:var(--mut);font-size:11px;margin-bottom:3px}
+.cell .b{font-size:13.5px;font-variant-numeric:tabular-nums}
+.pickline{margin-top:8px;font-size:13px}
+.pickline b{color:var(--gold)}
+.form5 span{display:inline-block;width:16px;height:16px;line-height:16px;text-align:center;border-radius:3px;font-size:10px;margin-right:2px}
+.form5 .W{background:#1f3a26;color:#7ee2a0}.form5 .D{background:#33301c;color:#e5d68a}.form5 .L{background:#3a2026;color:#ff9a9a}
+.collapse{color:var(--blu);cursor:pointer;font-size:12px}
+/* 付费墙 */
+.pay .lockwrap{position:relative}
+.mask{filter:blur(7px);opacity:.55;user-select:none;pointer-events:none}
+.paybar{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:linear-gradient(90deg,#2a2413,#1a1d24);border:1px solid #5a4220;border-radius:10px;padding:10px 12px;margin:10px 0}
+.price{color:var(--gold);font-weight:700}
+.btn{background:#2b4a70;border:1px solid #3f6a9c;color:#dfeaff;border-radius:8px;padding:7px 13px;cursor:pointer;font-size:13px}
+.btn.g{background:#25401f;border-color:#3c6a2c;color:#c8f0b8}
+.lockrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+#paymodal{position:fixed;inset:0;background:rgba(4,6,10,.78);display:none;align-items:center;justify-content:center;z-index:50;padding:18px}
+#paymodal.on{display:flex}
+.mbox{background:var(--card);border:1px solid #3a4453;border-radius:14px;padding:20px;max-width:440px;width:100%}
+.mbox h3{margin:0 0 8px;font-size:18px}
+.mbox .opt{border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:8px 0;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+.mbox .opt:hover{border-color:#4a63a8}
+.mbox input{width:100%;background:#12161d;border:1px solid var(--line);color:var(--tx);border-radius:8px;padding:9px;font-size:14px;margin-top:8px}
+.pricetag{font-size:11px;color:var(--mut)}
+.titem{white-space:nowrap;display:inline-block}
+#lg tr.pend td{opacity:.72}   /* 高节奏场次：桌面一行一条，手机端见下方媒体查询 */
+/* ================= 手机端（≤700px）2026-11-07 =================
+   实测 390×844：原版横向溢出 181px、nav 三行 184px + 筛选栏 415px 占首屏 71%、36 个点击区 <38px */
+html{-webkit-text-size-adjust:100%}
+@media(max-width:700px){
+  body{overflow-x:hidden}
+  .wrap{padding:10px}
+  header{padding:14px 0 6px}
+  h1{font-size:20px;line-height:1.35}
+  .sub{font-size:12.5px}
+  .badge{font-size:11px;padding:1px 7px}
+  /* 导航：单行横向滑动，不再折成三行 */
+  nav{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0;padding:6px 0;scrollbar-width:none}
+  nav::-webkit-scrollbar{display:none}
+  nav button{flex:0 0 auto;min-height:40px;padding:9px 13px;font-size:13.5px}
+  /* 筛选栏：同样压成一行横向滑动（原本 415px 高） */
+  .filters{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;top:52px;gap:6px;padding:8px;scrollbar-width:none}
+  .filters::-webkit-scrollbar{display:none}
+  .filters .grp{flex:0 0 auto}
+  .filters button,.filters select,.filters input{min-height:40px;font-size:13px}
+  /* 高节奏场次那串原本是内联 nowrap，手机上一行 457px 直接把页面撑宽 181px */
+  .titem{white-space:normal;display:block;margin:3px 0}
+  .form5 span{width:17px;height:17px;line-height:17px;font-size:11px}
+  /* 手机端票面只看主线：序号 / 对阵 / 310 选号。均概率、官方SP、亚盘、凯利等参数由 JS 标 .opt-col 后整列隐藏 */
+  .opt-col{display:none}
+  /* 宽表横滑时冻结首列，滑到哪儿都知道是第几场 */
+  table th:first-child,table td:first-child{position:sticky;left:0;background:var(--card);z-index:1}
+  /* 表格：自己横向滚或换行，绝不把整页撑宽 */
+  table{display:block;width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;font-size:13px}
+  th,td{padding:6px 7px}
+  th{font-size:12px}
+  .card{padding:12px;border-radius:10px}
+  .card h2{font-size:15.5px}
+  .card h3{font-size:14px}
+  .note{font-size:12.5px}
+  .kpi .v{font-size:20px}
+  .kpi{padding:10px 12px}
+  .cell{font-size:12.5px}
+  .cell .t{font-size:11.5px}
+  .cell .b{font-size:13px}
+  .tag{font-size:11px}
+  .mtag{font-size:11.5px}
+  .mhd{font-size:13.5px}
+  .day{font-size:12.5px}
+  .note,.sub,.warn,.ok,.foot,td{overflow-wrap:anywhere;word-break:break-word}
+  /* 付费条与按钮：竖排、拉满、好点 */
+  .paybar{flex-direction:column;align-items:stretch;gap:8px}
+  .paybar button,.lockrow .btn,.mbox .opt{min-height:44px}
+  .btn{padding:10px 14px;font-size:13.5px}
+  .lockwrap{margin:0 -4px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>小九足球实验室 <b>· 每日全量足球比赛推荐台</b><span class="badge">每天 20:40 定稿</span><span class="badge b0">任九 / 任14 定稿</span><span class="badge b1">本页每 1 小时刷新</span></h1>
+  <div class="sub">首页列出每天能抓到的<b>全部</b>足球比赛与推荐依据（可按竞彩足球 / 北京单场 / 赛程 / 赛季 / 国家切换）；积分榜、近5场走势、主客场分项、机构初→终盘、大小球、模型对照、联赛画像。<b>本页每小时自动重建一次</b>；任九与任14 的定稿票面每晚 20:40 出，这里不收钱，以后也不收费。<a href="#donate" onclick="return gotoDonate()">如果你觉得这些数据对你有用，欢迎顺手打赏一杯茶——钱不多，够付下个月的接口和服务器，也是我们把每天的数据接着跑完的动力；打赏不改选号，纯粹一份心意 →</a>　<span id="gen"></span></div>
+</header>
+
+<nav id="nav"></nav>
+
+<section id="s-pool" class="on">
+  <div class="filters">
+    <div class="grp"><span class="lb">玩法</span><span id="f-play"></span></div>
+    <div class="grp"><span class="lb">分类</span><span id="f-view"></span></div>
+    <div class="grp"><span class="lb">国家</span><select id="f-country"></select></div>
+    <div class="grp"><span class="lb">赛季</span><select id="f-season"></select></div>
+    <div class="grp"><span class="lb">排序</span><select id="f-sort">
+      <option value="time">开赛时间</option><option value="pow">市场强度</option>
+      <option value="edge">模型价值(参考)</option><option value="over">大球倾向</option>
+      <option value="pts">积分排名差</option></select></div>
+    <div class="grp"><input id="f-q" placeholder="搜球队/联赛…" style="width:150px"></div>
+    <div class="grp"><button id="f-clear">重置</button></div>
+  </div>
+  <div id="tempo-bar" style="display:none;margin:2px 0 10px;padding:10px 12px;border:1px solid var(--line);border-left:3px solid #e8a33d;border-radius:8px;background:rgba(232,163,61,.07)"></div>
+  <div class="note" id="pool-sum"></div>
+  <div id="pool-list"></div>
+</section>
+
+<section id="s-pay14">
+  <div class="card pay"><h2>任选十四（任14）定稿推荐</h2>
+    <div class="note" id="p14-sub"></div>
+    <div class="lockwrap"><div id="p14-body"></div></div>
+    <div id="p14-why"></div>
+  </div>
+</section>
+
+<section id="s-leagues">
+  <div class="card"><h2>联赛库 · 按国家 / 按赛季</h2>
+    <div class="note">本季联赛画像：场均进球、主胜/平/客胜率——用来判断"这联赛该买大球还是小球、该不该信主让"。</div>
+    <div style="overflow-x:auto"><table id="lt"></table></div></div>
+  <div class="card"><h2>往季对照</h2><div class="note" id="hist-note"></div>
+    <div style="overflow-x:auto"><table id="hist"></table></div></div>
+  <div class="card"><h2>积分榜速览</h2>
+    <div class="grp" style="margin:6px 0"><span class="lb">选联赛</span><select id="lg-pick"></select>
+      <span class="lb" style="margin-left:10px">字段</span><select id="lg-field">
+        <option value="all">完整</option><option value="form">近5场走势</option><option value="split">主客场分项</option></select></div>
+    <div style="overflow-x:auto"><table id="tb"></table></div></div>
+</section>
+
+<section id="s-ticket">
+  <div class="card pay"><h2 id="tk-title">当期票面</h2><div class="note" id="tk-sub"></div>
+    <div class="lockrow" style="margin:6px 0 2px"><button class="btn" id="tk-copy" onclick="copyTicket(this)">复制票面（01–14）</button><span class="note" style="font-size:12px">复制出来就是买票顺序：序号 + 对阵 + 310 选择 + 弃场</span></div>
+    <div class="lockwrap"><div id="tk-body"></div></div>
+    <div id="tk-alert"></div>
+  </div>
+  <div class="card"><h2>四场进球</h2><div id="tk-jqc"></div></div>
+  <div class="card"><h2>为什么别人收费、我们不用</h2>
+    <p class="note">付费站的锁不在数据，而在打包：九个玩法的模型概率、一万次蒙特卡洛模拟、非英超的 AI 前瞻、每日完整价值场次。我们把能拿到的公开接口自己拼了一遍，
+    结果<strong>赛前决策要的东西基本都有</strong>；缺的两样（实时预测、赛后 xG）本来就不属于赛前下注环节。所有结论都在「实验室」页公开样本与方法，可自行复算。</p>
+    <table><tr><th>能力</th><th>付费站</th><th>本站</th></tr><tbody id="cmp"></tbody></table>
+  </div>
+</section>
+
+<section id="s-data">
+  <div class="card"><h2>本期 14 场 · 市场四层 + 机构终盘</h2><div class="note" id="dt-sub"></div><div style="overflow-x:auto"><table id="dt"></table></div></div>
+  <div class="card"><h2>5 公司初盘共识 / 分歧</h2><div class="note">威廉·澳门·bet365·立博·立明 初盘；分歧 = 五家赔率的离散度</div><div style="overflow-x:auto"><table id="zx"></table></div></div>
+  <div class="card"><h2>相同欧指历史发生率（※仅提示，不改选号）</h2><div class="note">同赔面历史与当前概率的差，万级样本实测仅 0-2pt，属抽样噪声 → 2026-11-04 起降级为提示</div><div style="overflow-x:auto"><table id="so"></table></div></div>
+  <div class="card"><h2>近 10 期任九奖金行情</h2><div style="overflow-x:auto"><table id="prize"></table></div></div>
+</section>
+
+<section id="s-ledger">
+  <div class="card"><h2>我方实票战绩（连输的期也公开）</h2><div class="note" id="lg-sum"></div><div style="overflow-x:auto"><table id="lg"></table></div></div>
+  <div class="card"><h2>累计</h2><div class="grid g4" id="lg-kpi"></div></div>
+</section>
+
+<section id="s-lab">
+  <div class="card"><h2>校准表：市场赔率 vs 实际发生率</h2><div class="note">13.9 万场公开回测（2012 至今，34 联赛）。edge = 实际 − 赔率隐含；|edge| ≤ 2pt 即市场已把该信息定价。</div>
+    <div class="grid g2"><div><h3>主胜热门档</h3><table id="cal-h"></table></div><div><h3>平局档</h3><table id="cal-d"></table></div></div>
+    <div class="warn">读法：赔率 1.10-1.20 的热门实际只赢 86.3%，而保本线是 87.0% —— 越是"稳"的胆，长期越贴地平线。这就是足彩长期不赚钱的数学原因（付费站自己的视频也给出 83.4% vs 保本线 83.3% 的同一结论）。</div>
+  </div>
+  <div class="card"><h2>统计模型的成色（3,726 场自证 + 260 场对照）</h2><div class="grid g2"><div><h3>模型置信档 → 首选方向命中率</h3><table id="mb"></table></div><div><h3>杯赛 vs 国内联赛（以市场收盘价为基准）</h3><table id="cup"></table></div></div>
+    <div class="warn">结论：<b>模型比市场高的方向是反向指标</b>。第二轮各 120 场对照：跨国杯赛里「模型比市场高≥5pt」的方向 105 次只打出 17.1%，模型 Brier 比市场差 +0.096；同一实验在国内联赛组差距只有 +0.019、价值信号 26.9%。→ 欧冠/欧联/欧协联场次只认市场侧证据。</div>
+  </div>
+  <div class="card"><h2>形态/休息/Elo 等 17 项切片（固定价格档内）</h2><div class="note">在同一赔率档内部比较，剔除价格差异；最大偏差 ±1.5pt，均在噪声范围</div><div style="overflow-x:auto"><table id="form"></table></div></div>
+  <div class="card"><h2>付费站自己的"价值策略"实况（1x2 台账 1,794 注）</h2><div class="grid g4" id="lab-kpi"></div><canvas id="curve"></canvas><div class="note" id="lab-note"></div></div>
+  <div class="card"><h2>角球 / 罚牌模型（顺带测的）</h2><div class="grid g2"><div><table id="m-corner"></table></div><div><table id="m-card"></table></div></div></div>
+</section>
+
+<section id="s-rules">
+  <div class="card"><h2>定稿规则 a-h（每天 20:40 定票，20:40 一条推送）</h2><div id="rules"></div></div>
+  <div class="card"><h2>两条被数据改写过的规则</h2><div id="rule-changes"></div></div>
+  <div class="card"><h2>术语表 · 页面里出现的词都在这儿</h2>
+    <div class="note" style="margin:0 0 8px">满屏术语是我们偷懒，这份表就是补的。鼠标停在表头上也会出简短说明。</div>
+    <table><tr><th>词</th><th>一句话说明</th></tr><tbody>
+      <tr><td><b>均概率</b></td><td>威廉·澳门·bet365·立博·立明五家赔率<b>去掉抽水</b>折算成胜率再取平均。它代表市场怎么看，不是我们的主观判断。</td></tr>
+      <tr><td><b>去水 / 抽水</b></td><td>机构赔率里含约 6–8% 的利润，先剔掉这部分才能还原成真实概率。</td></tr>
+      <tr><td><b>官方SP</b></td><td>体彩官方胜平负赔率，<b>3 / 1 / 0</b> 分别是主胜 / 平局 / 客胜，返奖以它为准。</td></tr>
+      <tr><td><b>机构初→终盘</b></td><td>主流机构开盘价与临场价的对照。价格<b>缩短</b>＝钱压向这一边，<b>放长</b>＝钱在撤。</td></tr>
+      <tr><td><b>亚盘</b></td><td>亚洲让球盘（半球、一球/球半等）。让得越深，机构越看好让球方。</td></tr>
+      <tr><td><b>凯利</b></td><td>概率 × 赔率。明显低于 1 说明这一边赔率给得偏低（机构在防），明显高于 1 很少见。</td></tr>
+      <tr><td><b>Brier 分</b></td><td>概率准不准的评分，<b>越小越准</b>。三项概率与真实结果差的平方和，闭眼瞎猜约 0.667。</td></tr>
+      <tr><td><b>xPTS / 期望积分</b></td><td>按当前概率推算的期望联赛积分，用来核对球队真实战绩与积分表是否背离。</td></tr>
+      <tr><td><b>市场强度 / 模型偏差</b></td><td>强度＝去水概率的高低；偏差＝我们自建模型与市场分的差。差得多不代表谁对，要看长期兑现率（实验室页有样本）。</td></tr>
+      <tr><td><b>胆 / 双选 / 弃</b></td><td>胆＝这场单选（省注数）；双选＝两个结果都买；弃＝这场不选，任九只挑 9 场。</td></tr>
+      <tr><td><b>压缩胆</b></td><td>没达到胆资格、但为了把注数压到 32 注而降成单选的场，是本票的主要风险点，每期都标出来。</td></tr>
+      <tr><td><b>同赔历史</b></td><td>历史上出现几乎相同赔率组合时实际开出的比例。万级样本也只差 0–2 个百分点，属噪声，所以只当提示。</td></tr>
+    </tbody></table>
+  </div>
+</section>
+
+<section id="s-about">
+  <div class="card"><h2>数据与更新</h2><div id="about"></div></div>
+  <div class="card"><h2>接口自检（每天 09:00 自动巡检）</h2><div class="note">下表是本机自动巡检的结果：站上数据由公开网络抓取整理而来，个别通道抓取失败会自动降级，不影响已生成的定稿票面。</div><div id="health"></div></div>
+  <div class="card"><h2>访问统计</h2>
+    <div id="visit-line" class="note" style="margin:0 0 6px">统计载入中…</div>
+    <div class="note" style="margin:0">全站访问量用一个<b>不设 cookie</b> 的轻量计数器：只记页面打开、从哪个页面来、什么设备和浏览器、大概哪个地区，不存个人身份、不做跨站跟踪；换设备或清了浏览器缓存，本机的计数会从头开始。</div>
+  </div>
+
+  <div class="card" id="contact"><h2>联系方式</h2>
+    <div class="note" style="margin:0 0 10px">数据有错、页面有 bug、规则口径想掰扯，都可以直接说。<b>不聊投注需求、不代买彩票、不拉群收费</b>；提问请带上期号和场次序号，好对着数据回。</div>
+    <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start">
+      <div style="text-align:center">
+        <div id="qr-wx"></div>
+        <div class="mut" id="qr-wx-tip" style="margin-top:6px;font-size:13px;max-width:260px;display:none">加微信好友：手机上长按二维码识别；电脑上把二维码截图存下来，用微信「扫一扫 → 相册」识别。加好友时备注一句来路（比如「301392.xyz」），不然认不出来。</div>
+      </div>
+      <div style="flex:1;min-width:250px;max-width:540px">
+        <div style="font-size:15px">邮箱　<a href="mailto:admin@301392.xyz?subject=%E6%95%B0%E6%8D%AE%E7%BA%A0%E9%94%99%EF%BC%88%E8%AF%B7%E5%B8%A6%E6%9C%9F%E5%8F%B7%E4%B8%8E%E5%9C%BA%E6%AC%A1%E5%BA%8F%E5%8F%B7%EF%BC%89" id="mail-link" style="color:var(--blu)">admin@301392.xyz</a>
+          <button class="btn" id="mail-copy" style="margin-left:8px;padding:2px 10px;font-size:12px">复制</button>
+          <a href="mailto:admin@301392.xyz?subject=%E6%95%B0%E6%8D%AE%E7%BA%A0%E9%94%99%EF%BC%88%E8%AF%B7%E5%B8%A6%E6%9C%9F%E5%8F%B7%E4%B8%8E%E5%9C%BA%E6%AC%A1%E5%BA%8F%E5%8F%B7%EF%BC%89&amp;body=%E6%9C%9F%E5%8F%B7%EF%BC%9A%0A%E5%9C%BA%E6%AC%A1%E5%BA%8F%E5%8F%B7%EF%BC%9A%0A%E9%94%99%E5%9C%A8%E5%93%AA%EF%BC%9A" style="margin-left:10px;font-size:13px">发现数据错了？点这里写信</a></div>
+        <div class="note" style="margin-top:8px">这是个<b>真有人在看的信箱</b>，不是自动回复，一般一个工作日内回。数据纠错、页面故障、口径讨论都收；投注明细请自己操作，本站不代售彩票。</div>
+        <div class="note" style="margin-top:6px">想每天准点拿到定稿：定稿在每天 <b>20:40 前后</b>发到企业微信群，任九停售 <b>22:00</b>；页面里不做弹窗打扰，装了 App 也一样。</div>
+      </div>
+    </div>
+  </div>
+  <div class="card" id="donate"><h2>打赏 · 收款码</h2>
+    <div class="note" style="margin:0 0 6px">这里不收钱，抓取、服务器和数据都是自付的。好心愿意打赏的，扫下面的码，金额随意；<b>打赏不影响选号规则，也不构成任何投注建议</b>，本站不代售彩票。</div>
+    <div style="display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start">
+      <div style="text-align:center">
+        <div id="qr-codes" style="display:flex;gap:16px;flex-wrap:wrap;justify-content:center"></div>
+        <div style="margin-top:8px"><b style="color:var(--gold);font-size:15px">打赏这个屌毛</b></div>
+        <div class="note" id="qr-sub" style="margin-top:2px;max-width:460px;display:none">金额随意，1 块也收；一分也是感情，绝不影响选号。扫哪个都行。</div>
+      </div>
+      <div class="note" style="max-width:520px">票面是按公开数据一场一场算出来的：规则全写在「规则」页，样本和方法全摊在「实验室」页，谁都能复算挑错。照着打中了，随手赏一点就行；打不中也别怪这个屌毛——足球本来就不讲道理，这里能给你的是概率，不是结果。</div>
+      <div class="note" id="donate-tip" style="display:none;max-width:520px">收款码还没上传：微信码存成 <code>donate_wx.jpg</code>、支付宝码存成 <code>donate_alipay.jpg</code>，放进 <code>rea_site\site\</code> 目录，下次构建后就会显示在这里。在此之前想打赏的话，私信我要码。</div>
+    </div>
+  </div>
+  <div class="foot" id="foot"></div>
+</section>
+</div>
+
+<script id="dfree" type="text/plain">__DATA_FREE__</script>
+<script id="ds" type="text/plain" data-k="__KA__" data-j="__KB__">__BLOB__</script>
+<script>var DATA=(function(){var d={};
+try{d=JSON.parse(document.getElementById("dfree").textContent);}catch(e){}
+try{var e=document.getElementById("ds"),A=e.getAttribute("data-k")||"",J=e.getAttribute("data-j")||A;
+var K=[parseInt(A.substr(0,2),16),parseInt(A.substr(2,2),16),parseInt(J.substr(0,2),16),parseInt(J.substr(2,2),16)];
+var b=atob((e.textContent||"").trim()),u=new Uint8Array(b.length);
+for(var i=0;i<b.length;i++)u[i]=b.charCodeAt(i)^K[i&3];
+var j=JSON.parse(new TextDecoder("utf-8").decode(u));for(var k in j)d[k]=j[k];}catch(e2){window.__e_sens=String(e2);}return d;})();</script>
+<script>
+const $=s=>document.querySelector(s),pad=n=>String(n).padStart(2,"0");
+const fmt=(v,d=2)=>v==null?"--":(typeof v==="number"?v.toFixed(d):v);
+const pc=(v,d=1)=>v==null?"--":(v*100).toFixed(d)+"%";
+const TABS=[["pool","全部比赛"],["ticket","任九定稿"],["pay14","任14定稿"],["data","本期数据"],["ledger","实票战绩"],["leagues","联赛库"],["lab","实验室"],["rules","规则"],["about","关于/自检"]];
+const nav=$("#nav");
+TABS.forEach(([k,t],i)=>{const b=document.createElement("button");b.textContent=t;if(!i)b.className="on";
+  b.onclick=()=>{document.querySelectorAll("nav button").forEach(x=>x.className="");b.className="on";
+    document.querySelectorAll("section").forEach(s=>s.className="");$("#s-"+k).className="on";};nav.append(b)});
+(function(){
+  var R=DATA.refresh||{};
+  function hh(v){if(v==null)return "—";if(v<1)return "刚刚";if(v<26)return v.toFixed(1)+" 小时前";return Math.round(v/24)+" 天前";}
+  var ga=(DATA.generated_at||"").replace("T"," ").slice(0,16),ago="";
+  try{
+    var mins=Math.round((Date.now()-new Date((DATA.generated_at||"").slice(0,16).replace("T"," ").replace(/-/g,"/")))/60000);
+    if(!isNaN(mins))ago=" · "+(mins<1?"就在刚刚":(mins<60?mins+" 分钟前":(mins<48?Math.round(mins/60)+" 小时前":Math.round(mins/1440)+" 天前")));
+  }catch(e){}
+  document.getElementById("gen").textContent="数据更新 "+ga+ago+
+    "　·　本页每 1 小时重建　|　竞彩/北单 "+hh(R.jc_h)+"　全量比赛 "+hh(R.upcoming_h)+"　积分榜 "+hh(R.daily_h);
+})();
+function gotoDonate(){
+  var bs=document.querySelectorAll("nav button");
+  for(var i=0;i<bs.length;i++){if((bs[i].textContent||"").indexOf("关于")>=0){bs[i].click();break;}}
+  setTimeout(function(){var d=document.getElementById("donate");if(d)d.scrollIntoView({behavior:"smooth",block:"start"});},90);
+  return false;
+}
+
+/* ---------- 票面 ---------- */
+const T=DATA.ticket||{},S=DATA.signals||{},C=DATA.card||{};
+/* 当期已在售但还没定稿（定稿文件仍是上一期）→ 卡片放当期实时盘口，明确标"未定稿" */
+const PRE=((S.rows||[]).length&&String(S.issue||"")!==String(T.issue||""))?S:null;
+if(PRE){
+  const spn=PRE.rows.filter(r=>(r.sp||{})["3"]!=null).length;
+  $("#tk-title").innerHTML="任选九 第"+PRE.issue+"期 · 停售 "+(PRE.deadline||"?")+' <span class="tag">未定稿</span>';
+  $("#tk-sub").innerHTML='<div class="warn"><b>这不是最终定稿</b>：下面是第 '+PRE.issue+' 期 14 场的<b>实时盘口数据</b>，'
+    +'每小时随抓取更新，抓到多少放多少（本次抓取 '+(PRE.fetched||"")+'，官方SP 已开 '+spn+'/'+PRE.rows.length+' 场，未开的显示 --）。'
+    +'胆/双/弃、注数与成本等<b>每晚 20:40 定稿</b>后替换本表。</div>'
+    +(T.issue?(T.result
+      ?('<div class="note">上期（第'+T.issue+'期）已开奖：命中 <b>'+(T.hit||0)+'/'+(T.hit_n||9)+'</b> → '
+        +(T.won?"中奖":"未中")+'　310：<b class="n">'+T.result+'</b></div>')
+      :('<div class="note">上期（第'+T.issue+'期）已于 '+(T.deadline||"?")+' 停售，<b>官方还没开出具名 310</b>；'
+        +'我方命中与奖金要等官方开奖后由每天 10:00 的结算回填，现在没有数字。</div>')):"");
+  let ph='<table><tr><th>序</th><th>开赛</th><th>对阵</th><th>选</th><th>均概率(主/平/客)</th><th>官方SP(3/1/0)</th><th>亚盘</th><th>凯利</th></tr><tbody>';
+  PRE.rows.forEach(r=>{const p=r.prob||{},sp=r.sp||{},kl=r.kelly||{};
+    ph+='<tr><td class="n">'+pad(r.no)+'</td><td class="n">'+(PRE.times&&PRE.times[String(r.no)]||r.time||"--")+'</td><td>'+r.vs
+      +'</td><td class="mut">待定</td><td class="n">'+fmt(p["3"],1)+" / "+fmt(p["1"],1)+" / "+fmt(p["0"],1)
+      +'</td><td class="n">'+fmt(sp["3"])+" / "+fmt(sp["1"])+" / "+fmt(sp["0"])
+      +'</td><td>'+((r.asian||[]).join(" "))+'</td><td class="n">'+fmt(kl["3"])+" / "+fmt(kl["1"])+" / "+fmt(kl["0"])+"</td></tr>";});
+  ph+="</tbody></table>";
+  $("#tk-body").innerHTML=ph;
+  $("#tk-alert").innerHTML=(PRE.sp_cmp||[]).filter(x=>(x.maxgap||0)>=5).length
+    ?('<div class="note">官方SP 与百家均概率偏离 ≥5pt：'+PRE.sp_cmp.filter(x=>(x.maxgap||0)>=5)
+        .map(x=>pad(x.no)+' '+x.vs+'（'+x.hot+' 官方'+fmt(x.imp[x.hot],1)+'% vs 百家差 '+fmt(x.maxgap,1)+'pt）').join("；")
+        +'　——只作提示，不改选号。</div>'):"";
+}else{
+$("#tk-title").textContent=T.issue?("任选九 第"+T.issue+"期 · "+(T.settled?("已于 "+(T.deadline||"?")+" 停售"+(T.result?"（已开奖）":"（待开奖）")):("停售 "+(T.deadline||"?")))):"暂无在售期次";
+$("#tk-sub").innerHTML=(T.note||"")+'　'+(T.cost?('<span class="tag">'+T.bets+'注 / '+T.cost+'元</span>'):"")
+ +(T.settled?(function(){
+   var nf=function(x){return (x==null||x==="")?"—":(typeof x==="number"?x.toLocaleString("en-US"):x);};
+   var vr=T.won?("中奖！本期任9 "+nf(T.rj_count)+' 注、单注 '+nf(T.rj_prize)+' 元')
+     :("未中（本期任9 "+nf(T.rj_count)+' 注 / 单注 '+nf(T.rj_prize)+' 元；一等奖 '+nf(T.g1_count)+' 注'+(T.g1_prize?" / "+nf(T.g1_prize)+" 元":"（滚存）")+")");
+   return '<div class="note">官方 310：<b class="n">'+(T.result||"--")+'</b>　我方命中 <b class="n">'+
+     (T.hit||0)+'/'+(T.hit_n||9)+'</b> → '+vr+
+     (T.next?('<br>第 '+T.next.issue+' 期定稿每晚 '+(T.next.at||"20:40")+' 出'):"")+'</div>';}()):"");
+let tb='';
+if(T.settled&&(T.rows||[]).length){
+  const LBL={"3":"主胜","1":"平","0":"客胜"};
+  tb='<table><tr><th>序</th><th>对阵</th><th>我们的选</th><th>官方结果</th></tr><tbody>';
+  T.rows.forEach(r=>{const drop=r.pick==="弃",res=r.res||"",ok=!drop&&res&&r.pick.indexOf(res)>=0;
+    tb+='<tr><td class="n">'+pad(r.no)+'</td><td>'+r.vs+'</td><td class="'+(drop?"drop":"pick")+'">'+(drop?"-":r.pick)+
+        '</td><td>'+(res?((LBL[res]||res)+" "+(ok?'<span class="up">✓ 中</span>':'<span class="dn">✗ 未中</span>')):"--")+'</td></tr>';});
+  tb+="</tbody></table>";
+}else{
+ const TAG={};(T.rows||[]).forEach(function(r){if(r.tag)TAG[r.no]=r.tag;});   // 票面行括注（如「压缩胆」）
+ tb='<table><tr><th>序</th><th>对阵</th><th>选</th><th>均概率(主/平/客)</th><th>亚盘</th><th>凯利</th></tr><tbody>';
+ (S.rows||[]).forEach(r=>{
+  const pk=(T.picks||{})[r.no], drop=pk==="弃";
+  tb+='<tr><td class="n">'+pad(r.no)+'</td><td>'+r.vs+'</td><td class="'+(drop?"drop":"pick")+'">'+
+      (drop?"-":(pk||"--"))+'</td><td class="n">'+fmt(r.prob&&r.prob["3"],1)+" / "+fmt(r.prob&&r.prob["1"],1)+" / "+fmt(r.prob&&r.prob["0"],1)+
+      '</td><td>'+((r.asian||[]).join(" "))+'</td><td class="n">'+fmt(r.kelly&&r.kelly["3"])+" / "+fmt(r.kelly&&r.kelly["1"])+" / "+fmt(r.kelly&&r.kelly["0"])+"</td></tr>";
+ });
+ tb+="</tbody></table>";
+}
+$("#tk-body").innerHTML=tb;
+$("#tk-alert").innerHTML=(T.drops?('<div class="note">未选场次：'+T.drops+'</div>'):"")+(T.alerts?('<ul class="note">'+T.alerts.map(a=>"<li>"+a+"</li>").join("")+"</ul>"):"");
+}
+
+/* 终盘参考（机构初→终） */
+if((C.rows||[]).length){
+  let h='<h3>终盘参考（机构终盘 · 覆盖 '+(C.coverage||"?")+'）</h3><table><tr><th>序</th><th>对阵</th><th>机构初→终</th><th>模型1x2</th><th>大小</th><th>首发/天气</th></tr><tbody>';
+  C.rows.forEach(r=>{ if(!r.found){h+='<tr><td class="n">'+pad(r.no)+'</td><td>'+r.query+'</td><td colspan="4" class="mut">✗ '+r.note+'</td></tr>';return;}
+    const p=r.pinn||{},o=p.opening||{},nn=p.odds||{},m=r.model||{},t=r.totals||{},lu=r.lineups||{};
+    const od=v=>(v==null?"--":(Math.round(v*100)/100).toFixed(2));   // 接口给的是浮点原值（1.7100000000000002）
+    const mv=(o,c)=>((o==null||c==null)?"--":(c<o-1e-9?'<span class="up">缩短</span>':(c>o+1e-9?'<span class="dn">放长</span>':'<span class="mut">持平</span>')));
+    h+='<tr><td class="n">'+pad(r.no)+'</td><td>'+(r.home||"")+'v'+(r.away||"")+' <span class="tag">'+(r.lg||"")+'</span></td>'+
+       '<td>主 '+od(o.home)+" → "+od(nn.home)+" "+mv(o.home,nn.home)+'<br>客 '+od(o.away)+" → "+od(nn.away)+" "+mv(o.away,nn.away)+"</td>"+
+       '<td class="n">'+pc(m.p_home)+" / "+pc(m.p_draw)+" / "+pc(m.p_away)+'</td>'+
+       '<td>'+(t.line!=null?("大 "+t.line+" "+pc((t.probs||{}).over)):"--")+'</td>'+
+       '<td class="mut">'+(lu.kind?("首发"+lu.kind+" "+lu.home+"/"+lu.away):"--")+(r.weather?(" 天气"+r.weather):"")+"</td></tr>";
+    if(r.insight){h+='<tr><td></td><td colspan="5" class="mut" style="font-size:12.5px">AI前瞻(英超)：'+(r.insight["关键预测"]||"").slice(0,160)+"</td></tr>";}
+  });
+  $("#tk-body").innerHTML+=h+"</tbody></table>";
+}
+
+/* 官方一手：SP 逐项对照 + 本期任选9 单注奖金区间 + 近10期奖金行情 */
+(function(){
+  var O=S.official||{},SC=S.sp_cmp||[],est=O.est||{},H=O.hist||[],NR=function(v){return (v==null?"--":Number(v).toLocaleString());};
+  if(!H.length&&!SC.length)return;
+  var h='<h3>官方一手 · 奖金行情与本期区间</h3>';
+  if(SC.length){
+    var NAME={"3":"主","1":"平","0":"客"},big=SC.filter(function(x){return x.maxgap>=3;}).map(function(x){
+      var k="3",mx=0;["3","1","0"].forEach(function(d){if(x.gap[d]!=null&&Math.abs(x.gap[d])>mx){mx=Math.abs(x.gap[d]);k=d;}});
+      return pad(x.no)+x.vs+"（"+NAME[k]+"向 "+(x.gap[k]>0?"+":"")+(+x.gap[k]).toFixed(1)+"pt）";
+    });
+    h+='<div class="note">官方SP 已开 <b>'+SC.length+'/'+(S.rows||[]).length+'</b> 场（去水隐含概率与百家均概率逐项比对）：'+
+       (big.length?("差≥3pt 的场次：<b>"+big.join("、")+"</b>"):"官方与百家方向一致（14 场全部差&lt;3pt）")+
+       '<br><span class="mut">这一栏只作提示记录，不参与选号；它反映的是官方口径相对百家的倾斜方向，未经大样本验证不构成信号。</span></div>';
+  }else{
+    h+='<div class="note">官方SP 截至本页面构建时未开出：胆资格退化为只看百家均概率。</div>';
+  }
+  if(est.prize_lo){
+    h+='<div class="note">本期任选9 <b>单注奖金区间 '+NR(est.prize_lo)+' ~ '+NR(est.prize_hi)+' 元/注</b>'+
+       '（预计中出 '+NR(est.cnt_lo)+'~'+NR(est.cnt_hi)+' 注，预计销量 '+(est.sales_est/1e8).toFixed(2)+' 亿元，胆面热度 '+(O.hot>0?"+":"")+(O.hot||0)+
+       '）。算法：任9 派奖≈销量×0.64；中出注数按近'+est.n+'期「每亿元销量中出注数」中位 '+Math.round(est.dens_med)+
+       ' 注缩放，胆越集中→中出越多→单注越低。<span class="mut">估算，不是承诺。</span></div>';
+  }
+  if(H.length){
+    h+='<table><tr><th>期号</th><th>任9 中出注数</th><th>任9 单注奖金</th><th>一等奖</th><th>销量</th></tr><tbody>';
+    H.slice(0,10).forEach(function(x){
+      h+='<tr><td class="n">'+x.issue+'</td><td class="n">'+NR(x.rj_count)+' 注</td><td class="n">'+NR(x.rj_prize)+
+         ' 元</td><td class="n">'+NR(x.g1_count)+' 注 / '+NR(x.g1_prize)+' 元</td><td class="n">'+NR(x.sales)+' 元</td></tr>';
+    });
+    h+='</tbody></table>';
+    if(O.cur&&O.cur.result&&O.cur.result.length)h+='<div class="note">★ 本期官方已开奖：310 = <b>'+O.cur.result.join(" ")+
+      '</b>　任9 '+NR(O.cur.rj_count)+' 注 / 单注 '+NR(O.cur.rj_prize)+' 元　一等奖 '+NR(O.cur.g1_count)+' 注 / '+NR(O.cur.g1_prize)+' 元</div>';
+  }
+  $("#tk-body").innerHTML+=h;
+})();
+
+/* 四场进球 */
+const J=DATA.jqc||{};
+$("#tk-jqc").innerHTML=J.issue?("第"+J.issue+"期 · 截止 "+(J.deadline||"?")+"　"+(J.skipped?'<span class="warn" style="display:inline-block">强弱不分明（强热门 '+(J.clear||0)+'/4 &lt; '+(J.min_clear||2)+'）→ 本期不打</span>':('<span class="tag">'+J.n_bets+'注 / '+J.cost+'元</span>'))):"暂无";
+if(J.rows&&J.rows.length){let h='<table><tr><th>场</th><th>对阵</th><th>欧赔</th><th>我方选球数(主/客)</th><th>主队 0/1/2/3+</th><th>客队 0/1/2/3+</th></tr><tbody>';
+  J.rows.forEach(r=>{h+='<tr><td class="n">'+r.cid+'</td><td>'+r.vs+'</td><td class="n">'+(r.odds||[]).join("/")+'</td>'+
+    '<td class="pick">'+("主 "+((r.picks_home||[]).join("/"))+"　客 "+((r.picks_away||[]).join("/")))+'</td>'+
+    '<td class="n">'+(r.dist_home||[]).map(x=>(x*100).toFixed(1)).join(" / ")+'</td>'+
+    '<td class="n">'+(r.dist_away||[]).map(x=>(x*100).toFixed(1)).join(" / ")+"</td></tr>";});
+  $("#tk-jqc").innerHTML+=h+"</tbody></table>"+(J.hit_p?('<div class="note">单注全中率 '+(J.hit_p*100).toFixed(2)+"%（模型估算；实际彩票返奖率约 65%）</div>"):"");
+}
+
+/* 与付费站的对比表 */
+$("#cmp").innerHTML=(DATA.compare_free||[]).map(r=>"<tr><td>"+r[0]+'</td><td class="mut">'+r[1]+'</td><td class="freed">'+r[2]+"</td></tr>").join("");
+
+/* ---------- 本期数据 ---------- */
+$("#dt-sub").innerHTML='第'+(S.issue||'?')+'期　官方SP：'+(S.sp_open===false?'<b class="dn">未开出</b>（开售晚，胆资格退化为只看均概率≥60%）':'已开')+'　'+(S.deadline||'');
+let d1='<tr><th>序</th><th>对阵</th><th>比赛时间</th><th>官方SP</th><th>5家均概率</th><th>亚盘</th><th>凯利</th><th>共识</th><th>同赔历史提示</th></tr><tbody>';
+(S.rows||[]).forEach(r=>{const z=(S.zx||{})[r.no],so=(S.same_odds||{})[r.no],tm=(S.times||{})[r.no];
+  const pmax=r.prob?Object.entries(r.prob).filter(x=>x[1]!=null).sort((a,b)=>b[1]-a[1])[0]:null;
+  const hot=so?((so.hist[0]-r.prob["3"])>8?"主":(so.hist[1]-r.prob["1"])>8?"平":(so.hist[2]-r.prob["0"])>8?"客":"-"):"-";
+  d1+='<tr><td class="n">'+r.no+"</td><td>"+r.vs+'</td><td class="mut">'+(tm||"--")+'</td><td class="n">'+
+      ((r.sp&&r.sp["3"]!=null)?[r.sp["3"],r.sp["1"],r.sp["0"]].map(x=>fmt(x)).join("/"):'<span class="mut">未开</span>')+
+      '</td><td class="n">'+fmt(r.prob&&r.prob["3"],1)+" / "+fmt(r.prob&&r.prob["1"],1)+" / "+fmt(r.prob&&r.prob["0"],1)+
+      '</td><td>'+((r.asian||[]).join(" "))+'</td><td class="n">'+fmt(r.kelly&&r.kelly["3"])+" / "+fmt(r.kelly&&r.kelly["1"])+" / "+fmt(r.kelly&&r.kelly["0"])+
+      '</td><td>'+(z?('<span class="tag">'+(z.agree||"")+'</span>'+(z.mark||"")):'<span class="mut">--</span>')+
+      '</td><td class="mut">'+(so?("面热["+hot+"] 历史"+so.hist.join("/")+" n="+so.n):"--")+"</td></tr>";});
+$("#dt").innerHTML=d1+"</tbody></table>";
+
+let z1='<tr><th>序</th><th>对阵</th><th>共识方向</th><th>与均概率</th><th>分歧(主/平/客)</th><th>五家初盘</th></tr><tbody>';
+(S.rows||[]).forEach(r=>{const z=(S.zx||{})[r.no];if(!z)return;
+  const bs=Object.entries(z.books||{}).map(([k,v])=>(DATA.book_names[k]||k)+" "+v.map(x=>fmt(x)).join("/")).join("　");
+  z1+='<tr><td class="n">'+r.no+"</td><td>"+r.vs+'</td><td class="pick">'+(z.agree||"")+'</td><td>'+(z.mark||"")+
+      '</td><td class="n">'+((z.disp||[]).map(x=>fmt(x,3)).join(" / "))+'</td><td class="mut" style="font-size:12px">'+bs+"</td></tr>";});
+$("#zx").innerHTML=z1+"</tbody></table>";
+
+let s1='<tr><th>序</th><th>对阵</th><th>同赔历史 主/平/客</th><th>当前均概率</th><th>差值</th><th>样本</th></tr><tbody>';
+(S.rows||[]).forEach(r=>{const so=(S.same_odds||{})[r.no];if(!so)return;
+  const dif=so.hist.map((h,i)=>{const k=["3","1","0"][i];return (h-(r.prob?r.prob[k]:0)).toFixed(1);});
+  s1+='<tr><td class="n">'+r.no+"</td><td>"+r.vs+'</td><td class="n">'+so.hist.join(" / ")+'</td><td class="n">'+
+      fmt(r.prob&&r.prob["3"],1)+" / "+fmt(r.prob&&r.prob["1"],1)+" / "+fmt(r.prob&&r.prob["0"],1)+
+      '</td><td class="n">'+dif.join(" / ")+'</td><td class="mut">n='+so.n+" ("+so.books+"家)</td></tr>";});
+$("#so").innerHTML=s1+"</tbody></table>";
+
+$("#prize").innerHTML='<tr><th>期</th><th>任九中奖注数</th><th>单注奖金</th><th>任九销量</th></tr><tbody>'+
+ ((DATA.prizes||[]).map(p=>"<tr><td>"+p.issue+'</td><td class="n">'+p.rj_n+'</td><td class="n">¥'+p.rj_prize+
+   '</td><td class="n">'+(p.rj_sales?Number(p.rj_sales).toLocaleString():"--")+"</td></tr>").join(""))+
+ '<tr><td colspan="4" class="mut">中位 ¥'+(DATA.prize_median||"--")+"　最低 ¥"+(DATA.prize_min||"--")+"　最高 ¥"+(DATA.prize_max||"--")+"</td></tr></tbody>";
+
+/* ---------- 战绩 ---------- */
+const L=DATA.ledger||{};
+$("#lg").innerHTML='<tr><th>期</th><th>票面</th><th>注数/成本</th><th>命中</th><th>结果</th><th>奖金</th><th>净额</th></tr><tbody>'+
+ ((L.rows||[]).map(function(r){var P=!!r.pending;
+  return '<tr'+(P?' class="pend"':'')+'><td>'+r.issue+(P?' <span class="tag">待开奖</span>':'')+'</td>'+
+   '<td class="mut">'+(r.ticket||"--")+'</td><td class="n">'+(r.bets||"--")+'注 / '+(r.cost||"--")+'元</td>'+
+   '<td class="'+(String(r.hit).indexOf("9/9")===0?"up":"")+'">'+(r.hit||"--")+'</td>'+
+   '<td class="mut">'+(r.result||"--")+'</td>'+
+   '<td class="n">'+(P?"未开":((r.win||0)+"元"))+'</td>'+
+   '<td class="'+(P?"mut":((r.pnl||0)>=0?"up":"dn"))+'">'+(P?"待定":(((r.pnl||0)>0?"+":"")+(r.pnl||0)+"元"))+'</td></tr>';}).join(""))+"</tbody>";
+var sn=L.settled_n||((L.rows||[]).filter(function(r){return !r.pending}).length);
+$("#lg-sum").textContent="已结算 "+sn+" 期　总投入 ¥"+(L.stake||0)+"　总回收 ¥"+(L.return||0)+
+ (L.pending?("　·　另：第 "+L.pending.issue+" 期已于 "+(L.pending.deadline||"?")+" 停售、¥"+L.pending.cost+
+  " 已投入，等官方开出 310 就回填命中与奖金（不计入上面的合计）"):"");
+$("#lg-kpi").innerHTML=[["累计盈亏（已结算）","¥"+(L.pnl||0),(L.pnl||0)>=0?"up":"dn"],["投入（已结算）","¥"+(L.stake||0),"mut"],
+  ["回收","¥"+(L.return||0),"mut"],["9/9 期数",((L.rows||[]).filter(r=>String(r.hit).indexOf("9/9")>=0).length)+" 期","up"]]
+  .map(x=>'<div class="kpi"><div class="l">'+x[0]+'</div><div class="v '+x[2]+'">'+x[1]+"</div></div>").join("");
+
+/* ---------- 实验室 ---------- */
+const LB=DATA.lab||{};
+function caltbl(id,arr){$(id).innerHTML='<tr><th>赔率档</th><th>样本</th><th>实际%</th><th>隐含%</th><th>edge</th><th>ROI%</th></tr><tbody>'+
+ ((arr||[]).map(x=>"<tr><td>"+x.band[0].toFixed(2)+"-"+x.band[1].toFixed(2)+'</td><td class="n">'+x.n.toLocaleString()+
+  '</td><td class="n">'+x.hist.toFixed(1)+'</td><td class="n">'+x.implied.toFixed(1)+'</td><td class="'+(x.edge>=0?"up":"dn")+'">'+
+  (x.edge>0?"+":"")+x.edge.toFixed(1)+'</td><td class="'+(x.roi>=0?"up":"dn")+'">'+x.roi.toFixed(2)+"</td></tr>").join(""))+"</tbody>";}
+caltbl("#cal-h",(LB.calib||{}).home_all);caltbl("#cal-d",(LB.calib||{}).draw_all);
+$("#mb").innerHTML='<tr><th>模型最高概率档</th><th>样本</th><th>首选命中%</th></tr><tbody>'+
+ ((LB.model_bands||[]).map(x=>"<tr><td>"+x.lo.toFixed(2)+"-"+x.hi.toFixed(2)+'</td><td class="n">'+x.n+'</td><td class="n">'+x.hit.toFixed(1)+"</td></tr>").join(""))+"</tbody>";
+const CP=LB.cuptest||{};
+$("#cup").innerHTML='<tr><th>组别</th><th>样本</th><th>模型命中</th><th>市场命中</th><th>模型Brier</th><th>市场Brier</th><th>价值信号命中</th></tr><tbody>'+
+ [["跨国杯赛",CP.cup],["国内联赛",CP.domestic]].map(x=>{const g=x[1]||{};const n=g.n||0;
+  return "<tr><td>"+x[0]+'</td><td class="n">'+n+'</td><td class="n">'+(g.model_hit/Math.max(n,1)*100).toFixed(1)+"%</td><td class=\"n up\">"+
+   (g.mkt_hit/Math.max(n,1)*100).toFixed(1)+"%</td><td class=\"n\">"+(g.brier_m/Math.max(n,1)).toFixed(4)+'</td><td class="n up">'+
+   (g.brier_k/Math.max(n,1)).toFixed(4)+'</td><td class="n dn">'+(g.val_hit/Math.max(g.val_n,1)*100).toFixed(1)+"% (n="+g.val_n+")</td></tr>";}).join("")+"</tbody>";
+let f1='<tr><th>价格档</th><th>基准命中%</th><th>样本</th><th>切片</th><th>n</th><th>命中%</th><th>edge</th></tr><tbody>';
+Object.entries(LB.formtest||{}).forEach(([k,v])=>{(v.slices||[]).forEach((s,i)=>{
+  f1+="<tr>"+(i?'<td colspan="3"></td>':('<td rowspan="'+v.slices.length+'">'+k+'</td><td class="n">'+v.base+'</td><td class="n">'+v.n.toLocaleString()+"</td>"))+
+   '<td class="mut">'+s.name+'</td><td class="n">'+s.n.toLocaleString()+'</td><td class="n">'+s.hist.toFixed(1)+'</td><td class="'+(s.edge>=0?"up":"dn")+'">'+
+   (s.edge>0?"+":"")+s.edge.toFixed(1)+"</td></tr>";});});
+$("#form").innerHTML=f1+"</tbody></table>";
+const OL=LB.odds_lab||{};
+$("#lab-kpi").innerHTML=[["累计注数",(OL.kpi||{}).n,"mut"],["ROI%",((OL.kpi||{}).roi||0),"up"],["命中率%",((OL.kpi||{}).hit||0),"mut"],["最大回撤 ¥",((OL.kpi||{}).maxdd||0),"dn"]]
+ .map(x=>'<div class="kpi"><div class="l">'+x[0]+'</div><div class="v '+x[2]+'">'+x[1]+"</div></div>").join("");
+$("#lab-note").innerHTML="近 6 个月逐月 ROI："+(((OL.kpi||{}).recent||[]).map(x=>(x>0?"+":"")+x).join(" / "))+
+ "　→ 长期 +9.8% 的策略，从 2026-07-17 起 349 注亏 ¥5,433、近 30 日命中 19.4%。原因见上表：它的「价值」集中在跨国杯赛，而那里模型最瞎。";
+drawCurve((OL.curve||{}).points||[]);
+function drawCurve(pts){const c=$("#curve");if(!pts.length)return;const w=c.clientWidth||900,h=200;c.width=w;c.height=h;
+ const g=c.getContext("2d"),ys=pts.map(p=>p[1]);const mn=Math.min(...ys),mx=Math.max(...ys);
+ g.clearRect(0,0,w,h);g.strokeStyle="#4c9ffe";g.lineWidth=2;g.beginPath();
+ pts.forEach((p,i)=>{const x=i/(pts.length-1)*w,y=h-(p[1]-mn)/(mx-mn||1)*(h-20)-10;i?g.lineTo(x,y):g.moveTo(x,y)});g.stroke();
+ g.strokeStyle="#272d38";g.beginPath();g.moveTo(0,h-(0-mn)/(mx-mn||1)*(h-20)-10);g.lineTo(w,h-(0-mn)/(mx-mn||1)*(h-20)-10);g.stroke();}
+[["#m-corner","角球",(LB.league_cal||{}).corners],["#m-card","罚牌",(LB.league_cal||{}).cards]].forEach(x=>{
+  const g=x[2]||{};$(x[0]).innerHTML="<tr><th>"+x[1]+"模型</th><th>值</th></tr><tbody>"+
+   [["样本 n",g.n],["Brier",g.brier],["基准 Brier",(g.baseline||{}).brier],["模型大方向正确率",(LB.corners_dir||{})["角球"]&&x[1]==="角球"?LB.corners_dir["角球"]+"%":"--"]]
+   .filter(r=>r[1]!=null).map(r=>"<tr><td class=\"mut\">"+r[0]+'</td><td class="n">'+r[1]+"</td></tr>").join("")+"</tbody>";});
+
+/* ---------- 规则 ---------- */
+$("#rules").innerHTML='<ul>'+(DATA.rules||[]).map(r=>"<li><b>"+r[0]+"</b>　"+r[1]+"</li>").join("")+"</ul>";
+$("#rule-changes").innerHTML=(DATA.rule_changes||[]).map(r=>'<div class="warn"><b>'+r[0]+"</b><br>"+r[1]+"</div>").join("");
+$("#about").innerHTML=(DATA.about||[]).map(r=>"<p class=\"note\"><b>"+r[0]+"</b>　"+r[1]+"</p>").join("");
+const H=DATA.health||{};
+$("#health").innerHTML='<div class="'+((H.abnormal||0)===0?"ok":"warn")+'">'+(H.date||"")+" 接口巡检 "+(H.ok||0)+"/"+(H.total||11)+
+  " 正常　降级 "+(H.degraded||0)+"　异常 "+(H.abnormal||0)+"</div><table><tr><th>接口</th><th>状态</th><th>说明</th></tr><tbody>"+
+  ((H.items||[]).map(i=>'<tr><td>'+i.name+'</td><td class="'+(i.ok?"up":"dn")+'">'+(i.ok?"✓":"✗")+'</td><td class="mut">'+(i.info||"")+"</td></tr>").join(""))+"</tbody>";
+$("#foot").innerHTML="本站为个人研究站点，只计算概率、不预测结果、不代售彩票。历史回测不代表未来。数据由公开网络抓取整理，版权归原作者所有。生成时间 "+(DATA.generated_at||"").replace("T"," ").slice(0,16)+"。";
+
+/* ============ 2026-11-07 取消付费墙：定稿票面永久可读，不收钱，以后也不收费 ============
+   按期 / 按月购买那一整套（含遮罩 .mask 与弹窗 #paymodal）已删除。 */
+const PAY=DATA.paywall||{};
+function paint(){}
+
+/* ================= 首页：每日全量比赛 ================= */
+const P=DATA.pool||{},PM=P.matches||[];
+let F={play:"all",view:"day",country:"",season:"",sort:"time",q:""};
+const pctf=v=>v==null?"--":(v*100).toFixed(1)+"%";
+function chips(id,items,key){
+  var e=document.getElementById(id);if(!e)return;
+  e.innerHTML=items.map(function(it){return '<button data-v="'+it[0]+'" class="'+(F[key]===it[0]?"on":"")+'">'+it[1]+"</button>";}).join("");
+  e.onclick=function(ev){var b=ev.target.closest("button");if(!b)return;F[key]=b.dataset.v;chips(id,items,key);renderPool();};
+}
+function opts(id,list,val){
+  var e=document.getElementById(id);if(!e)return;
+  e.innerHTML='<option value="">全部</option>'+list.map(function(x){return '<option value="'+x+'"'+(x===val?" selected":"")+">"+x+"</option>";}).join("");
+  if(val)e.value=val;
+}
+function dayname(d){
+  if(!d)return "时间未知";
+  var a=new Date(d+"T12:00:00").setHours(0,0,0,0),b=new Date().setHours(0,0,0,0);
+  var k=Math.round((a-b)/864e5);
+  var lab=k===0?"今天":k===1?"明天":k===2?"后天":k===-1?"昨天":k>0?(k+" 天后"):(-k)+" 天前";
+  return lab+"　"+d.slice(5);
+}
+function f5(s){
+  if(!s)return "";
+  return '<span class="form5">'+String(s).split("").map(function(c){return '<span class="'+c+'">'+c+"</span>";}).join("")+"</span>";
+}
+function cell(t,b){return '<div class="cell"><div class="t">'+t+'</div><div class="b">'+b+"</div></div>";}
+function hasPlay(m,src,name){var a=m.plays||[];for(var i=0;i<a.length;i++)if(a[i][0]===src&&a[i][1]===name)return 1;return 0;}
+function bestN(a,n){return (a||[]).filter(function(x){return x.sp>0;}).sort(function(x,y){return x.sp-y.sp;}).slice(0,n);}
+function ttgstr(a){return bestN(a,2).map(function(x){return (x.g>=7?"7+":x.g)+"球 "+x.sp;}).join("、");}
+function crsstr(a){return bestN(a,3).map(function(x){return x.label+" "+x.sp;}).join("、");}
+function hafustr(h){var NM={hh:"胜胜",hd:"胜平",ha:"胜负",dh:"平胜",dd:"平平",da:"平负",ah:"负胜",ad:"负平",aa:"负负"};
+  var b=[];for(var k in NM){if(h&&h[k])b.push([h[k],NM[k]]);}if(!b.length)return "";
+  b.sort(function(x,y){return x[0]-y[0];});return b.slice(0,2).map(function(x){return x[1]+" "+x[0];}).join("、");}
+function playline(m){
+  var j=m.jc||{},b=m.bc||{},s="";
+  if(j.spf)s+="　竞彩胜平负 "+[j.spf["3"],j.spf["1"],j.spf["0"]].join(" / ");
+  if(j.rqspf)s+="　竞彩让球("+j.give+") "+[j.rqspf["3"],j.rqspf["1"],j.rqspf["0"]].join(" / ");
+  if(j.ttg&&j.ttg.length)s+="　竞彩总进球 "+ttgstr(j.ttg);
+  if(j.crs&&j.crs.length)s+="　竞彩比分 "+crsstr(j.crs);
+  if(j.hafu)s+="　竞彩半全场 "+hafustr(j.hafu);
+  if(b.rqspf)s+="　北单让球("+b.give+") "+[b.rqspf["3"],b.rqspf["1"],b.rqspf["0"]].join(" / ")+"（参考SP）";
+  if(b.ttg&&b.ttg.length&&!(j.ttg&&j.ttg.length))s+="　北单总进球 "+ttgstr(b.ttg);
+  if(b.crs&&b.crs.length&&!(j.crs&&j.crs.length))s+="　北单比分 "+crsstr(b.crs);
+  return s;
+}
+var PLAYF={
+  "jc·胜平负":{lb:"竞彩·胜平负",fn:function(m){return hasPlay(m,"竞彩","胜平负");}},
+  "jc·让球胜平负":{lb:"竞彩·让球胜平负",fn:function(m){return hasPlay(m,"竞彩","让球胜平负");}},
+  "jc·比分":{lb:"竞彩·比分",fn:function(m){return hasPlay(m,"竞彩","比分");}},
+  "jc·总进球数":{lb:"竞彩·总进球数",fn:function(m){return hasPlay(m,"竞彩","总进球数");}},
+  "jc·半全场胜平负":{lb:"竞彩·半全场",fn:function(m){return hasPlay(m,"竞彩","半全场胜平负");}},
+  "jc·单关":{lb:"竞彩·可单关",fn:function(m){return m.single_any===1;}},
+  "jc·混合过关":{lb:"竞彩·混合过关",fn:function(m){return m.allup===1;}},
+  "bc·让球胜平负":{lb:"北单·让球胜平负",fn:function(m){return hasPlay(m,"北单","让球胜平负");}},
+  "bc·总进球数":{lb:"北单·总进球数",fn:function(m){return hasPlay(m,"北单","总进球数");}},
+  "bc·比分":{lb:"北单·比分",fn:function(m){return hasPlay(m,"北单","比分");}},
+  "sfc14":{lb:"胜负彩14场",fn:function(m){return hasPlay(m,"足彩","胜负彩14场");}},
+  "rq9":{lb:"任选9场",fn:function(m){return hasPlay(m,"足彩","任选9场");}},
+  "jq4":{lb:"4场进球",fn:function(m){return hasPlay(m,"足彩","4场进球");}},
+  "bq6":{lb:"6场半全场（未接入）",fn:function(){return 0;}}
+};
+function mcard(m){
+  var tg=['<span class="mtag b">'+(m.lg||"")+(m.country?(" · "+m.country):"")+"</span>"];
+  if(m.jc)tg.push('<span class="mtag y">竞彩 '+(m.jc.code||"")+(m.jc.give!=null?(" 让"+m.jc.give):"")+"</span>");
+  if(m.bc)tg.push('<span class="mtag y">北单 '+(m.bc.code||"")+(m.bc.give!=null?(" 让"+m.bc.give):"")+"</span>");
+  var pl=m.plays||[],pp=[];
+  for(var pi=0;pi<pl.length;pi++)pp.push(pl[pi][1]+(pl[pi][2]?"·可单关":""));
+  if(pp.length)tg.push('<span class="mtag">开售玩法：'+pp.join("、")+"</span>");
+  if(m.sfc_no)tg.push('<span class="mtag g">本期胜负彩14场 第'+m.sfc_no+"场（任9候选）</span>");
+  if(m.jqc_no)tg.push('<span class="mtag g">本期4场进球 第'+m.jqc_no+"场</span>");
+  if(m.cup)tg.push('<span class="mtag r">跨国杯赛 · 模型只作参考</span>');
+  var o=m.odds||{},op=m.open||{},pr=m.probs||{};
+  var h='<div class="mcard"><div class="mhd"><span class="tm">'+String(m.at||"").slice(5,16)+"</span>"+
+    (m.logo_h?('<img src="'+m.logo_h+'" alt="">'):"")+'<span class="vs">'+(m.home||"")+"</span>"+
+    (m.pos_h?('<span class="mtag">'+m.pos_h+"名 "+(m.pts_h||0)+"分</span>"):"")+f5(m.form_h)+
+    '<span class="mut">vs</span>'+(m.logo_a?('<img src="'+m.logo_a+'" alt="">'):"")+'<span class="vs">'+(m.away||"")+"</span>"+
+    (m.pos_a?('<span class="mtag">'+m.pos_a+"名 "+(m.pts_a||0)+"分</span>"):"")+f5(m.form_a)+"</div>"+
+    '<div class="mtags">'+tg.join("")+"</div>"+
+    '<div class="mrow">'+
+      cell(m.official_only?"官方SP（去水）":"机构初→终（去水）","主 "+(op.home?(op.home+" → "):"")+(o.home||"--")+"（"+pctf(pr.home)+"）　客 "+(op.away?(op.away+" → "):"")+(o.away||"--")+"（"+pctf(pr.away)+"）")+
+      cell("大小球","盘口 "+(m.ou_line==null?"--":m.ou_line)+"　大球 "+pctf(m.over)+(m.ou_open?("　初盘大 "+m.ou_open):""))+
+      cell("统计模型 1x2（仅供参考）","主 "+pctf(m.mp_h)+" / 平 "+pctf(m.mp_d)+" / 客 "+pctf(m.mp_a)+
+           (m.edge?("　最大偏差 "+(m.edge>0?"+":"")+(m.edge*100).toFixed(1)+"pt @"+m.edge_side):""))+
+    "</div>"+
+    '<div class="pickline">推荐：<b>'+(m.side||"--")+"</b>　市场强度 "+pctf(m.pow)+' → <span class="mtag '+(m.tier_cls||"")+'">'+(m.tier||"")+"</span>"+
+      (m.draw_risk?('　<span class="mtag r">平局风险 '+m.draw_risk+"</span>"):"")+
+      (m.ou_tone?("　大小："+m.ou_tone):"")+
+      playline(m)+
+      (m.rankgap?("　排名差 "+m.rankgap):"")+
+      (m.note?('　<span class="mtag">'+m.note+"</span>"):"")+"</div></div>";
+  return h;
+}
+function filtered(){
+  var q=(F.q||"").toLowerCase();
+  return PM.filter(function(m){
+    if(F.play==="jc"&&!m.jc)return false;
+    if(F.play==="bc"&&!m.bc)return false;
+    if(F.play==="szc"&&!m.sfc_no)return false;
+    if(PLAYF[F.play]&&!PLAYF[F.play].fn(m))return false;
+    if(F.country&&m.country!==F.country)return false;
+    if(F.season&&m.season!==F.season)return false;
+    if(q&&String((m.home||"")+(m.away||"")+(m.lg||"")+(m.country||"")).toLowerCase().indexOf(q)<0)return false;
+    return true;});
+}
+function playsum(){
+  var pm=DATA.play_meta||{},c=pm.counts||{},s="";
+  if(!c||!Object.keys(c).length)return "";
+  s+="　｜　本期开售玩法：";
+  if(c["竞彩·胜平负"]!=null||c["竞彩·让球胜平负"]!=null)
+    s+="竞彩 胜平负"+(c["竞彩·胜平负"]||0)+"/让球胜平负"+(c["竞彩·让球胜平负"]||0)+"/比分"+(c["竞彩·比分"]||0)+
+       "/总进球数"+(c["竞彩·总进球数"]||0)+"/半全场"+(c["竞彩·半全场胜平负"]||0)+"，其中可单关 "+(c["竞彩·单关"]||0)+" 场";
+  if(c["北单·让球胜平负"])s+="　|　北京单场 让球胜平负"+c["北单·让球胜平负"]+"/总进球数"+(c["北单·总进球数"]||0)+"/比分"+(c["北单·比分"]||0);
+  if(c["足彩·胜负彩14场"])s+="　|　传统足彩 胜负彩14场 "+c["足彩·胜负彩14场"]+" 场/任选9场 "+(c["足彩·任选9场"]||0)+
+       " 场/4场进球 "+(c["足彩·4场进球"]||0)+" 场"+(pm.sfc_issue?("（足彩期号 "+pm.sfc_issue+"）"):"");
+  if(pm.note)s+="　|　"+pm.note;
+  return s;
+}
+function renderPool(){
+  var a=filtered();
+  if(F.sort==="pow")a.sort(function(x,y){return (y.pow||0)-(x.pow||0);});
+  else if(F.sort==="edge")a.sort(function(x,y){return (y.edge||0)-(x.edge||0);});
+  else if(F.sort==="over")a.sort(function(x,y){return (y.over||0)-(x.over||0);});
+  else if(F.sort==="pts")a.sort(function(x,y){return (y.gap||0)-(x.gap||0);});
+  else a.sort(function(x,y){return String(x.at||"").localeCompare(String(y.at||""));});
+  var njc=a.filter(function(m){return m.jc;}).length,nbc=a.filter(function(m){return m.bc;}).length,jm=DATA.jc_meta||{};
+  document.getElementById("pool-sum").textContent="命中 "+a.length+" 场（全站 "+PM.length+" 场，数据更新 "+String(P.generated_at||DATA.generated_at||"").replace("T"," ").slice(5,16)+"）　竞彩官方在售 "+njc+" 场（接口共 "+(jm.total_jc||0)+" 场）/ 北单在售 "+nbc+" 场（接口共 "+(jm.total_bc||0)+" 场）　"+
+    "推荐依据：市场方向（机构终盘去水概率）+ 排名与近5场 + 大小球盘口；统计模型只作参考，跨国杯赛场次不作依据。"+(jm.note?("　"+jm.note):"")+playsum();
+  var groups=[];
+  if(F.view==="day"){var cur="";a.forEach(function(m){var d=String(m.at||"").slice(0,10);
+      if(d!==cur){cur=d;groups.push({k:dayname(d),items:[]});}groups[groups.length-1].items.push(m);});}
+  else{var key=F.view,map={};a.forEach(function(m){var k=m[key]||"未知";(map[k]=map[k]||[]).push(m);});
+       Object.keys(map).sort().forEach(function(k){groups.push({k:k,items:map[k]});});}
+  var html=groups.map(function(g){return '<div class="day">'+g.k+"　·　"+g.items.length+" 场</div>"+g.items.map(mcard).join("");}).join("");
+  document.getElementById("pool-list").innerHTML=html||'<div class="note">没有符合条件的比赛。</div>';
+}
+function bootPool(){
+  var pitems=[["all","全部比赛"],["jc","竞彩足球"],["bc","北京单场"],["szc","本期胜负彩14场"]];
+  Object.keys(PLAYF).forEach(function(k){pitems.push([k,PLAYF[k].lb+" "+PM.filter(PLAYF[k].fn).length]);});
+  chips("f-play",pitems,"play");
+  chips("f-view",[["day","按赛程"],["country","按国家"],["league","按联赛"],["season","按赛季"]],"view");
+  opts("f-country",Array.from(new Set(PM.map(function(m){return m.country;}).filter(Boolean))).sort());
+  opts("f-season",Array.from(new Set(PM.map(function(m){return m.season;}).filter(Boolean))).sort());
+  var s=document.getElementById("f-sort");if(s){s.value=F.sort;s.onchange=function(){F.sort=this.value;renderPool();};}
+  var q=document.getElementById("f-q");if(q)q.oninput=function(){F.q=this.value.trim();renderPool();};
+  var c=document.getElementById("f-country");if(c)c.onchange=function(){F.country=this.value;renderPool();};
+  var se=document.getElementById("f-season");if(se)se.onchange=function(){F.season=this.value;renderPool();};
+  var cl=document.getElementById("f-clear");if(cl)cl.onclick=function(){F={play:"all",view:"day",country:"",season:"",sort:"time",q:""};bootPool();};
+  renderPool();
+}
+function qrImg(src,label,w){
+  if(!src)return "";
+  return '<div style="text-align:center"><img src="'+src+'" alt="'+label+
+    '" style="width:'+(w||210)+'px;max-width:44vw;border:1px solid var(--line);border-radius:10px;background:#fff;padding:6px"'+
+    ' onerror="this.parentNode.style.display=\'none\'"><div class="mut" style="margin-top:6px;font-size:13px">'+label+"</div></div>";
+}
+function paintQr(){
+  var d=DATA.donate||{},h="";
+  if(d.wx)h+=qrImg(d.wx,"微信收款码");
+  if(d.ali)h+=qrImg(d.ali,"支付宝收款码");
+  if(!h&&d.legacy)h+=qrImg(d.legacy,"收款码");
+  var box=document.getElementById("qr-codes");
+  if(box)box.innerHTML=h;
+  var sub=document.getElementById("qr-sub"),tip=document.getElementById("donate-tip");
+  if(sub&&h)sub.style.display="block";
+  if(tip&&!h)tip.style.display="block";
+}
+paintQr();
+/* 联系方式：域名邮箱（可一键复制）+ 加微信好友的二维码 */
+function paintContact(){
+  var c=DATA.contact||{},box=document.getElementById("qr-wx"),tip=document.getElementById("qr-wx-tip");
+  if(box&&c.wx){box.innerHTML=qrImg(c.wx,"微信加好友",240);if(tip)tip.style.display="block";}
+  var m=document.getElementById("mail-link");
+  if(m&&c.email){m.innerText=c.email;m.href="mailto:"+c.email;}
+  var b=document.getElementById("mail-copy");
+  if(b)b.onclick=function(){
+    var t=(m&&m.innerText)||"";
+    if(!t||t==="载入中…")return;
+    var done=function(){b.innerText="已复制";setTimeout(function(){b.innerText="复制";},1600);};
+    var fallback=function(){var i=document.createElement("textarea");i.value=t;
+      i.style.position="fixed";i.style.left="-9999px";document.body.appendChild(i);i.select();
+      try{document.execCommand("copy");}catch(e3){}document.body.removeChild(i);done();};
+    try{if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(done,fallback);return;}}catch(e){}
+    fallback();
+  };
+}
+paintContact();
+/* 首页「高节奏场次」提示条：本季真实进球 vs 机构大小盘口的缺口 */
+(function(){
+  var T=DATA.tempo||{},L=T.lagging||[],M=T.top||[],mg=T.min_gap||0.35;
+  var el=document.getElementById("tempo-bar");
+  if(!el||(!L.length&&!M.length))return;
+  var lg=L.map(function(x){return "<b>"+x.league+"</b> 本季"+x.avg_goals.toFixed(2)+" vs 盘口"+x.line.toFixed(2)+"（"+(x.gap>=0?"+":"")+x.gap.toFixed(2)+"）";}).join("　·　");
+  var rows=M.slice(0,10).map(function(m){
+    var g=m.gap||0,col=g>=mg?"#c0392b":"inherit";
+    return '<span class="titem" style="margin:2px 12px 2px 0">'+String(m.at||"").slice(5,16)+
+      ' <span class="tag">'+(m.league||"")+'</span> '+(m.home||"")+' vs '+(m.away||"")+
+      ' <span style="color:'+col+';font-weight:600">'+(g>=0?"+":"")+g.toFixed(2)+"</span>"+
+      ' <span class="mut">盘'+(m.line!=null?m.line.toFixed(2):"--")+" / 期望"+(m.exp!=null?m.exp.toFixed(2):"--")+"</span></span>";
+  }).join("");
+  el.innerHTML='<b style="color:#e8a33d">高节奏场次</b> '+
+    '<span class="mut">算法：用本季主/客场分项算出这场比赛的期望总进球，再减机构大小盘口；差为正说明机构盘口可能还没跟上（≥'+mg.toFixed(2)+' 才算滞后）。</span>'+
+    (lg?'<div style="margin-top:6px">本季滞后联赛：'+lg+"</div>":"")+
+    '<div style="margin-top:6px">'+rows+"</div>"+
+    '<div class="note" style="margin-top:6px">这条还在攒样本：赛前缺口已记录 '+(T.logged||0)+
+    ' 场，赛后用我们自己的赛果核对。够样本之前只当参考，不作投注依据——缺口大不代表一定大球，机构也可能早把节奏算进去了。</div>';
+  el.style.display="block";
+})();
+
+/* 装成 App：service worker 只在 https 下注册（http 环境浏览器本来也不给装） */
+if("serviceWorker" in navigator && location.protocol==="https:"){
+  var __swreg=function(){
+    navigator.serviceWorker.register("/sw.js").then(function(){
+      try{localStorage.setItem("sfc_sw","ok "+Date.now());}catch(e){}
+    }).catch(function(err){
+      try{localStorage.setItem("sfc_sw","ERR:"+err);}catch(e2){}
+    });
+  };
+  if(document.readyState==="complete"){__swreg();}
+  else{window.addEventListener("load",__swreg);}
+  window.addEventListener("appinstalled",function(){try{localStorage.setItem("sfc_installed","1");}catch(e){}});
+}
+
+function visitStat(){
+  try{
+    var now=new Date(),d=now.getFullYear()+"-"+String(now.getMonth()+1).padStart(2,"0")+"-"+String(now.getDate()).padStart(2,"0"),v={};
+    try{v=JSON.parse(localStorage.getItem("sfc_visit")||"{}");}catch(e){v={};}
+    if(typeof v.days!=="object"||!v.days)v.days={};
+    if(v.day!==d)v.today=0;
+    v.day=d;v.today=(v.today||0)+1;v.total=(v.total||0)+1;v.days[d]=1;
+    var nd=Object.keys(v.days).length,last=v.at?String(v.at).replace("T"," ").slice(0,16):"";
+    v.at=now.toISOString();
+    try{localStorage.setItem("sfc_visit",JSON.stringify(v));}catch(e){}
+    var el=document.getElementById("visit-line");
+    if(el)el.innerHTML="你这台设备：<b>今天 "+v.today+" 次</b>　·　累计 <b>"+v.total+"</b> 次　·　已经来本站 <b>"+nd+"</b> 天"+
+      (last?("　·　上次访问 "+last):"")+"　·　全站计数：<span id=\"wa-st\">连接中…</span>";
+  }catch(e){}
+}
+function waStat(ok){var e=document.getElementById("wa-st");if(e)e.textContent=ok?"已就绪":"此刻没连上（不影响看数据）";}
+bootPool();
+if(document.getElementById("visit-line"))visitStat();
+
+/* ================= 任14（定稿前是实时影子票，定稿后才是最终票面） ================= */
+const R=DATA.rq14||{},S14=DATA.signals||{},T14=DATA.ticket||{};
+// 判据与任九那张卡完全一致：signals 有行、且期号 != 已定稿票面的期号 → 说明当期还没定稿
+const PRE14=((S14.rows||[]).length&&String(S14.issue||"")!==String(T14.issue||""))?S14:null;
+const sub14=document.getElementById("p14-sub");
+if(PRE14){
+  const n14=(PRE14.rows||[]).filter(r=>(r.sp||{})["3"]!=null).length;
+  sub14.innerHTML="第"+PRE14.issue+"期　停售 "+(PRE14.deadline||"?")+"　"+(R.bets||"?")+"注 / "+(R.cost||"?")+
+    "元　（14场全包复式，一票最多中1注）　<span class=\"tag\">未定稿</span>"+
+    '<div class="warn"><b>这不是最终定稿</b>：下面是按当期<b>实时盘口自动生成</b>的 14 场全包影子票，抓到多少放多少'+
+    "（本次抓取 "+(PRE14.fetched||"")+"，官方SP 已开 "+n14+"/"+PRE14.rows.length+" 场），"+
+    "选号每小时随抓取变化，<b>每晚 20:40 定稿后才是最终票面</b>。本期未投注（影子仓位），定稿版留档供次日核奖。</div>"+
+    (T14.issue?(T14.result?('<div class="note">上期（第'+T14.issue+'期）任九命中 '+(T14.hit||0)+'/'+(T14.hit_n||9)+
+      " → "+(T14.won?"中奖":"未中")+"</div>")
+      :('<div class="note">上期（第'+T14.issue+'期）官方<b>尚未开出 310</b>，命中与奖金待 10:00 结算回填</div>')
+    ):"");
+}else{
+  sub14.textContent="第"+(R.issue||"?")+"期　停售 "+(R.deadline||"?")+"　"+(R.bets||"?")+"注 / "+(R.cost||"?")+"元　（14场全包复式，一票最多中1注）";
+}
+let h14='<table><tr><th>序</th><th>对阵</th><th>选</th><th>均概率 主/平/客</th><th>亚盘</th></tr><tbody>';
+(R.rows||[]).forEach(function(r){h14+='<tr><td class="n">'+pad(r.no)+"</td><td>"+(r.vs||"")+'</td><td class="pick">'+(r.pick||"--")+
+  '</td><td class="n">'+(r.prob||[]).join(" / ")+'</td><td class="mut">'+((r.asian||[]).join(" "))+"</td></tr>";});
+document.getElementById("p14-body").innerHTML=h14+"</tbody></table>";
+document.getElementById("p14-why").innerHTML='<ul class="note">'+(PRE14?("<li><b>自动生成、未定稿</b>：以下依据每小时会随抓取变化，定稿版以每晚 20:40 那次为准</li>"):"")+
+  (R.why||[]).map(function(x){return "<li>"+x+"</li>";}).join("")+"</ul>";
+
+/* ================= 联赛库 ================= */
+const LG=P.leagues||[];
+document.getElementById("lt").innerHTML='<tr><th>联赛</th><th>国家</th><th>赛季</th><th>球队</th><th>场均进球</th><th>主胜%</th><th>平%</th><th>客胜%</th><th>主队场均</th><th>总场次</th></tr><tbody>'+
+  LG.map(function(l){var o=l.overview||{};
+    return "<tr><td>"+(l.zh||"")+'</td><td class="mut">'+(l.country||"")+'</td><td class="mut">'+(l.season||"--")+
+      '</td><td class="n">'+Object.keys(l.teams||{}).length+'</td><td class="n '+(parseFloat(o.avg_goals)>=2.9?"up":"")+'">'+(o.avg_goals||"--")+
+      '</td><td class="n">'+(o.home_win_pct||"--")+'</td><td class="n">'+(o.draw_pct||"--")+'</td><td class="n">'+(o.away_win_pct||"--")+
+      '</td><td class="n">'+(o.avg_home_goals||"--")+'</td><td class="n">'+(o.matches||"--")+"</td></tr>";}).join("")+"</tbody>";
+const HI=DATA.season_hist||[];
+document.getElementById("hist-note").textContent=HI.length?"各联赛往季场均进球 / 主胜率对照（看进球是不是真的在涨）":"往季画像待抓取（跑 daily.py --seasons=4 后出现）";
+document.getElementById("hist").innerHTML=HI.length?('<tr><th>联赛</th><th>赛季</th><th>场次</th><th>场均进球</th><th>主胜%</th><th>平%</th><th>客胜%</th></tr><tbody>'+
+  HI.map(function(h){return (h.seasons||[]).map(function(s,i){var o=s.overview||{};
+    return "<tr>"+(i?'<td colspan="2"></td>':('<td rowspan="'+(h.seasons||[]).length+'">'+(h.zh||"")+"</td>"))+
+      '<td class="mut">'+(s.season||"--")+'</td><td class="n">'+(o.matches||"--")+'</td><td class="n">'+(o.avg_goals||"--")+
+      '</td><td class="n">'+(o.home_win_pct||"--")+'</td><td class="n">'+(o.draw_pct||"--")+'</td><td class="n">'+(o.away_win_pct||"--")+"</td></tr>";}).join("");}).join("")+"</tbody>"):"";
+const selLG=document.getElementById("lg-pick");
+if(selLG&&LG.length){
+  selLG.innerHTML='<option value="">全部联赛（每个前 5）</option>'+LG.map(function(l,i){return '<option value="'+i+'">'+(l.zh||"")+"（"+(l.country||"")+"）</option>";}).join("");
+  var drawTB=function(){
+    var fld=document.getElementById("lg-field").value,NC=(fld==="split"?8:7);
+    var tr=function(t,name){return '<tr><td class="n">'+(t.pos||"-")+"</td><td>"+name+'</td><td class="n">'+(t.pl||0)+'</td><td class="n">'+(t.pts||0)+
+      '</td><td class="n">'+((t.gd||0)>0?"+":"")+(t.gd||0)+"</td>"+
+      (fld==="split"
+        ?('<td class="n">'+((t.home||{}).won||0)+"胜/"+((t.home||{}).played||0)+"场/"+((t.home||{}).points||0)+"分</td><td class=\"n\">"+((t.away||{}).won||0)+"胜/"+((t.away||{}).played||0)+"场/"+((t.away||{}).points||0)+"分</td>")
+        :("<td>"+f5(t.form)+"</td>"))+
+      '<td class="mut">'+(t.xpts==null?"--":t.xpts)+"</td></tr>";};
+    var rank=function(l){return Object.keys(l.teams||{}).map(function(k){return [k,l.teams[k]];}).sort(function(a,b){return (a[1].pos||99)-(b[1].pos||99);});};
+    var h='<tr><th>#</th><th>球队</th><th>赛</th><th>积分</th><th>净胜</th>'+(fld==="split"?"<th>主场战绩</th><th>客场战绩</th>":"<th>近5场</th>")+"<th>xPTS</th></tr><tbody>";
+    if(selLG.value===""){                       /* 全部联赛：按联赛分组，各列前 5，不跨联赛混排 */
+      LG.forEach(function(l){
+        var rs=rank(l);if(!rs.length)return;
+        h+='<tr><td colspan="'+NC+'" style="background:#12161d;color:var(--gold);font-weight:600">'+(l.zh||"")+"（"+(l.country||"")+"）· 共 "+rs.length+" 队，列前 5</td></tr>"+
+           rs.slice(0,5).map(function(r){return tr(r[1],r[0]);}).join("");
+      });
+      document.getElementById("tb").innerHTML=h+"</tbody>";return;
+    }
+    var l=LG[+selLG.value||0]||LG[0];if(!l)return;
+    rank(l).forEach(function(r){h+=tr(r[1],r[0]);});
+    document.getElementById("tb").innerHTML=h+"</tbody>";
+  };
+  selLG.onchange=drawTB;document.getElementById("lg-field").onchange=drawTB;drawTB();
+}
+paint();
+/* ===== 手机端票面精简 · 一键复制 · 表头释义（2026-11-07 按用户反馈加）===== */
+function copyTicket(btn){
+  var T=DATA.ticket||{},SG=DATA.signals||{},RG=DATA.rq14||{},P=T.picks||{},nm={},i,lines=[];
+  /* 队名只认同一期：signals/rq14 常已翻到下一期，拿错期的名字会把 02 德比郡 写成 富勒姆vs纽卡斯 */
+  function put(rows){(rows||[]).forEach(function(r){var n=+r.no;if(n>0&&n<=14&&!nm[n])nm[n]=r.vs;});}
+  put(T.rows);
+  if(String(SG.issue)===String(T.issue))put(SG.rows);
+  if(String(RG.issue)===String(T.issue))put(RG.rows);
+  (String(T.drops||"").match(/(\d+)([^、]+)/g)||[]).forEach(function(s){
+    var m=s.match(/^(\d+)(.+)$/);if(m&&!nm[+m[1]])nm[+m[1]]="（"+m[2]+"，弃场清单截短名）";
+  });
+  for(i=1;i<=14;i++){
+    var pk=(P[String(i)]!==undefined?P[String(i)]:(P[i]!==undefined?P[i]:null));
+    if(pk==null){var rr=(T.rows||[]).filter(function(x){return +x.no===i;})[0];if(rr)pk=rr.pick;}
+    if(pk==null)pk="弃";
+    var vs=nm[i]||"--";
+    lines.push(("0"+i).slice(-2)+"　"+(pk==="弃"?("-"+(vs==="--"?"":"　"+vs)):vs+"　"+pk));
+  }
+  var txt="任选九 第"+(T.issue||"--")+"期　停售 "+(T.deadline||"--")+(T.bets?("　"+T.bets+"注 / "+T.cost+"元"):"")+
+    "\n"+lines.join("\n");
+  var back=btn?btn.innerText:"";
+  var done=function(){if(btn){btn.innerText="已复制 ✓";setTimeout(function(){btn.innerText=back;},1800);}};
+  var fb=function(){var ta=document.createElement("textarea");ta.value=txt;ta.style.cssText="position:fixed;top:-99px;opacity:0";
+    document.body.append(ta);ta.select();try{document.execCommand("copy");done();}catch(e){}ta.remove();};
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).then(done,fb);else fb();
+}
+(function(){
+  var HIDE=/均概率|官方SP|亚盘|凯利/;   /* 手机上票面只留 序号/对阵/选号，参数列整列不显示 */
+  var GLOSS={"均概率":"五家机构赔率去水后的平均胜率，代表市场看法，不是主观判断",
+    "官方SP":"体彩官方胜平负赔率，3/1/0 = 主胜/平局/客胜",
+    "亚盘":"亚洲让球盘，让得越深机构越看好让球方",
+    "凯利":"概率×赔率：明显低于 1 说明机构在防这一边",
+    "共识":"五家机构赔率的离散度，越大越分歧",
+    "同赔历史":"历史上几乎相同赔率组合实际开出的比例，万级样本仅差 0-2pt，属噪声"};
+  function mark(id){
+    var root=document.getElementById(id);if(!root)return;
+    [].slice.call(root.querySelectorAll("table")).forEach(function(tb){
+      var hr=tb.querySelector("tr");if(!hr)return;
+      var ths=[].slice.call(hr.children),idx=[];
+      if(ths.length<5)return;                       /* 已开奖票面只有 4 列，不动 */
+      ths.forEach(function(th,i){
+        var t=(th.textContent||"").trim();
+        for(var k in GLOSS){if(t.indexOf(k)>=0){th.title=GLOSS[k];break;}}
+        if(HIDE.test(t))idx.push(i);
+      });
+      if(!idx.length)return;
+      [].slice.call(tb.querySelectorAll("tr")).forEach(function(tr){
+        idx.forEach(function(i){var c=tr.children[i];if(c)c.classList.add("opt-col");});
+      });
+    });
+  }
+  mark("tk-body");mark("p14-body");                 /* 只有付费票面这么减，数据页保持全量 */
+  document.querySelectorAll("th").forEach(function(th){
+    var t=(th.textContent||"").trim();if(th.title)return;
+    for(var k in GLOSS){if(t.indexOf(k)>=0){th.title=GLOSS[k];break;}}
+  });
+  /* 全站点统一列对齐（2026-11-08 用户：表头和数值不在同一列中心）
+   第一版判得太死：①要求整列每个格子都带 class="n" 才算数值列 —— 「近10期奖金行情」「17项切片」
+   里混着 up/dn、mut 着色的格子，差一个就把整列放弃，表头还留在左边；
+   ②「往季对照」用 rowspan/colspan，一行错位就把整列判死。
+   现在：对不上的行跳过（不牵连整列），按多数投票，格子内容本身像数字也算数值列。 */
+function isNumCell(td){
+  if(td.classList.contains("pick")||td.classList.contains("drop"))return false;
+  if(td.classList.contains("n"))return true;
+  var t=(td.textContent||"").replace(/[\s,]/g,"").replace(/[注场元期项个档人岁]+/g,"");
+  return /[0-9]/.test(t)&&/^[0-9.+\-\u2212\u2013\u2014():\/%]+$/.test(t);
+}
+function alignCols(){
+  document.querySelectorAll("table").forEach(function(tb){
+    try{
+      var hr=tb.rows&&tb.rows[0];if(!hr||!hr.cells.length)return;
+      for(var c=0;c<hr.cells.length;c++){
+        var th=hr.cells[c];if(!th||th.tagName.toLowerCase()!=="th")continue;
+        if(th.classList.contains("n")||th.classList.contains("pick"))continue;
+        var tot=0,num=0,pick=0;
+        for(var r=1;r<tb.rows.length;r++){
+          var td=tb.rows[r].cells[c];
+          if(!td||td.cellIndex!==c)continue;          /* rowspan/colspan 的行跳过，不牵连整列 */
+          tot++;
+          if(isNumCell(td))num++;
+          if(td.classList.contains("pick")||td.classList.contains("drop"))pick++;
+        }
+        /* 判定成立就把整列一起改：只改表头会让「表头右、格子左」，等于反过来错位 */
+        var cls=num/tot>=.6?"n":(pick/tot>=.6?"pick":"");
+        if(!cls)continue;
+        th.classList.add(cls);
+        for(var r2=1;r2<tb.rows.length;r2++){
+          var td2=tb.rows[r2].cells[c];
+          if(td2&&td2.cellIndex===c)td2.classList.add(cls);
+        }
+      }
+    }catch(e){}                                       /* 单张表出错不许连累其它表 */
+  });
+}
+alignCols();
+  /* 票面/任14 这些表是解密完数据才渲染的，可能晚于本次执行；观察器之外再补扫几次，
+     避免「首页数据表对齐了、票面表还是左对齐」这种半吊子状态（2026-11-08 实测漏过一回） */
+  [80,300,900,2500,6000].forEach(function(ms){setTimeout(alignCols,ms);});
+  var _acT=null;
+  new MutationObserver(function(){clearTimeout(_acT);_acT=setTimeout(alignCols,150);})
+    .observe(document.body,{childList:true,subtree:true});
+})();
+</script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "fe020c59ca7e4f46b32729d1c4b42458"}' onload="waStat(1)" onerror="waStat(0)"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+name: 站点保底重建（GitHub 端）
+
+# 抓取只能在这台电脑上做：实测同一请求走境外出口，体彩官方回 418、500 网页回 403。
+# Actions 只负责「数据已经 push 上来」之后的重建与发布 —— 电脑关着，站点也不会停在昨天。
+# 源数据在仓库 _lab/ 里（本机 build.py 每次跑都自动刷新，只留每种缓存的最新一份）。
+on:
+  schedule:
+    - cron: "50 0 * * *"      # 08:50 北京
+    - cron: "50 3 * * *"      # 11:50 北京（竞彩当天赛程放出之后）
+  workflow_dispatch:
+  push:
+    paths:
+      - "_lab/**"
+
+permissions:
+  contents: write
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: 装 Pillow（只用于微信码裁白边）
+        run: python -m pip install --quiet pillow
+      - name: 用同一份 build.py 重建 index.html
+        env:
+          SFC_BASE: ${{ github.workspace }}/_lab
+          SFC_ROOT: ${{ github.workspace }}/_lab
+          SFC_OUT: ${{ github.workspace }}
+        run: python -X utf8 _lab/build.py
+      - name: 有变化就提交（Pages 自动发布）
+        run: |
+          rm -f data.json
+          git config user.name "sfc-lab-actions"
+          git config user.email "sfc-lab-actions@users.noreply.github.com"
+          if ! git diff --quiet -- index.html; then
+            git add index.html
+            git commit -q -m "rebuild index.html（GitHub 端保底 $(date -u +%m-%d\\ %H:%M)\\ UTC）"
+            git push -q
+            echo 已重建并发布
+          else
+            echo 数据没变，index.html 未改动
+          fi

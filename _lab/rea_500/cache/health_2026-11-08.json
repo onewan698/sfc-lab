@@ -1,0 +1,72 @@
+{
+ "ts": "2026-11-08 09:01:04",
+ "rows": [
+  {
+   "name": "0 调试Chrome 9222",
+   "status": "✓",
+   "msg": "在线"
+  },
+  {
+   "name": "1 红单方案列表 hdapi",
+   "status": "✓",
+   "msg": "code=0000 返回 5 条"
+  },
+  {
+   "name": "2 赛果/赔率 getMatchinfo",
+   "status": "⚠",
+   "msg": "无可用 playId"
+  },
+  {
+   "name": "3 方案详情 zjtj",
+   "status": "✓",
+   "msg": "planId=8757835(已购单兜底) resultCode=0000 planInfo=有｜登录态 有效（已购 8757835 isBuy=1 方向图卢兹 (-1) 负 正文484字）"
+  },
+  {
+   "name": "4 trade/rj 官方SP层",
+   "status": "✓",
+   "msg": "fixture 14 个 / 已有SP 14 场"
+  },
+  {
+   "name": "5 kaijiang sfc 开奖",
+   "status": "✓",
+   "msg": "期=26160 含奖等"
+  },
+  {
+   "name": "6 jqc 四场进球赛程",
+   "status": "✓",
+   "msg": "期=26232 比赛 4 场"
+  },
+  {
+   "name": "7 jq4 四场进球开奖",
+   "status": "✓",
+   "msg": "期=26230 8格[0, 0, 1, 1, 1, 2, 3, 3]"
+  },
+  {
+   "name": "8 zx 指数中心",
+   "status": "✓",
+   "msg": "场次块 14（DOM直读）"
+  },
+  {
+   "name": "9 odds 欧赔平均",
+   "status": "✓",
+   "msg": "fid=1420554 avwinc2 在"
+  },
+  {
+   "name": "10 同赔历史 ajax",
+   "status": "✓",
+   "msg": "接口可 POST（counts 可能为 null=无历史）"
+  },
+  {
+   "name": "11 官方接口 胜负/任9",
+   "status": "✓",
+   "msg": "26160 赛果14项 销量19,556,096 任9 506注/17,707元"
+  },
+  {
+   "name": "12 官方接口 进球/半全场",
+   "status": "✓",
+   "msg": "26230 赛果8项 销量2,539,762 一等 31注/52,433元"
+  }
+ ],
+ "bad": 0,
+ "warn": 1
+}

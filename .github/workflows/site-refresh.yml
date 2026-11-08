@@ -38,7 +38,7 @@ jobs:
           git config user.email "sfc-lab-actions@users.noreply.github.com"
           if ! git diff --quiet -- index.html; then
             git add index.html
-            git commit -q -m "rebuild index.html（GitHub 端保底 $(date -u +%m-%d\\ %H:%M)\\ UTC）"
+            git commit -q -m "rebuild index.html（GitHub 端保底刷新）"
             git push -q
             echo 已重建并发布
           else

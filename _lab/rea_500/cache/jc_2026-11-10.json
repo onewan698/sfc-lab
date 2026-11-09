@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-10T06:01:02",
+ "generated_at": "2026-11-10T07:01:02",
  "jc": [
   {
    "code": "周二001",
@@ -1118,7 +1118,7 @@
   ],
   "n_requests": 4,
   "warnings": [
-   "BC 列表页解析到 0 场, 页面结构可能已变 (page len=1055368)"
+   "BC 列表页解析到 0 场, 页面结构可能已变 (page len=1055369)"
   ],
   "bc_excluded_not_on_sale": 369,
   "bc_ttg_rows": 369,

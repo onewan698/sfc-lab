@@ -143,6 +143,8 @@ def parse_betslip(path):
     # 严格要求「**3**|」把带括注的 04、07 两行整行丢掉，票面只剩 7 行
     rows = []
     for ln in txt.splitlines():
+        if ln.startswith("## ") and rows:      # 第二张小节（B 组/任14）的表不算主票，否则命中数会混成 17/18
+            break
         g = re.match(r"^\|\s*(\d+)\s*\|\s*(\d+)\s*\|\s*([^|]+?)\s*\|\s*\*{0,2}\s*"
                      r"([013](?:\s*/\s*[013])?)\s*\*{0,2}\s*(?:[（(]([^）)]*)[）)])?\s*\|", ln)
         if g:
@@ -265,7 +267,7 @@ if os.path.exists(lp):
     # —— 用户点名要的：「最新这一期的数据还看不到」，2026-11-07 加
     tk = D.get("ticket") or {}
     iss = str(tk.get("issue") or "")
-    lg["settled_n"] = len(lg["rows"])
+    lg["settled_n"] = len({r["issue"] for r in lg["rows"]})   # 按**期号**去重：一期出 A/B 两组时不能算成两期
     if iss and re.fullmatch(r"26\d{3}", iss) and tk.get("rows") and not any(r["issue"] == iss for r in lg["rows"]):
         pk = tk.get("picks") or {}
         dan = sum(1 for v in pk.values() if "/" not in str(v) and "弃" not in str(v))

@@ -840,9 +840,12 @@ function bootPool(){
 }
 function qrImg(src,label,w){
   if(!src)return "";
-  return '<div style="text-align:center"><img src="'+src+'" alt="'+label+
-    '" style="width:'+(w||210)+'px;max-width:44vw;border:1px solid var(--line);border-radius:10px;background:#fff;padding:6px"'+
-    ' onerror="this.parentNode.style.display=\'none\'"><div class="mut" style="margin-top:6px;font-size:13px">'+label+"</div></div>";
+  /* ① 图下面那行「微信收款码 / 支付宝收款码」的可见文字不要了（alt 留着给读屏）；
+     ② 两张码原图比例不同（一张方、一张竖），统一成 1:1 方框 + contain，两张卡片才等高。 */
+  var s0=w||210;
+  var sty=" style=\"width:"+s0+"px;aspect-ratio:1/1;object-fit:contain;max-width:44vw;border:1px solid var(--line);border-radius:12px;background:#fff;padding:6px;box-sizing:border-box\"";
+  var err=" onerror=\"this.parentNode.style.display=\'none\'\"";
+  return "<div style=\"text-align:center\"><img src=\""+src+"\" alt=\""+label+"\""+sty+err+"></div>";
 }
 function paintQr(){
   var d=DATA.donate||{},h="";

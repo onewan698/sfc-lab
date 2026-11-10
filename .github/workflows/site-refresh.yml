@@ -8,9 +8,8 @@ on:
     - cron: "50 0 * * *"      # 08:50 北京
     - cron: "50 3 * * *"      # 11:50 北京（竞彩当天赛程放出之后）
   workflow_dispatch:
-  push:
-    paths:
-      - "_lab/**"
+  # 不在 push 时重建：本机的发布才是权威（抓到的数据更新、票面更全），
+  # Actions 只在「电脑没开、没人发布」时按时间兜底，避免它用 _lab 快照覆盖线上新版。
 
 permissions:
   contents: write

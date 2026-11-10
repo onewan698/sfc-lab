@@ -1120,22 +1120,27 @@ function alignCols(){
   });
   function roll(el,finalText,dur,delay){
     if(!el) return;
-    if(RED){el.textContent=finalText;return;}
-    var t0=performance.now()+delay;
-    function step(){
-      var p=(performance.now()-t0)/dur;
-      if(p<0){requestAnimationFrame(step);return;}
-      if(p>=1){el.textContent=finalText;return;}
-      var n=finalText.length,shown=Math.floor(p*n),out="";
-      for(var i=0;i<n;i++){
-        if(i<shown) out+=finalText[i];
-        else if(i<shown+3) out+=GLY[(Math.random()*GLY.length)|0];
-        else break;
-      }
-      el.textContent=out;
-      requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
+    el.dataset.f=finalText||"";
+    if(RED){el.textContent=finalText||"";return;}
+    var n=(finalText||"").length;
+    el.textContent="";
+    /* 用 setInterval 而不是 rAF：后台标签页 rAF 会被暂停，票面就永远空着（2026-11-10 线上实测踩到） */
+    setTimeout(function(){
+      var t0=Date.now();
+      var iv=setInterval(function(){
+        var p=(Date.now()-t0)/dur;
+        if(p>=1){clearInterval(iv);el.textContent=finalText;return;}
+        var shown=Math.floor(p*n),out="";
+        for(var i=0;i<n;i++){
+          if(i<shown) out+=finalText[i];
+          else if(i<shown+3) out+=GLY[(Math.random()*GLY.length)|0];
+          else break;
+        }
+        el.textContent=out;
+      },26);
+    },delay);
+    /* 保底：动画被节流/中断也必须落到最终态 */
+    setTimeout(function(){el.textContent=finalText;}, delay+dur+360);
   }
   nodes.forEach(function(n,i){
     var base=140+i*68;

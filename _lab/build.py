@@ -112,6 +112,26 @@ if card:
     log.append(f"card {os.path.basename(card_f)} 覆盖 {card.get('coverage')}")
 
 # ---------- 3. 票面（betslip 落盘文件）----------
+
+def rows_from_push(issue):
+    """从 push_<期>_定稿.md 的票面块取 01~14 全序 14 行（含弃场写 `-`）。
+    betslip 的主表只列入选的 9 行，首屏「票面正在落定」要 14 行才完整。"""
+    p = os.path.join(ARCH, "push_%s_定稿.md" % issue)
+    if not os.path.exists(p) or not re.search(r"```", open(p, encoding="utf-8").read()):
+        return []
+    txt = open(p, encoding="utf-8").read()
+    m = re.search(r"```[\s\S]*?```", txt)
+    if not m:
+        return []
+    out = []
+    for ln in m.group(0).splitlines():
+        g = re.match(r"^(\d{2})\s+(\d{2}:\d{2})\s+(.+?)\s+([013](?:/[013])?|-)\s*$", ln.strip())
+        if g:
+            out.append({"no": int(g.group(1)), "vs": g.group(3).strip(),
+                        "pick": "-" if g.group(4) == "-" else g.group(4), "tag": ""})
+    return out if len(out) == 14 else []
+
+
 def parse_betslip(path):
     txt = open(path, encoding="utf-8").read()
     issue = os.path.basename(path).split("_")[1].split(".")[0]
@@ -151,6 +171,9 @@ def parse_betslip(path):
             rows.append({"no": int(g.group(2)), "vs": g.group(3).strip(),
                          "pick": re.sub(r"\s+", "", g.group(4)),
                          "tag": (g.group(5) or "").strip()})
+    _full = rows_from_push(issue)
+    if _full:
+        rows = _full
     return {"issue": issue, "deadline": t.group(1) if t else "", "bets": int(m.group(1)) if m else None,
             "cost": int(m.group(2)) if m else None, "picks": pk, "drops": drops,
             "alerts": alerts, "note": note, "rows": rows}
@@ -179,7 +202,7 @@ if bf:
         if _off:
             _res = [str(x) for x in _off["result"]]
             _rw = _T.get("rows") or []
-            _sel = [r for r in _rw if r.get("pick") not in (None, "弃")]
+            _sel = [r for r in _rw if r.get("pick") not in (None, "弃", "-")]
             for r in _rw:
                 r["res"] = _res[int(r["no"]) - 1] if 1 <= int(r["no"]) <= len(_res) else ""
             _hit = sum(1 for r in _sel if r["res"] and r["res"] in r["pick"])

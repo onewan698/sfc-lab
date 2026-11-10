@@ -1066,7 +1066,7 @@ if os.path.isdir(LAB):
     KEEP = [("rea_500", "cache", ["signals_*.json", "jc_*.json", "jqc_*.json", "card_*.json", "kj_*.html",
                                  "health_*.json", "sfc_official_*.json", "rj_times.json"]),
             ("rea_djyy", "cache", ["upcoming_*.json", "gap_*.json", "card_*.json", "tempo_log.jsonl"]),
-            ("rea_zgzcw", "archive", ["betslip_*.md", "*战绩*.md"]),
+            ("rea_zgzcw", "archive", ["betslip_*.md", "push_*_定稿.md", "*战绩*.md"]),
             (None, "cache", ["rq14_history.jsonl", "season_overview_*.json"])]
     nb = 0
     for root_, sub, pats in KEEP:

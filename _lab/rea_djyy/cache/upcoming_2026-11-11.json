@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-11T20:52:11",
+ "generated_at": "2026-11-11T21:03:13",
  "window": [
   "2026-11-11",
   "2026-11-14"
@@ -301,7 +301,7 @@
    },
    "state": "not_started",
    "ou_line": 2.25,
-   "ou_over": 0.4802110817941952,
+   "ou_over": 0.4814814814814815,
    "ou_open": 1.84,
    "btts_yes": 0.4623655913978494,
    "ah_line": null,
@@ -1550,8 +1550,8 @@
     "home": 1.65
    },
    "state": "not_started",
-   "ou_line": 2.75,
-   "ou_over": 0.5208333333333334,
+   "ou_line": 3.0,
+   "ou_over": 0.4973821989528796,
    "ou_open": 1.8200000000000003,
    "btts_yes": 0.5585106382978724,
    "ah_line": null,
@@ -2552,8 +2552,8 @@
     "home": 1.65
    },
    "state": "not_started",
-   "ou_line": 2.75,
-   "ou_over": 0.5208333333333334,
+   "ou_line": 3.0,
+   "ou_over": 0.4973821989528796,
    "ou_open": 1.8200000000000003,
    "btts_yes": 0.5585106382978724,
    "ah_line": null,
@@ -2903,7 +2903,7 @@
    },
    "state": "not_started",
    "ou_line": 2.25,
-   "ou_over": 0.4802110817941952,
+   "ou_over": 0.4814814814814815,
    "ou_open": 1.84,
    "btts_yes": 0.4623655913978494,
    "ah_line": null,

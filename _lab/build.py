@@ -676,7 +676,9 @@ if sig_rows:
         (top, ptop), sec_pair = order[0], order[1]
         pdraw = p.get("1") or 0            # 平局隐含（去水归一）
         # v3 口径：第二选项 = 热门 ≥45% 配平、<45% 配反向（79,577 场实测分界 44~45%）
-        second = "1" if ptop >= 45 else sec_pair[0]
+        # §十（v18，2026-11-11 用户「以能中奖为原则」）：平隐含 ≥28% 的冷门场一律配平（31/01）——
+        # 我们影子账本第二格实测 配平 33% vs 配反向 31% 无差别，冷门更容易往平走
+        second = "1" if (ptop >= 45 or pdraw >= 28) else sec_pair[0]
         if second == top:
             second = order[1][0] if order[1][0] != top else order[2][0]
         # 胆分级：一级胆=均概率≥57%（实测命中 57%+）；二级胆=52~57% 且 平局隐含<28%；其余=该双选
@@ -697,7 +699,7 @@ if sig_rows:
     need = sorted([x for x in p14 if x[4] == 3], key=lambda x: (-x[3], x[2]))
     seat = [x[0] for x in need if x[0] in diff][:2]
     for x in need:
-        if len(seat) >= 4:
+        if len(seat) >= 5:      # v18（2026-11-11）：任14 默认 5 双 = 32注/64元（原 4 双 16注）
             break
         if x[0] not in seat:
             seat.append(x[0])
@@ -728,8 +730,41 @@ if sig_rows:
             x[1] = x[1][0]
             if x[4] == 2:
                 upgraded.add(x[0])
+    # §十（v18）：任14 最多 1 场双选升级三选（310）。触发：
+    #   ① 平隐含 ≥28% 且两个非首选方向差距 <8pt（31 与 01 一线之隔，两个保险都要）
+    #   ② 官方 SP 去水首选 ≠ 均概率首选且该方向差 ≥5pt（官方与市场反向）
+    #   凯利 ≥0.99 留给值班人工判断；没有场满足就不硬凑（宁缺毋滥）
+    trip = None
+    _sr = {r["no"]: r for r in sig_rows}
+    for x in sorted([y for y in p14 if len(y[1]) == 2 and y[0] in seat], key=lambda y: y[0]):
+        rr = _sr.get(x[0]) or {}
+        pr = {k: v for k, v in (rr.get("prob") or {}).items() if v is not None}
+        if len(pr) < 3:
+            continue
+        ins = [c for c in "310" if c != x[1][0]]
+        _gap = abs((pr.get(ins[0]) or 0) - (pr.get(ins[1]) or 0))
+        if (pr.get("1") or 0) >= 28 and _gap < 8:
+            trip = (x[0], "① 平隐含 %.1f%%，两保险只差 %.1fpt（31/01 都要）" % (pr.get("1") or 0, _gap))
+            break
+        sp = {k: v for k, v in (rr.get("sp") or {}).items() if v}
+        if len(sp) == 3:
+            inv = {k: 1.0 / v for k, v in sp.items()}
+            _ss = sum(inv.values())
+            imp = {k: inv[k] / _ss * 100.0 for k in inv}
+            st_ = max(imp, key=imp.get)
+            if st_ != x[1][0] and (imp[st_] - (pr.get(st_) or 0)) >= 5:
+                trip = (x[0], "② 官方去水首选 %s，与市场差 %.1fpt（官方反向）" % (st_, imp[st_] - (pr.get(st_) or 0)))
+                break
+    n3 = 0
+    if trip:
+        for x in p14:
+            if x[0] == trip[0]:
+                _t0 = x[1][0]
+                x[1] = _t0 + "".join(c for c in "310" if c != _t0)   # 首选在前；留档显示成「3/1/0」
+                n3 = 1
+                break
     dbl = sum(1 for x in p14 if len(x[1]) > 1)
-    bets = 2 ** dbl                     # 注数 = 2^(双选场数)；成本另乘 2 元
+    bets = 2 ** (dbl - n3) * (3 ** n3)  # 注数 = 2^双 × 3^三；成本另乘 2 元
     rows14 = [{"no": r["no"], "vs": r.get("vs"),
                "pick": "/".join(next(x[1] for x in p14 if x[0] == r["no"])),
                "prob": [((r.get("prob") or {}).get(k)) for k in ("3", "1", "0")],
@@ -750,15 +785,19 @@ if sig_rows:
         why14.append(f"二级胆 {z2(dan2)}：均概率 52~57% 但平局隐含 <28% —— 是「伪胆区」里平局风险最低的一批，"
                      f"<b>本票最大的风险点就在这里</b>（14场全包，错一场即全盘皆输）")
     if duu:
-        why14.append(f"双选 {z2(duu)}：名额 4 个（v8 默认取低值 = 16注/32元，上限 32注/64元），"
+        why14.append(f"双选 {z2(duu)}：名额 5 个（v18 默认 = 32注/64元，§十可再升级 1 场三选到 48注/96元），"
                      f"**分配参考 DeepSeek 分歧**："
                      + (f"它与百家分歧的中游场 {z2(seat_d)} 先占名额；" if seat_d else "")
                      + (f"它判平的二级胆 {z2(demote_in)} 降级为双选；" if demote_in else "")
                      + f"其余名额按平局隐含最高补满（实测 45~55% 档实际平局率 27.0%，≥60% 档只有 19.4%）。"
-                     f"第二格按热门 ≥45% 配平、<45% 配反向——<b>方向一律取市场首选，DeepSeek 只决定哪几场加保险，不改方向</b>"
+                     f"第二格：平隐含 ≥28% 的冷门场一律配平（v18 §十，影子账本配平33% vs 反向31% 无差别），其余按热门 ≥45% 配平、<45% 配反向——<b>方向一律取市场首选，DeepSeek 只决定哪几场加保险，不改方向</b>"
                      + (f"；<b>丙口径</b>：AI 押平且平局隐含 ≥24% 的分歧场 {z2(ai_draw_seats)}，第二格改配平——"
                         f"不然名额是它抢来的、保险却买了反向，等于白花这一票" if ai_draw_seats else ""))
-    why14.append(f"{dbl} 个双选 → 2^{dbl} = {bets} 注 / {bets * 2} 元；14场全包，一张复式最多中 1 注")
+    if trip:
+        why14.append(f"<b>§十 310</b>：{str(trip[0]).zfill(2)} 升级三选 —— {trip[1]}；4双+1三 = {bets} 注 / {bets * 2} 元，本期唯一三选（以能中奖为原则）")
+        why14.append(f"{dbl - 1} 个双选 + 1 个三选 → 2^{dbl - 1} × 3 = {bets} 注 / {bets * 2} 元；14场全包，一张复式最多中 1 注")
+    else:
+        why14.append(f"{dbl} 个双选 → 2^{dbl} = {bets} 注 / {bets * 2} 元；14场全包，一张复式最多中 1 注")
     why14.append("口径与任九完全一致（v3）：市场优先；AI/专家/模型永不覆盖市场方向；欧冠/欧联/欧协联场次不采信模型与专家")
     # ref 已在分配双选名额前算好（DeepSeek 分歧参与分配），此处不再重复取
     if ref:
@@ -773,7 +812,7 @@ if sig_rows:
                  "deadline": (D.get("signals") or {}).get("deadline") or (D.get("ticket") or {}).get("deadline"),
                  "bets": bets, "cost": bets * 2, "rows": rows14,
                  "ai_ref": ref, "why": why14}
-    log.append(f"rq14 {len(rows14)}行 {dbl}双 {bets}注/{bets * 2}元")
+    log.append(f"rq14 {len(rows14)}行 {dbl - n3}双{n3}三 {bets}注/{bets * 2}元" + (f" ｜ 310：{str(trip[0]).zfill(2)}" if trip else ""))
     # 任14 选号留档：data.json 每小时会被下一期覆盖，第二天结算要按当期取票面，
     # 所以按期号另存一份历史（cache\rq14_history.jsonl）。同一期反复重建时**保留最后一次**
     # （越接近停售越接近终盘，结算认的就是这张）。rea_500\sfc14_check.py 读这份核奖。

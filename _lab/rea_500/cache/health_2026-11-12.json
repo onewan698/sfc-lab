@@ -1,5 +1,5 @@
 {
- "ts": "2026-11-11 09:00:03",
+ "ts": "2026-11-12 09:00:03",
  "rows": [
   {
    "name": "0 调试Chrome 9222",
@@ -24,7 +24,7 @@
   {
    "name": "4 trade/rj 官方SP层",
    "status": "✓",
-   "msg": "fixture 14 个 / 已有SP 0 场"
+   "msg": "fixture 14 个 / 已有SP 5 场"
   },
   {
    "name": "5 kaijiang sfc 开奖",
@@ -43,8 +43,8 @@
   },
   {
    "name": "8 zx 指数中心",
-   "status": "✓",
-   "msg": "场次块 14（DOM直读）"
+   "status": "⚠",
+   "msg": "DOM拉取失败/被拦"
   },
   {
    "name": "9 odds 欧赔平均",
@@ -68,5 +68,5 @@
   }
  ],
  "bad": 0,
- "warn": 1
+ "warn": 2
 }

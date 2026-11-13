@@ -228,6 +228,7 @@ try:
     _lv = _LS.fetch()
     _LS.attach((D.get("ticket") or {}).get("rows") or [], _lv)
     _LS.attach((D.get("signals") or {}).get("rows") or [], _lv)
+    _LS.attach((D.get("rq14") or {}).get("rows") or [], _lv)
     D["live"] = _LS.meta(_lv)
     _done = sum(1 for r in ((D.get("ticket") or {}).get("rows") or [])
                 if r.get("live") and r.get("live") not in ("未开", "进行中", "—", "待出"))
@@ -1035,6 +1036,16 @@ import base64 as _b64
 import hashlib as _hl
 import random as _rnd
 SENS = ("ticket", "rq14", "signals", "jqc", "ledger", "card")
+# 实时赛果：rq14 的行要等到 §5 才组装好，这里在序列化前补齐（失败不影响出站）
+try:
+    _r14 = (D.get("rq14") or {}).get("rows") or []
+    _smap = {str(x.get("vs")): x for x in ((D.get("signals") or {}).get("rows") or [])}
+    for _r in _r14:                                  # rq14 行没有开赛时间，从同对阵的 signals 行借
+        if not _r.get("time") and _smap.get(str(_r.get("vs"))):
+            _r["time"] = _smap[str(_r.get("vs"))].get("time")
+    _LS.attach(_r14, _lv)                            # noqa: F821
+except Exception:
+    pass
 D["wm"] = {"i": _hl.sha1(data_js.encode("utf-8")).hexdigest()[:10],
            "b": datetime.datetime.now().strftime("%Y-%m-%d %H:%M")}      # 隐形水印/查重指纹
 data_js = json.dumps(D, ensure_ascii=False)

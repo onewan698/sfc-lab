@@ -960,9 +960,9 @@ if(PRE14){
 }else{
   sub14.textContent="第"+(R.issue||"?")+"期　停售 "+(R.deadline||"?")+"　"+(R.bets||"?")+"注 / "+(R.cost||"?")+"元　（14场全包复式，一票最多中1注）";
 }
-let h14='<table><tr><th>序</th><th>对阵</th><th>选</th><th>均概率 主/平/客</th><th>亚盘</th></tr><tbody>';
+let h14='<table><tr><th>序</th><th>对阵</th><th>选</th><th>实时赛果</th><th>均概率 主/平/客</th><th>亚盘</th></tr><tbody>';
 (R.rows||[]).forEach(function(r){h14+='<tr><td class="n">'+pad(r.no)+"</td><td>"+(r.vs||"")+'</td><td class="pick">'+(r.pick||"--")+
-  '</td><td class="n">'+(r.prob||[]).join(" / ")+'</td><td class="mut">'+((r.asian||[]).join(" "))+"</td></tr>";});
+  '</td><td class="n">'+(r.live||"—")+'</td><td class="n">'+(r.prob||[]).join(" / ")+'</td><td class="mut">'+((r.asian||[]).join(" "))+"</td></tr>";});
 document.getElementById("p14-body").innerHTML=h14+"</tbody></table>";
 document.getElementById("p14-why").innerHTML='<ul class="note">'+(PRE14?("<li><b>自动生成、未定稿</b>：以下依据每小时会随抓取变化，定稿版以每晚 20:50 那次为准</li>"):"")+
   (R.why||[]).map(function(x){return "<li>"+x+"</li>";}).join("")+"</ul>";

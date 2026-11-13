@@ -468,12 +468,12 @@ if(PRE){
   $("#tk-title").innerHTML="任选九 第"+PRE.issue+"期 · 停售 "+(PRE.deadline||"?")+' <span class="tag">未定稿</span>';
   $("#tk-sub").innerHTML='<div class="warn"><b>这不是最终定稿</b>：下面是第 '+PRE.issue+' 期 14 场的<b>实时盘口数据</b>，'
     +'每小时随抓取更新，抓到多少放多少（本次抓取 '+(PRE.fetched||"")+'，官方SP 已开 '+spn+'/'+PRE.rows.length+' 场，未开的显示 --）。'
-    +'胆/双/弃、注数与成本等<b>每晚 20:40 定稿</b>后替换本表。</div>'
+    +'胆/双/弃、注数与成本等<b>每晚 20:50 定稿</b>（早截止期次提前到 16:10）后替换本表。</div>'
     +(T.issue?(T.result
       ?('<div class="note">上期（第'+T.issue+'期）已开奖：命中 <b>'+(T.hit||0)+'/'+(T.hit_n||9)+'</b> → '
         +(T.won?"中奖":"未中")+'　310：<b class="n">'+T.result+'</b></div>')
-      :('<div class="note">上期（第'+T.issue+'期）已于 '+(T.deadline||"?")+' 停售，<b>官方还没开出具名 310</b>；'
-        +'我方命中与奖金要等官方开奖后由每天 10:00 的结算回填，现在没有数字。</div>')):"");
+      :('<div class="note">上期（第'+T.issue+'期）已于 '+(T.deadline||"?")+' 停售，官方开奖结果<b>待出</b>；'
+        +'我方命中与奖金要等官方开奖后由每天 10:00 的结算回填。</div>')):"");
   let ph='<table><tr><th>序</th><th>开赛</th><th>对阵</th><th>选</th><th>均概率(主/平/客)</th><th>官方SP(3/1/0)</th><th>亚盘</th><th>凯利</th></tr><tbody>';
   PRE.rows.forEach(r=>{const p=r.prob||{},sp=r.sp||{},kl=r.kelly||{};
     ph+='<tr><td class="n">'+pad(r.no)+'</td><td class="n">'+(PRE.times&&PRE.times[String(r.no)]||r.time||"--")+'</td><td>'+r.vs

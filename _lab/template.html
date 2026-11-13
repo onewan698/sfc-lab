@@ -489,20 +489,23 @@ if(PRE){
 }else{
 $("#tk-title").textContent=T.issue?("任选九 第"+T.issue+"期 · "+(T.settled?("已于 "+(T.deadline||"?")+" 停售"+(T.result?"（已开奖）":"（待开奖）")):("停售 "+(T.deadline||"?")))):"暂无在售期次";
 $("#tk-sub").innerHTML=(T.note||"")+'　'+(T.cost?('<span class="tag">'+T.bets+'注 / '+T.cost+'元</span>'):"")
- +(T.settled?(function(){
+ +(T.result?(function(){
    var nf=function(x){return (x==null||x==="")?"—":(typeof x==="number"?x.toLocaleString("en-US"):x);};
    var vr=T.won?("中奖！本期任9 "+nf(T.rj_count)+' 注、单注 '+nf(T.rj_prize)+' 元')
      :("未中（本期任9 "+nf(T.rj_count)+' 注 / 单注 '+nf(T.rj_prize)+' 元；一等奖 '+nf(T.g1_count)+' 注'+(T.g1_prize?" / "+nf(T.g1_prize)+" 元":"（滚存）")+")");
-   return '<div class="note">官方 310：<b class="n">'+(T.result||"--")+'</b>　我方命中 <b class="n">'+
+   return '<div class="note">官方 310：<b class="n">'+T.result+'</b>　我方命中 <b class="n">'+
      (T.hit||0)+'/'+(T.hit_n||9)+'</b> → '+vr+
-     (T.next?('<br>第 '+T.next.issue+' 期定稿每晚 '+(T.next.at||"20:40")+' 出'):"")+'</div>';}()):"");
+     (T.next?('<br>第 '+T.next.issue+' 期定稿每晚 20:50 出（早截止期次提前到 16:10）'):"")+'</div>';}())
+   :(T.settled?('<div class="note">已于 '+(T.deadline||"")+' 停售，官方开奖结果待出（本页每小时自动重建，出结果即更新）'+
+     (T.next?('<br>第 '+T.next.issue+' 期定稿每晚 20:50 出（早截止期次提前到 16:10）'):"")+'</div>'):""));
 let tb='';
 if(T.settled&&(T.rows||[]).length){
   const LBL={"3":"主胜","1":"平","0":"客胜"};
+  const hasRes=!!T.result;
   tb='<table><tr><th>序</th><th>对阵</th><th>我们的选</th><th>官方结果</th></tr><tbody>';
   T.rows.forEach(r=>{const drop=r.pick==="弃",res=r.res||"",ok=!drop&&res&&r.pick.indexOf(res)>=0;
     tb+='<tr><td class="n">'+pad(r.no)+'</td><td>'+r.vs+'</td><td class="'+(drop?"drop":"pick")+'">'+(drop?"-":r.pick)+
-        '</td><td>'+(res?((LBL[res]||res)+" "+(ok?'<span class="up">✓ 中</span>':'<span class="dn">✗ 未中</span>')):"--")+'</td></tr>';});
+        '</td><td>'+(hasRes?(res?((LBL[res]||res)+" "+(ok?'<span class="up">✓ 中</span>':'<span class="dn">✗ 未中</span>')):"--"):'<span class="mut">待开奖</span>')+'</td></tr>';});
   tb+="</tbody></table>";
 }else{
  const TAG={};(T.rows||[]).forEach(function(r){if(r.tag)TAG[r.no]=r.tag;});   // 票面行括注（如「压缩胆」）
@@ -1159,7 +1162,7 @@ function alignCols(){
     meta.innerHTML=bits.map(function(x){return "<span>"+x+"</span>";}).join("");
   }
   var iss=document.getElementById("hero-issue");
-  if(iss){var st=(T.rows&&T.rows.length&&T.settled)?(T.won?"已开奖 · 命中":"已开奖"):"未定稿";iss.textContent=(T.issue?"第 "+T.issue+" 期":"当期票面")+" · "+st;}
+  if(iss){var st=(T.rows&&T.rows.length)?(T.result?(T.won?"已开奖 · 命中":"已开奖"):(T.settled?"已停售 · 待开奖":"在售")):"未定稿";iss.textContent=(T.issue?"第 "+T.issue+" 期":"当期票面")+" · "+st;}
 })();
 
 /* ---------- 滚动资讯条 ---------- */
@@ -1168,7 +1171,7 @@ function alignCols(){
   var T=DATA.ticket||{}, SG=DATA.signals||{};
   var _now=Date.now(), _dd=T.deadline?new Date(T.deadline.replace(/-/g,"/")).getTime():0;
   var live=(_dd&&_dd>_now)?T.deadline:(SG.deadline||"");
-  var items=["每天 <b>20:40</b> 定稿推送",
+  var items=["每天 <b>20:50</b> 定稿推送（早截止期次 16:10）",
     (live?"在售期停售 <i>"+String(live).slice(-11)+"</i>":"停售时间以官方为准"),
     "任九 A/B 两组 · 任14 · 四场进球",
     "本页每 1 小时自动重建",

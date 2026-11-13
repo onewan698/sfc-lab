@@ -687,7 +687,9 @@ if sig_rows:
     for r in sig_rows:
         p = {k: v for k, v in (r.get("prob") or {}).items() if v is not None}
         if not p:
-            p14.append([r["no"], "31", 0, 0, 3])
+            # tier 4 = 该场还没开盘（500 的 data-pjgl 为空）。只占位显示「待定」，不参与注数计算；
+            # 2026-11-13 用户发现任14 少了 3 场——根因在 sfc500.py 把这类行整行丢了。
+            p14.append([r["no"], "待定", 0, 0, 4])
             continue
         order = sorted(p.items(), key=lambda kv: -kv[1])
         (top, ptop), sec_pair = order[0], order[1]
@@ -780,18 +782,23 @@ if sig_rows:
                 x[1] = _t0 + "".join(c for c in "310" if c != _t0)   # 首选在前；留档显示成「3/1/0」
                 n3 = 1
                 break
-    dbl = sum(1 for x in p14 if len(x[1]) > 1)
+    dbl = sum(1 for x in p14 if len(x[1]) > 1 and x[4] != 4)
     bets = 2 ** (dbl - n3) * (3 ** n3)  # 注数 = 2^双 × 3^三；成本另乘 2 元
+    _pick14 = {x[0]: ("待定" if x[4] == 4 else "/".join(x[1])) for x in p14}
     rows14 = [{"no": r["no"], "vs": r.get("vs"),
-               "pick": "/".join(next(x[1] for x in p14 if x[0] == r["no"])),
+               "pick": _pick14.get(r["no"], "--"),
                "prob": [((r.get("prob") or {}).get(k)) for k in ("3", "1", "0")],
                "asian": r.get("asian") or []} for r in sig_rows]
     z2 = lambda ns: "、".join(str(x).zfill(2) for x in sorted(ns))
     dan = [x[0] for x in p14 if len(x[1]) == 1]
     dan_ok = [x for x in dan if x not in upgraded]      # 真达胆资格的胆
     dan_up = sorted(upgraded)                            # 被压成单选的，未达胆资格
-    duu = [x[0] for x in p14 if len(x[1]) > 1]
+    duu = [x[0] for x in p14 if len(x[1]) > 1 and x[4] != 4]
     why14 = []
+    _tbd = sorted(x[0] for x in p14 if x[4] == 4)
+    if _tbd:
+        why14.append(f"<b>缺盘口 {len(_tbd)} 场</b>：{z2(_tbd)} —— 均概率/凯利还没放出来（多为后两天的场次），"
+                     f"预览里显示「待定」、<b>不计入注数</b>；<b>定稿时若仍缺，这张任14 不完整、不能出票</b>")
     dan1 = [x[0] for x in p14 if x[4] == 1]
     dan2 = [x[0] for x in p14 if x[4] == 2]
     seat_d = sorted(n for n in duu if n in diff)                 # 靠 DeepSeek 分歧拿到双选名额的场

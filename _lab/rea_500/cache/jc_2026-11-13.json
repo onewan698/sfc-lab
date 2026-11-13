@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-13T08:01:03",
+ "generated_at": "2026-11-13T09:01:02",
  "jc": [
   {
    "code": "周五002",
@@ -2210,200 +2210,7 @@
    "src": "sporttery"
   }
  ],
- "bc": [
-  {
-   "code": "31",
-   "num": 31,
-   "lg": "中北美国联",
-   "country": null,
-   "home": "库拉索",
-   "away": "巴拿马",
-   "home_full": "库拉索",
-   "away_full": "巴拿马",
-   "at": "2026-11-13 08:30",
-   "ddl": "2026-11-13 08:20",
-   "give": 0.0,
-   "spf": null,
-   "rqspf": {
-    "3": 4.67,
-    "1": 3.35,
-    "0": 2.04
-   },
-   "ttg": [
-    {
-     "g": 0,
-     "sp": 10.87,
-     "plus": false
-    },
-    {
-     "g": 1,
-     "sp": 5.84,
-     "plus": false
-    },
-    {
-     "g": 2,
-     "sp": 4.02,
-     "plus": false
-    },
-    {
-     "g": 3,
-     "sp": 4.47,
-     "plus": false
-    },
-    {
-     "g": 4,
-     "sp": 7.8,
-     "plus": false
-    },
-    {
-     "g": 5,
-     "sp": 12.68,
-     "plus": false
-    },
-    {
-     "g": 6,
-     "sp": 28.86,
-     "plus": false
-    },
-    {
-     "g": 7,
-     "sp": 42.46,
-     "plus": true
-    }
-   ],
-   "crs": [
-    {
-     "label": "胜其它",
-     "res": "3+",
-     "sp": 86.58
-    },
-    {
-     "label": "1:0",
-     "res": "3",
-     "sp": 16.19
-    },
-    {
-     "label": "2:0",
-     "res": "3",
-     "sp": 29.33
-    },
-    {
-     "label": "2:1",
-     "res": "3",
-     "sp": 16.32
-    },
-    {
-     "label": "3:0",
-     "res": "3",
-     "sp": 87.42
-    },
-    {
-     "label": "3:1",
-     "res": "3",
-     "sp": 53.84
-    },
-    {
-     "label": "3:2",
-     "res": "3",
-     "sp": 66.19
-    },
-    {
-     "label": "4:0",
-     "res": "3",
-     "sp": 264.54
-    },
-    {
-     "label": "4:1",
-     "res": "3",
-     "sp": 159.19
-    },
-    {
-     "label": "4:2",
-     "res": "3",
-     "sp": 94.21
-    },
-    {
-     "label": "平其它",
-     "res": "1+",
-     "sp": 489.31
-    },
-    {
-     "label": "0:0",
-     "res": "1",
-     "sp": 11.58
-    },
-    {
-     "label": "1:1",
-     "res": "1",
-     "sp": 7.03
-    },
-    {
-     "label": "2:2",
-     "res": "1",
-     "sp": 21.29
-    },
-    {
-     "label": "3:3",
-     "res": "1",
-     "sp": 93.87
-    },
-    {
-     "label": "负其它",
-     "res": "0+",
-     "sp": 64.21
-    },
-    {
-     "label": "0:1",
-     "res": "0",
-     "sp": 9.48
-    },
-    {
-     "label": "0:2",
-     "res": "0",
-     "sp": 12.71
-    },
-    {
-     "label": "1:2",
-     "res": "0",
-     "sp": 7.87
-    },
-    {
-     "label": "0:3",
-     "res": "0",
-     "sp": 28.32
-    },
-    {
-     "label": "1:3",
-     "res": "0",
-     "sp": 19.23
-    },
-    {
-     "label": "2:3",
-     "res": "0",
-     "sp": 40.65
-    },
-    {
-     "label": "0:4",
-     "res": "0",
-     "sp": 80.26
-    },
-    {
-     "label": "1:4",
-     "res": "0",
-     "sp": 67.54
-    },
-    {
-     "label": "2:4",
-     "res": "0",
-     "sp": 86.12
-    }
-   ],
-   "pool_status": "在售",
-   "fid": "2160036",
-   "lg_id": "20248",
-   "src": "500/bjdc"
-  }
- ],
+ "bc": [],
  "meta": {
   "cache_file": "D:\\BaiduNetdiskDownload\\竞彩足球数据\\rea_500\\cache\\jc_2026-11-13.json",
   "from_cache": false,
@@ -2414,11 +2221,13 @@
    "https://trade.500.com/bjdc/project_fq_bf.php"
   ],
   "n_requests": 4,
-  "warnings": [],
-  "bc_excluded_not_on_sale": 30,
+  "warnings": [
+   "BC 列表页解析到 0 场, 页面结构可能已变 (page len=155419)"
+  ],
+  "bc_excluded_not_on_sale": 31,
   "bc_ttg_rows": 31,
   "bc_crs_rows": 31,
-  "jc_last_update": "2026-11-12 21:55:01",
+  "jc_last_update": "2026-11-12 19:56:16",
   "jc_total_count": 8,
   "jc_date_list": [
    {

@@ -219,6 +219,22 @@ if bf:
     if _T["settled"] and _nx and _nx != str(_T["issue"]):
         _T["next"] = {"issue": _nx, "at": "20:50"}
 
+# ---------- 3b. 实时赛果（开赛后 120~130 分钟落定；用户 2026-11-13 定）----------
+try:
+    import sys as _sys
+    if BASE not in _sys.path:
+        _sys.path.insert(0, BASE)
+    import live_scores as _LS
+    _lv = _LS.fetch()
+    _LS.attach((D.get("ticket") or {}).get("rows") or [], _lv)
+    _LS.attach((D.get("signals") or {}).get("rows") or [], _lv)
+    D["live"] = _LS.meta(_lv)
+    _done = sum(1 for r in ((D.get("ticket") or {}).get("rows") or [])
+                if r.get("live") and r.get("live") not in ("未开", "进行中", "—", "待出"))
+    log.append(f"live {len(_lv)} 场 / 票面已落定 {_done} 行（开赛后 120 分钟起生效）")
+except Exception as _e:
+    log.append("live 取数失败（不影响出站）：" + str(_e)[:90])
+
 # ---------- 4. 四场进球 ----------
 jf = latest(S500, "jqc_*.json")
 jq = jload(jf)

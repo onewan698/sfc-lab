@@ -474,10 +474,10 @@ if(PRE){
         +(T.won?"中奖":"未中")+'　310：<b class="n">'+T.result+'</b></div>')
       :('<div class="note">上期（第'+T.issue+'期）已于 '+(T.deadline||"?")+' 停售，官方开奖结果<b>待出</b>；'
         +'我方命中与奖金要等官方开奖后由每天 10:00 的结算回填。</div>')):"");
-  let ph='<table><tr><th>序</th><th>开赛</th><th>对阵</th><th>选</th><th>均概率(主/平/客)</th><th>官方SP(3/1/0)</th><th>亚盘</th><th>凯利</th></tr><tbody>';
+  let ph='<table><tr><th>序</th><th>开赛</th><th>对阵</th><th>选</th><th>实时赛果</th><th>均概率(主/平/客)</th><th>官方SP(3/1/0)</th><th>亚盘</th><th>凯利</th></tr><tbody>';
   PRE.rows.forEach(r=>{const p=r.prob||{},sp=r.sp||{},kl=r.kelly||{};
     ph+='<tr><td class="n">'+pad(r.no)+'</td><td class="n">'+(PRE.times&&PRE.times[String(r.no)]||r.time||"--")+'</td><td>'+r.vs
-      +'</td><td class="mut">待定</td><td class="n">'+fmt(p["3"],1)+" / "+fmt(p["1"],1)+" / "+fmt(p["0"],1)
+      +'</td><td class="mut">待定</td><td class="n">'+(r.live||"—")+'</td><td class="n">'+fmt(p["3"],1)+" / "+fmt(p["1"],1)+" / "+fmt(p["0"],1)
       +'</td><td class="n">'+fmt(sp["3"])+" / "+fmt(sp["1"])+" / "+fmt(sp["0"])
       +'</td><td>'+((r.asian||[]).join(" "))+'</td><td class="n">'+fmt(kl["3"])+" / "+fmt(kl["1"])+" / "+fmt(kl["0"])+"</td></tr>";});
   ph+="</tbody></table>";
@@ -502,18 +502,18 @@ let tb='';
 if(T.settled&&(T.rows||[]).length){
   const LBL={"3":"主胜","1":"平","0":"客胜"};
   const hasRes=!!T.result;
-  tb='<table><tr><th>序</th><th>对阵</th><th>我们的选</th><th>官方结果</th></tr><tbody>';
+  tb='<table><tr><th>序</th><th>对阵</th><th>我们的选</th><th>实时赛果</th><th>官方结果</th></tr><tbody>';
   T.rows.forEach(r=>{const drop=r.pick==="弃",res=r.res||"",ok=!drop&&res&&r.pick.indexOf(res)>=0;
     tb+='<tr><td class="n">'+pad(r.no)+'</td><td>'+r.vs+'</td><td class="'+(drop?"drop":"pick")+'">'+(drop?"-":r.pick)+
-        '</td><td>'+(hasRes?(res?((LBL[res]||res)+" "+(ok?'<span class="up">✓ 中</span>':'<span class="dn">✗ 未中</span>')):"--"):'<span class="mut">待开奖</span>')+'</td></tr>';});
+        '</td><td class="n">'+(r.live||"—")+'</td><td>'+(hasRes?(res?((LBL[res]||res)+" "+(ok?'<span class="up">✓ 中</span>':'<span class="dn">✗ 未中</span>')):"--"):'<span class="mut">待开奖</span>')+'</td></tr>';});
   tb+="</tbody></table>";
 }else{
  const TAG={};(T.rows||[]).forEach(function(r){if(r.tag)TAG[r.no]=r.tag;});   // 票面行括注（如「压缩胆」）
- tb='<table><tr><th>序</th><th>对阵</th><th>选</th><th>均概率(主/平/客)</th><th>亚盘</th><th>凯利</th></tr><tbody>';
+ tb='<table><tr><th>序</th><th>对阵</th><th>选</th><th>实时赛果</th><th>均概率(主/平/客)</th><th>亚盘</th><th>凯利</th></tr><tbody>';
  (S.rows||[]).forEach(r=>{
   const pk=(T.picks||{})[r.no], drop=pk==="弃";
   tb+='<tr><td class="n">'+pad(r.no)+'</td><td>'+r.vs+'</td><td class="'+(drop?"drop":"pick")+'">'+
-      (drop?"-":(pk||"--"))+'</td><td class="n">'+fmt(r.prob&&r.prob["3"],1)+" / "+fmt(r.prob&&r.prob["1"],1)+" / "+fmt(r.prob&&r.prob["0"],1)+
+      (drop?"-":(pk||"--"))+'</td><td class="n">'+(r.live||"—")+'</td><td class="n">'+fmt(r.prob&&r.prob["3"],1)+" / "+fmt(r.prob&&r.prob["1"],1)+" / "+fmt(r.prob&&r.prob["0"],1)+
       '</td><td>'+((r.asian||[]).join(" "))+'</td><td class="n">'+fmt(r.kelly&&r.kelly["3"])+" / "+fmt(r.kelly&&r.kelly["1"])+" / "+fmt(r.kelly&&r.kelly["0"])+"</td></tr>";
  });
  tb+="</tbody></table>";
@@ -521,6 +521,8 @@ if(T.settled&&(T.rows||[]).length){
 $("#tk-body").innerHTML=tb;
 $("#tk-alert").innerHTML=(T.drops?('<div class="note">未选场次：'+T.drops+'</div>'):"")+(T.alerts?('<ul class="note">'+T.alerts.map(a=>"<li>"+a+"</li>").join("")+"</ul>"):"");
 }
+(function(){var el=document.getElementById("tk-alert");
+  if(el)el.insertAdjacentHTML("beforeend",'<div class="note">实时赛果：按开赛时间 <b>+120 分钟</b>（终场）落定，随本页每小时重建刷新；开赛后不足 120 分钟显示「进行中」，避免把半场比分当终局。命中与奖金仍以官方开奖、每天 10:00 结算为准。</div>');})();
 
 /* 终盘参考（机构初→终） */
 if((C.rows||[]).length){

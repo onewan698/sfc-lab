@@ -302,6 +302,9 @@ if os.path.exists(lp):
         lg["stake"] += r.get("cost") or 0
         lg["return"] += r.get("win") or 0
         lg["pnl"] += r.get("pnl") or 0
+    # 2026-11-14 修：pnl 原先只累加已结算行的「净额」，而 stake 含未结算注额 →
+    # 出现 stake 448 / return 375 / pnl −25 的算术不一致。统一成「已出票口径」= 回收 − 投入。
+    lg["pnl"] = lg["return"] - lg["stake"]
     lg["rows"].sort(key=lambda r: r["issue"], reverse=True)
     # 已出票但官方还没开奖的最新一期：也要出现在这张表里（标待开奖，不计入盈亏合计）
     # —— 用户点名要的：「最新这一期的数据还看不到」，2026-11-07 加

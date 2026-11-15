@@ -116,7 +116,11 @@ if card:
 def rows_from_push(issue):
     """从 push_<期>_定稿.md 的票面块取 01~14 全序 14 行（含弃场写 `-`）。
     betslip 的主表只列入选的 9 行，首屏「票面正在落定」要 14 行才完整。"""
+    # 2026-11-15：早截止期次的定稿 push 文件名是 push_<期>_早班.md（16:10 班），
+    # 以前只找 _定稿.md → 早班期次 rows 为空、站点票面没行、赛果列也不落定。两个名字都认。
     p = os.path.join(ARCH, "push_%s_定稿.md" % issue)
+    if not os.path.exists(p):
+        p = os.path.join(ARCH, "push_%s_早班.md" % issue)
     if not os.path.exists(p) or not re.search(r"```", open(p, encoding="utf-8").read()):
         return []
     txt = open(p, encoding="utf-8").read()
@@ -125,7 +129,7 @@ def rows_from_push(issue):
         return []
     out = []
     for ln in m.group(0).splitlines():
-        g = re.match(r"^(\d{2})\s+(\d{2}:\d{2})\s+(.+?)\s+([013](?:/[013])?|-)\s*$", ln.strip())
+        g = re.match(r"^(\d{2})\s+(?:\d{2}-\d{2}\s+)?(\d{2}:\d{2})\s+(.+?)\s+([013](?:/[013])?|-)\s*$", ln.strip())
         if g:
             out.append({"no": int(g.group(1)), "vs": g.group(3).strip(),
                         "pick": "-" if g.group(4) == "-" else g.group(4), "tag": ""})

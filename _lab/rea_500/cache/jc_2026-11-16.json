@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-16T09:01:02",
+ "generated_at": "2026-11-16T10:01:02",
  "jc": [],
  "bc": [],
  "meta": {
@@ -14,7 +14,7 @@
   "n_requests": 4,
   "warnings": [
    "JC 接口返回 0 场 (官方当日无可售场次, 或结构变更)",
-   "BC 列表页解析到 0 场, 页面结构可能已变 (page len=339420)"
+   "BC 列表页解析到 0 场, 页面结构可能已变 (page len=336455)"
   ],
   "bc_excluded_not_on_sale": 100,
   "bc_ttg_rows": 100,

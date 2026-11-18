@@ -1130,17 +1130,24 @@ function alignCols(){
 
 /* ---------- 首屏 signature：当期票面逐行解码落定（scramble → 3/1/0） ---------- */
 (function(){
-  var T=DATA.ticket||{}, pk=T.picks||{}, rows=T.rows||[];
+  var T=DATA.ticket||{}, pk=T.picks||{}, rows=T.rows||[], SG=DATA.signals||{};
   var box=document.getElementById("hero-ticket"); if(!box) return;
+  /* 2026-11-18：当期已在售但还没定稿（如 26166 已出、票面还是 26165）→ 首屏先给当期，
+     否则用户看到「26165 已开奖」就以为没刷新 */
+  var PEND=(SG.rows&&SG.rows.length&&String(SG.issue)!==String(T.issue))?SG:null;
+  if(PEND){
+    rows=(PEND.rows||[]).map(function(r){return {no:r.no,vs:r.vs,live:r.live,live_gate:r.live_gate};});
+  }
   var RED=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var GLY="░▒▓█▚▞<>/\\|#%&@*+=01";
   var pickOf={};
-  for(var i=1;i<=14;i++){var v=pk[i]!=null?pk[i]:pk[String(i)];pickOf[i]=(v==null||v===""||v==="弃")?"-":String(v);}
+  for(var i=1;i<=14;i++){var v=pk[i]!=null?pk[i]:pk[String(i)];
+    pickOf[i]=PEND?"待定":((v==null||v===""||v==="弃")?"-":String(v));}
   var head=document.createElement("div"); head.className="hthead";
   head.innerHTML="<span>序</span><span>对阵</span><span style=\"text-align:center\">A</span><span style=\"text-align:center\">B</span><span style=\"text-align:center\">赛果</span>";
   box.appendChild(head);
   /* 2026-11-18 用户要求：A、B 组同时显示 */
-  var RB=T.rows_b||[];
+  var RB=PEND?[]:(T.rows_b||[]);
   var pickB={}; RB.forEach(function(r){pickB[r.no]=(r.pick==="弃"?"-":r.pick);});
   var list=(rows||[]).filter(function(r){return r&&r.no;});
   if(!list.length){
@@ -1153,7 +1160,7 @@ function alignCols(){
     var row=document.createElement("div"); row.className="htrow";
     row.innerHTML="<span class=\"htno\">"+String(r.no).padStart(2,"0")+"</span><span class=\"htvs\"></span><span class=\"htpick\"></span><span class=\"htpick htpickB\"></span><span class=\"htlive\"></span>";
     box.appendChild(row);
-    nodes.push({vs:row.querySelector(".htvs"),pick:row.querySelector(".htpick"),pickBEl:row.querySelector(".htpickB"),live:r.live||"",liveEl:row.querySelector(".htlive"),gate:r.live_gate||"",no:r.no,vname:r.vs||"",pickA:pickOf[r.no]||"-",pickB:pickB[r.no]||"-"});
+    nodes.push({vs:row.querySelector(".htvs"),pick:row.querySelector(".htpick"),pickBEl:row.querySelector(".htpickB"),live:r.live||"",liveEl:row.querySelector(".htlive"),gate:r.live_gate||"",no:r.no,vname:r.vs||"",pickA:pickOf[r.no]||"-",pickB:PEND?"—":(pickB[r.no]||"-")});
   });
   function roll(el,finalText,dur,delay){
     if(!el) return;
@@ -1192,19 +1199,29 @@ function alignCols(){
   var meta=document.getElementById("hero-meta");
   if(meta){
     var bits=[];
-    if(T.deadline) bits.push("停售 "+String(T.deadline).slice(-11));
-    if(T.bets) bits.push("A <b>"+T.bets+"</b>注/"+T.cost+"元");
-    if(T.bets_b) bits.push("B <b>"+T.bets_b+"</b>注/"+T.cost_b+"元");
-    if(T.won) bits.push("已中出");
+    if(PEND){
+      if(PEND.deadline) bits.push("停售 "+String(PEND.deadline).slice(-11));
+      bits.push("待定稿");
+      bits.push("定稿 20:50");
+    }else{
+      if(T.deadline) bits.push("停售 "+String(T.deadline).slice(-11));
+      if(T.bets) bits.push("A <b>"+T.bets+"</b>注/"+T.cost+"元");
+      if(T.bets_b) bits.push("B <b>"+T.bets_b+"</b>注/"+T.cost_b+"元");
+      if(T.won) bits.push("已中出");
+    }
     meta.innerHTML=bits.map(function(x){return "<span>"+x+"</span>";}).join("");
   }
   nodes.forEach(function(n){ if(n.pickBEl) n.pickBEl.textContent=n.pickB||"-"; });
   /* 2026-11-18：大标题跟随状态（已开奖就别说「正在落定」，用户会以为还在售） */
   (function(){var h1=document.querySelector(".hero-title"); if(!h1) return;
-    var st=T.result?(T.won?"票面<em>已中出</em>":"票面<em>已开奖</em>"):(T.settled?"票面<em>已停售</em>":"票面<em>正在落定</em>");
+    var st=PEND?"票面<em>待定稿</em>":(T.result?(T.won?"票面<em>已中出</em>":"票面<em>已开奖</em>"):(T.settled?"票面<em>已停售</em>":"票面<em>正在落定</em>"));
     if(h1.innerHTML!==st) h1.innerHTML=st;})();
   var iss=document.getElementById("hero-issue");
-  if(iss){var st=(T.rows&&T.rows.length)?(T.result?(T.won?"已开奖 · 命中":"已开奖"):(T.settled?"已停售 · 待开奖":"在售")):"未定稿";iss.textContent=(T.issue?"第 "+T.issue+" 期":"当期票面")+" · "+st;}
+  if(iss){
+    if(PEND){ iss.textContent="第 "+PEND.issue+" 期 · 在售 · 待定稿"; }
+    else {var st=(T.rows&&T.rows.length)?(T.result?(T.won?"已开奖 · 命中":"已开奖"):(T.settled?"已停售 · 待开奖":"在售")):"未定稿";
+      iss.textContent=(T.issue?"第 "+T.issue+" 期":"当期票面")+" · "+st;}
+  }
 })();
 
 /* ---------- 滚动资讯条 ---------- */

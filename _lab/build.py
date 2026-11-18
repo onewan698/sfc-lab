@@ -64,7 +64,32 @@ def scrub(o):
     return o
 
 # ---------- 1. 当期信号（500 四层）----------
-sig_f = latest(S500, "signals_*.json")
+def _pick_sig():
+    """当期信号 = 停售时间最近且未过的那份（2026-11-18 修）。
+    500 同时挂多期（26166 停售 11-20、26171 停售 11-26），原来按 mtime 取最新，
+    两期一交替站点就在 26166/26171 之间来回跳，用户看到的就是「没刷新/刷错期」。"""
+    now = datetime.datetime.now()
+    best = None
+    for f in glob.glob(os.path.join(S500, "signals_*.json")):
+        d = jload(f) or {}
+        m = re.match(r"^(\d{1,2})-(\d{1,2})\s+(\d{1,2}):(\d{2})$", str(d.get("deadline") or "").strip())
+        ts = None
+        if m:
+            mm, dd, hh, mi = map(int, m.groups())
+            try:
+                ts = datetime.datetime(now.year, mm, dd, hh, mi)
+                if ts < now - datetime.timedelta(days=200):
+                    ts = ts.replace(year=now.year + 1)
+            except ValueError:
+                ts = None
+        live = ts is not None and ts >= now - datetime.timedelta(hours=8)
+        key = (0 if live else 1, ts or datetime.datetime.max)
+        cand = (key, os.path.getmtime(f), f)
+        if best is None or cand[:2] < best[:2]:
+            best = cand
+    return best[2] if best else None
+
+sig_f = _pick_sig()
 sig = jload(sig_f) or {}
 if sig:
     rows = sig.get("rows") or []

@@ -196,6 +196,12 @@ body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
   cursor:pointer;transition:color .2s,background .2s;font-family:var(--sans)}
 #nav button:hover{color:var(--tx);background:rgba(255,255,255,.06)}
 #nav button.on{color:#04140C;background:var(--brand);font-weight:700}
+/* A/B 组切换（2026-11-18） */
+.htsw{display:flex;gap:6px;justify-content:flex-end;margin:2px 0 6px}
+.htsw button{font:inherit;font-size:12px;padding:3px 10px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--mut);cursor:pointer}
+.htsw button.on{color:var(--fg);border-color:var(--fg);background:rgba(255,255,255,.06)}
+.htsw button[disabled]{opacity:.35;cursor:not-allowed}
+.tksw{margin:4px 0 6px}
 /* 首屏：当期票面正在落定 */
 #s-hero{padding:10px 0 24px;border-bottom:1px solid var(--line);margin-bottom:16px}
 .hero-eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);
@@ -210,7 +216,7 @@ body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
   background:linear-gradient(180deg,rgba(19,26,35,.94),rgba(11,15,20,.94))}
 .hero-ticket::after{content:"";position:absolute;left:0;right:0;top:0;height:1px;pointer-events:none;
   background:linear-gradient(90deg,transparent,rgba(53,208,127,.5),transparent)}
-.hthead,.htrow{display:grid;grid-template-columns:26px 1fr 44px 56px;gap:10px;align-items:center;font-family:var(--mono)}
+.hthead,.htrow{display:grid;grid-template-columns:26px 1fr 40px 40px 56px;gap:8px;align-items:center;font-family:var(--mono)}
 .hthead{font-size:10.5px;letter-spacing:.16em;color:#5c6b7d;text-transform:uppercase;padding:0 0 5px;
   border-bottom:1px solid rgba(255,255,255,.06)}
 .htrow{padding:3px 0;font-size:12.5px;border-bottom:1px dashed rgba(255,255,255,.045)}
@@ -521,7 +527,24 @@ if(T.settled&&(T.rows||[]).length){
  });
  tb+="</tbody></table>";
 }
-$("#tk-body").innerHTML=tb;
+(function(){
+  var RB2=T.rows_b||[];
+  if(!RB2.length){ $("#tk-body").innerHTML=tb; return; }
+  var bp={}; RB2.forEach(function(r){bp[r.no]=(r.pick==="弃"?"-":r.pick);});
+  var LBL2={"3":"主胜","1":"平","0":"客胜"}, hasRes2=!!T.result;
+  var h='<table><tr><th>序</th><th>对阵</th><th>选 A</th><th>选 B</th><th>实时赛果</th><th>官方结果</th></tr><tbody>';
+  (T.rows||[]).forEach(function(r){
+    var a=(r.pick==="弃"?"-":r.pick), b=bp[r.no]||"-", res=r.res||"";
+    var okA=(a!=="-")&&res&&a.indexOf(res)>=0, okB=(b!=="-")&&res&&b.indexOf(res)>=0;
+    h+='<tr><td class="n">'+pad(r.no)+'</td><td>'+r.vs+'</td>'
+      +'<td class="'+(a==="-"?"drop":"pick")+'">'+a+'</td>'
+      +'<td class="'+(b==="-"?"drop":"pick")+'">'+b+'</td>'
+      +'<td class="n">'+(r.live||"—")+'</td>'
+      +'<td>'+(hasRes2?(res?((LBL2[res]||res)+" "+(okA||okB?'<span class="up">✓ 中</span>':'<span class="dn">✗ 未中</span>')):"--"):'<span class="mut">待开奖</span>')+'</td></tr>';
+  });
+  h+="</tbody></table>";
+  $("#tk-body").innerHTML=h;
+})();
 $("#tk-alert").innerHTML=(T.drops?('<div class="note">未选场次：'+T.drops+'</div>'):"")+(T.alerts?('<ul class="note">'+T.alerts.map(a=>"<li>"+a+"</li>").join("")+"</ul>"):"");
 }
 (function(){var el=document.getElementById("tk-alert");
@@ -1114,8 +1137,11 @@ function alignCols(){
   var pickOf={};
   for(var i=1;i<=14;i++){var v=pk[i]!=null?pk[i]:pk[String(i)];pickOf[i]=(v==null||v===""||v==="弃")?"-":String(v);}
   var head=document.createElement("div"); head.className="hthead";
-  head.innerHTML="<span>序</span><span>对阵</span><span style=\"text-align:center\">选</span><span style=\"text-align:center\">赛果</span>";
+  head.innerHTML="<span>序</span><span>对阵</span><span style=\"text-align:center\">A</span><span style=\"text-align:center\">B</span><span style=\"text-align:center\">赛果</span>";
   box.appendChild(head);
+  /* 2026-11-18 用户要求：A、B 组同时显示 */
+  var RB=T.rows_b||[];
+  var pickB={}; RB.forEach(function(r){pickB[r.no]=(r.pick==="弃"?"-":r.pick);});
   var list=(rows||[]).filter(function(r){return r&&r.no;});
   if(!list.length){
     var d=document.createElement("div"); d.className="htrow"; d.style.gridTemplateColumns="1fr";
@@ -1125,9 +1151,9 @@ function alignCols(){
   var nodes=[];
   list.forEach(function(r){
     var row=document.createElement("div"); row.className="htrow";
-    row.innerHTML="<span class=\"htno\">"+String(r.no).padStart(2,"0")+"</span><span class=\"htvs\"></span><span class=\"htpick\"></span><span class=\"htlive\"></span>";
+    row.innerHTML="<span class=\"htno\">"+String(r.no).padStart(2,"0")+"</span><span class=\"htvs\"></span><span class=\"htpick\"></span><span class=\"htpick htpickB\"></span><span class=\"htlive\"></span>";
     box.appendChild(row);
-    nodes.push({vs:row.querySelector(".htvs"),pick:row.querySelector(".htpick"),live:r.live||"",liveEl:row.querySelector(".htlive"),gate:r.live_gate||"",no:r.no,vname:r.vs||""});
+    nodes.push({vs:row.querySelector(".htvs"),pick:row.querySelector(".htpick"),pickBEl:row.querySelector(".htpickB"),live:r.live||"",liveEl:row.querySelector(".htlive"),gate:r.live_gate||"",no:r.no,vname:r.vs||"",pickA:pickOf[r.no]||"-",pickB:pickB[r.no]||"-"});
   });
   function roll(el,finalText,dur,delay){
     if(!el) return;
@@ -1167,10 +1193,16 @@ function alignCols(){
   if(meta){
     var bits=[];
     if(T.deadline) bits.push("停售 "+String(T.deadline).slice(-11));
-    if(T.bets) bits.push("<b>"+T.bets+"</b> 注 / "+(T.cost!=null?T.cost:"--")+" 元");
-    if(T.won) bits.push("上一张已中出");
+    if(T.bets) bits.push("A <b>"+T.bets+"</b>注/"+T.cost+"元");
+    if(T.bets_b) bits.push("B <b>"+T.bets_b+"</b>注/"+T.cost_b+"元");
+    if(T.won) bits.push("已中出");
     meta.innerHTML=bits.map(function(x){return "<span>"+x+"</span>";}).join("");
   }
+  nodes.forEach(function(n){ if(n.pickBEl) n.pickBEl.textContent=n.pickB||"-"; });
+  /* 2026-11-18：大标题跟随状态（已开奖就别说「正在落定」，用户会以为还在售） */
+  (function(){var h1=document.querySelector(".hero-title"); if(!h1) return;
+    var st=T.result?(T.won?"票面<em>已中出</em>":"票面<em>已开奖</em>"):(T.settled?"票面<em>已停售</em>":"票面<em>正在落定</em>");
+    if(h1.innerHTML!==st) h1.innerHTML=st;})();
   var iss=document.getElementById("hero-issue");
   if(iss){var st=(T.rows&&T.rows.length)?(T.result?(T.won?"已开奖 · 命中":"已开奖"):(T.settled?"已停售 · 待开奖":"在售")):"未定稿";iss.textContent=(T.issue?"第 "+T.issue+" 期":"当期票面")+" · "+st;}
 })();

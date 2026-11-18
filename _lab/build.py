@@ -139,7 +139,10 @@ def rows_from_push(issue):
 def parse_betslip(path):
     txt = open(path, encoding="utf-8").read()
     issue = os.path.basename(path).split("_")[1].split(".")[0]
-    t = re.search(r"（(\d{4}-\d{2}-\d{2} \d{2}:\d{2}) 截止）", txt)
+    # 2026-11-18：标题写法多样（「复式截止 2026-11-16 21:40」「17:30 停售」），统一容错取截止
+    t = (re.search(r"（(\d{4}-\d{2}-\d{2} \d{2}:\d{2}) 截止）", txt)
+         or re.search(r"截止[^）\n]*?(\d{4}-\d{2}-\d{2} \d{2}:\d{2})", txt)
+         or re.search(r"(\d{4}-\d{2}-\d{2} \d{2}:\d{2})", txt))
     m = re.search(r"·\s*(\d+)注\s*·\s*(\d+)元", txt)
     pk = {}
     mm = re.search(r"310 记法速写：([^）]+)", txt)
@@ -178,9 +181,27 @@ def parse_betslip(path):
     _full = rows_from_push(issue)
     if _full:
         rows = _full
+    # 2026-11-18 用户要求：票面加 A/B 组切换 → 单独解析 B 组小节（表格 + 注数/金额）
+    rows_b, bets_b, cost_b = [], None, None
+    mb = re.search(r"^##+\s*B 组.*$", txt, re.M)
+    if mb:
+        seg = txt[mb.end():]
+        mseg = re.search(r"^##+\s", seg, re.M)
+        if mseg:
+            seg = seg[:mseg.start()]
+        hb = re.search(r"(\d+)\s*注\s*·\s*(\d+)\s*元", mb.group(0)) or re.search(r"(\d+)\s*注.*?(\d+)\s*元", mb.group(0))
+        if hb:
+            bets_b, cost_b = int(hb.group(1)), int(hb.group(2))
+        for ln in seg.splitlines():
+            g = re.match(r"^\|\s*(\d+)\s*\|\s*([^|]*?)\s*\|\s*([^|]+?)\s*\|\s*\*{0,2}\s*([013](?:\s*/\s*[013])?|-)\s*\*{0,2}\s*\|", ln)
+            if g:
+                rows_b.append({"no": int(g.group(1)), "vs": g.group(3).strip(),
+                               "pick": ("弃" if g.group(4) == "-" else re.sub(r"\s+", "", g.group(4))), "tag": ""})
+        rows_b.sort(key=lambda r: r["no"])
     return {"issue": issue, "deadline": t.group(1) if t else "", "bets": int(m.group(1)) if m else None,
             "cost": int(m.group(2)) if m else None, "picks": pk, "drops": drops,
-            "alerts": alerts, "note": note, "rows": rows}
+            "alerts": alerts, "note": note, "rows": rows,
+            "rows_b": rows_b, "bets_b": bets_b, "cost_b": cost_b}
 
 
 bf = latest(ARCH, "betslip_*.md")
@@ -231,6 +252,7 @@ try:
     import live_scores as _LS
     _lv = _LS.fetch()
     _LS.attach((D.get("ticket") or {}).get("rows") or [], _lv)
+    _LS.attach((D.get("ticket") or {}).get("rows_b") or [], _lv)
     _LS.attach((D.get("signals") or {}).get("rows") or [], _lv)
     _LS.attach((D.get("rq14") or {}).get("rows") or [], _lv)
     D["live"] = _LS.meta(_lv)

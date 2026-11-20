@@ -197,11 +197,13 @@ def parse_betslip(path):
     for ln in txt.splitlines():
         if ln.startswith("## ") and rows:      # 第二张小节（B 组/任14）的表不算主票，否则命中数会混成 17/18
             break
-        g = re.match(r"^\|\s*(\d+)\s*\|\s*(\d+)\s*\|\s*([^|]+?)\s*\|\s*\*{0,2}\s*"
-                     r"([013](?:\s*/\s*[013])?)\s*\*{0,2}\s*(?:[（(]([^）)]*)[）)])?\s*\|", ln)
+        # 2026-11-20 修：以前第 2 列写死要求纯数字（当成「序」），而实际票面第 2 列是**开赛时间**
+        # 「11-21 03:30」→ 永远匹配不上，rows 恒为 0，整张票面只能靠 push 文件兜底。
+        g = re.match(r"^\|\s*(\d+)\s*\|\s*([^|]*)\s*\|\s*([^|]+?)\s*\|\s*\*{0,2}\s*"
+                     r"([013](?:\s*/\s*[013](?:\s*/\s*[013])?)?|-)\s*\*{0,2}\s*(?:[（(]([^）)]*)[）)])?\s*\|", ln)
         if g:
-            rows.append({"no": int(g.group(2)), "vs": g.group(3).strip(),
-                         "pick": re.sub(r"\s+", "", g.group(4)),
+            rows.append({"no": int(g.group(1)), "vs": g.group(3).strip(),
+                         "pick": ("弃" if g.group(4).strip() == "-" else re.sub(r"\s+", "", g.group(4))),
                          "tag": (g.group(5) or "").strip()})
     _full = rows_from_push(issue)
     if _full:

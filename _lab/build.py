@@ -373,7 +373,15 @@ if os.path.exists(lp):
                               "ticket": ("%d胆+%d双" % (dan, dbl)) + (("（弃%d场）" % drp) if drp else ""),
                               "hit": "--", "bets": tk.get("bets"), "cost": tk.get("cost"),
                               "result": "待开奖", "win": None, "pnl": None, "pending": True})
-        lg["pending"] = {"issue": iss, "cost": tk.get("cost") or 0, "deadline": tk.get("deadline") or ""}
+        # 2026-11-21：B 组也是一张真票，待开奖期次必须 A、B 各一行（以前只插 A，B 的 16 元看不见）
+        if tk.get("bets_b"):
+            pkb = {str(r.get("no")): r.get("pick") for r in (tk.get("rows_b") or [])}
+            bdan = sum(1 for v in pkb.values() if "/" not in str(v) and "弃" not in str(v))
+            bdbl = sum(1 for v in pkb.values() if "/" in str(v))
+            lg["rows"].insert(1, {"issue": iss, "ticket": ("%d胆+%d双" % (bdan, bdbl)) + "（B 组）",
+                                  "hit": "--", "bets": tk.get("bets_b"), "cost": tk.get("cost_b"),
+                                  "result": "待开奖", "win": None, "pnl": None, "pending": True})
+        lg["pending"] = {"issue": iss, "cost": (tk.get("cost") or 0) + (tk.get("cost_b") or 0), "deadline": tk.get("deadline") or ""}
         log.append("ledger 追加待开奖行 第%s期 %s注/%s元" % (iss, tk.get("bets"), tk.get("cost")))
     D["ledger"] = lg
     log.append(f"ledger {len(lg['rows'])} 期 投入 {lg['stake']} 回收 {lg['return']} 盈亏 {lg['pnl']}")

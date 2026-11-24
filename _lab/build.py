@@ -839,6 +839,13 @@ if sig_rows:
                 trip = (x[0], "② 官方去水首选 %s，与市场差 %.1fpt（官方反向）" % (st_, imp[st_] - (pr.get(st_) or 0)))
                 break
     n3 = 0
+    # 2026-11-24 口径 v25 保险②：A 组上到 32 注（4胆+5双）时，任14 必须留在 32注/64元，
+    # 否则 A64 + B16 + 任14 96 = 176 超 160 封顶。这里直接压掉三选升级。
+    why14_note = []
+    _ticket_bets = (D.get("ticket") or {}).get("bets") or 0
+    if _ticket_bets >= 32 and trip:
+        why14_note.append("任14 保持 32注/64元：A 组已上 32 注（v25 保险②），三选 %02d 本轮不启用（%s）" % (trip[0], trip[1]))
+        trip = None
     if trip:
         for x in p14:
             if x[0] == trip[0]:
@@ -858,7 +865,7 @@ if sig_rows:
     dan_ok = [x for x in dan if x not in upgraded]      # 真达胆资格的胆
     dan_up = sorted(upgraded)                            # 被压成单选的，未达胆资格
     duu = [x[0] for x in p14 if len(x[1]) > 1 and x[4] != 4]
-    why14 = []
+    why14 = list(locals().get("why14_note") or [])
     _tbd = sorted(x[0] for x in p14 if x[4] == 4)
     if _tbd:
         why14.append(f"<b>缺盘口 {len(_tbd)} 场</b>：{z2(_tbd)} —— 均概率/凯利还没放出来（多为后两天的场次），"

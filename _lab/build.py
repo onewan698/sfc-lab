@@ -843,7 +843,16 @@ if sig_rows:
     # 否则 A64 + B16 + 任14 96 = 176 超 160 封顶。这里直接压掉三选升级。
     why14_note = []
     _ticket_bets = (D.get("ticket") or {}).get("bets") or 0
-    if _ticket_bets >= 32 and trip:
+    # 2026-11-27：A/B 都是 16 注（32元）时，A32+B32+C2+96 = 162 超 160 封顶
+    # → 用环境变量 RQ14_SKIP_310=1 强制留在 32注/64元；
+    # 也支持 RQ14_BUDGET=<元> 自动判断：A + B + C + 任14 超过预算就不上三选。
+    _budget = float(os.environ.get("RQ14_BUDGET") or 0)
+    _force_skip = os.environ.get("RQ14_SKIP_310") == "1"
+    if _budget and not _force_skip:
+        _rest = _budget - _ticket_bets * 2 - 34     # 34 = B(16) + C(2) 的常规占用
+        if _rest < 96:
+            _force_skip = True
+    if (_ticket_bets >= 32 or _force_skip) and trip:
         why14_note.append("任14 保持 32注/64元：A 组已上 32 注（v25 保险②），三选 %02d 本轮不启用（%s）" % (trip[0], trip[1]))
         trip = None
     if trip:
